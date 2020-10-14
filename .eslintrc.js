@@ -1,7 +1,6 @@
 module.exports = {
   env: {
     es6: true,
-    jest: true,
     browser: true,
   },
   extends: ['airbnb', 'prettier', 'prettier/react'],
@@ -32,7 +31,8 @@ module.exports = {
     'no-console': ['error', { allow: ['tron'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    "import/no-unresolved": 'off'
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
   },
   settings: {
     'import/resolver': {

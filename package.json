@@ -23,6 +23,7 @@
     "react-dom": "^16.13.1",
     "react-perfect-scrollbar": "^1.5.8",
     "react-picker": "^1.2.16",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-select": "^3.1.0",
@@ -37,10 +38,11 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix src --ext .js"
   },
   "eslintConfig": {
     "extends": "react-app"

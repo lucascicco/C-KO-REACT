@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
-import { Content } from './styles';
+import { Content, Title } from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Seu nome é obrigatório'),
@@ -21,6 +21,7 @@ export default function CreateAccount() {
 
   return (
     <Content>
+      <Title>Crie sua conta</Title>
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="name" type="text" placeholder="Nome completo" />
         <Input name="email" type="email" placeholder="Seu e-mail" />

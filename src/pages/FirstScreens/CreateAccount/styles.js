@@ -45,6 +45,7 @@ export const Content = styled.div`
       background: #303f9f;
       font-weight: bold;
       color: #fff;
+      font-family: Raleway;
       border: 0;
       border-radius: 4px;
       font-size: 16px;
@@ -66,4 +67,9 @@ export const Content = styled.div`
       }
     }
   }
+`;
+
+export const Title = styled.h1`
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
 `;

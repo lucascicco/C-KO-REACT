@@ -28,7 +28,7 @@ export const Content = styled.div`
       input:-webkit-autofill:hover,
       input:-webkit-autofill:focus,
       input:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -webkit-box-shadow: 0 0 0 #37474f white inset !important;
       }
     }
 

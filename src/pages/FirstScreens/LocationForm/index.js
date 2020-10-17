@@ -19,7 +19,7 @@ const schema = Yup.object().shape({
 
 export default function LocationFormRc() {
   function handleSubmit(data) {
-    console.log(data);
+    
   }
 
   return (

@@ -4,6 +4,7 @@ import ReactDatePicker from 'react-datepicker';
 import { useField } from '@rocketseat/unform';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import './style.css';
 
 export default function DatePicker({ name, placeholderText }) {
   const ref = useRef(null);

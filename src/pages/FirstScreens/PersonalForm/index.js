@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
-import history from '../../../services/history';
-import ReactSelect from '../../../components/ReactSelect';
-import ReactDatePicker from '../../../components/ReactDatePicker';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import history from '~/services/history';
+import ReactSelect from '~/components/ReactSelect';
+import ReactDatePicker from '~/components/ReactDatePicker';
+import PersonalIcon from '~/assets/Information_Icon.png';
+import { EmptyObject } from '~/utils/EmptyObjectVerifier';
+import { createPersonalDataRequest } from '~/store/modules/user/actions';
 
 import {
   Content,
@@ -11,21 +16,37 @@ import {
   GenderDiv,
   GenderDivSmall,
   SkipButton,
+  Title,
+  FlexDiv,
+  LogoImg,
 } from './styles';
 
-import Professions from '../../../utils/Profession';
+import Professions from '~/utils/Profession';
 
 export default function PersonalFormRc() {
+  const dispatch = useDispatch();
   const [gender, setGender] = useState('');
 
   function handleSubmit(data) {
     data.gender = gender;
-    console.log({ data });
+
+    if (EmptyObject(data)) {
+      toast.error(
+        'Todos os campos são obrigatórios, não esqueça de selecionar seu gênero.'
+      );
+    } else {
+      dispatch(createPersonalDataRequest(data));
+    }
   }
 
   return (
     <Content>
       <Form onSubmit={handleSubmit}>
+        <FlexDiv>
+          <LogoImg src={PersonalIcon} alt="PersonalLogo" />
+          <Title>Informações</Title>
+        </FlexDiv>
+
         <ReactSelect
           name="profession"
           placeholder="Selecione sua profissão"
@@ -56,18 +77,17 @@ export default function PersonalFormRc() {
           <Input name="identification" type="text" placeholder="CPF" />
         </SameLine>
 
-        <Input name="address" type="text" placeholder="Endereço" />
-
         <Button type="submit">Próximo</Button>
-
-        <SkipButton
-          onClick={() => {
-            history.push('/crlocation');
-          }}
-        >
-          Pular
-        </SkipButton>
       </Form>
+
+      <SkipButton
+        onClick={() => {
+          history.push('/crlocation');
+          history.go();
+        }}
+      >
+        Pular
+      </SkipButton>
     </Content>
   );
 }

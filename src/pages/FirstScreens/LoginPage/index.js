@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
 import { Content } from './styles';
 import Logo from '~/assets/Cko_logo.png';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -13,11 +15,11 @@ const schema = Yup.object().shape({
 });
 
 export default function LoginPage() {
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.auth.loading);
+  const dispatch = useDispatch();
 
-  function handleSubmit(data) {
-    console.log(data);
-    setLoading(true);
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
   }
 
   return (

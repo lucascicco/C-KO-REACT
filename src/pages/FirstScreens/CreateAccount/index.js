@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 import { Content, Title } from './styles';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Seu nome é obrigatório'),
@@ -13,10 +15,10 @@ const schema = Yup.object().shape({
 });
 
 export default function CreateAccount() {
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  function handleSubmit({ email, password }) {
-    setLoading(true);
+  function handleSubmit(data) {
+    dispatch(signUpRequest(data));
   }
 
   return (

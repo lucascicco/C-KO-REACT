@@ -1,30 +1,33 @@
 import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
-import history from '../../../services/history';
-import ReactSelect from '../../../components/ReactSelect';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import ReactSelect from '~/components/ReactSelect';
+import LocationIcon from '~/assets/Geolocation_icon.png';
+import { Content, SkipButton, Button, FlexDiv, Title, LogoImg } from './styles';
+import { createLocationRequest } from '~/store/modules/user/actions';
+import BrazilStates from '~/utils/BrazilStates';
 
-import { Content, SkipButton, Button } from './styles';
-
-import BrazilStates from '../../../utils/BrazilStates';
-
-const schema = Yup.object().shape({
-  states: Yup.string().required('Escolha seu estado.'),
-  city: Yup.string().required('Preencha sua cidade.'),
-  neighborhood: Yup.string().required('Preencha seu bairro.'),
-  postcode: Yup.string().required('Seu CEP é obrigatório.'),
-  streetnumber: Yup.string().required('Este campo é obrigatório.'),
-  address: Yup.string().required('O seu endereço é obrigatório.'),
-});
+import { EmptyObject } from '~/utils/EmptyObjectVerifier';
 
 export default function LocationFormRc() {
+  const dispatch = useDispatch();
+
   function handleSubmit(data) {
-    
+    if (EmptyObject(data)) {
+      toast.error('Todos os campos são obrigatórios.');
+    } else {
+      dispatch(createLocationRequest(data));
+    }
   }
 
   return (
     <Content>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <FlexDiv>
+        <LogoImg src={LocationIcon} alt="PersonalLogo" />
+        <Title>Localização</Title>
+      </FlexDiv>
+      <Form onSubmit={handleSubmit}>
         <ReactSelect
           name="states"
           placeholder="Selecione seu estado"
@@ -38,23 +41,17 @@ export default function LocationFormRc() {
         <Input name="postcode" type="text" placeholder="CEP" />
 
         <Input
-          name="streetnumber"
+          name="street_number"
           type="text"
           placeholder="Número"
           maxLength={5}
         />
-        <Input name="address" type="text" placeholder="Endereço" />
+        <Input name="street" type="text" placeholder="Endereço" />
 
         <Button type="submit">Próximo</Button>
-
-        <SkipButton
-          onClick={() => {
-            history.push('homepage');
-          }}
-        >
-          Pular
-        </SkipButton>
       </Form>
+
+      <SkipButton>Pular</SkipButton>
     </Content>
   );
 }

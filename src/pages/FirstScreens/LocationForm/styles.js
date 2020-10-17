@@ -109,6 +109,7 @@ export const SameLine = styled.div`
 export const SkipButton = styled.button`
   margin-top: 10px;
   height: 35px;
+  width: 100%;
   background: #d32f2f;
   font-weight: bold;
   color: #fff;
@@ -120,4 +121,23 @@ export const SkipButton = styled.button`
   &:hover {
     background: ${lighten(0.03, '#f44336')};
   }
+`;
+
+export const FlexDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 70px;
+  margin-bottom: 5px;
+`;
+
+export const Title = styled.h1`
+  color: #fff;
+  font-family: Raleway;
+  margin-left: 10px;
+  line-height: 70px;
+`;
+
+export const LogoImg = styled.img`
+  width: 70px;
+  margin: 0;
 `;

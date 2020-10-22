@@ -1,7 +1,8 @@
 import React from 'react';
 import * as ReactBootStrap from 'react-bootstrap';
 import { BsSearch, BsList } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '~/assets/Cko_logo.png';
 import { Text } from './styles';
 
@@ -12,21 +13,20 @@ const NavBar = ({ onLogOut }) => {
       expand="xl"
       bg="primary"
       variant="dark"
+      className="border border-dark p-1 justify-content-center"
     >
-      <ReactBootStrap.Navbar.Brand className="border border-dark">
+      <ReactBootStrap.Navbar.Brand className="p-0">
         <img src={Logo} width={50} alt="logo" />
         <Text>C-CKO</Text>
       </ReactBootStrap.Navbar.Brand>
 
-      <ReactBootStrap.Form
-        className="justify-content-center border border-dark w-100"
-        inline
-      >
+      <ReactBootStrap.Form className="justify-content-center  w-100 p-3" inline>
         <ReactBootStrap.FormControl
           type="text"
           placeholder="Pesquisar produto"
-          className="mr-sm-6 w-50"
+          className="w-50 p-2"
         />
+
         <ReactBootStrap.Button
           variant="outline-dark"
           className="ml-2"
@@ -34,6 +34,7 @@ const NavBar = ({ onLogOut }) => {
         >
           <BsSearch size={25} />
         </ReactBootStrap.Button>
+
         <ReactBootStrap.Button
           variant="outline-dark"
           className="ml-2"
@@ -41,30 +42,47 @@ const NavBar = ({ onLogOut }) => {
         >
           <BsList size={25} />
         </ReactBootStrap.Button>
+
+        <ReactBootStrap.Button
+          variant="outline-dark"
+          className="ml-2"
+          onClick={() => console.log('testing')}
+        >
+          <AiOutlineShoppingCart size={25} />
+        </ReactBootStrap.Button>
       </ReactBootStrap.Form>
 
       <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
       <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
-        <ReactBootStrap.Nav className="border border-dark align-items-center">
-          <Link to="/homepage">
-            <ReactBootStrap.Nav.Link href="homepage" className="h4">
+        <ReactBootStrap.Nav className=" align-items-center">
+          <NavLink to="/homepage" style={{ textDecoration: 'none' }}>
+            <ReactBootStrap.Nav.Link href="homepage" className="h4 text-center">
               Início
             </ReactBootStrap.Nav.Link>
-          </Link>
-          <Link to="/createproduct">
-            <ReactBootStrap.Nav.Link href="createproduct" className="h4">
+          </NavLink>
+
+          <NavLink to="/createproduct" style={{ textDecoration: 'none' }}>
+            <ReactBootStrap.Nav.Link
+              href="createproduct"
+              className="h4 text-center"
+            >
               Criar produto
             </ReactBootStrap.Nav.Link>
-          </Link>
-          <Link to="/myprofile">
-            <ReactBootStrap.Nav.Link href="myprofile" className="h4">
+          </NavLink>
+
+          <NavLink to="/myprofile" style={{ textDecoration: 'none' }}>
+            <ReactBootStrap.Nav.Link
+              href="myprofile"
+              className="h4 text-center"
+            >
               Meu Perfil
             </ReactBootStrap.Nav.Link>
-          </Link>
+          </NavLink>
+
           <ReactBootStrap.Button
             variant="outline-dark"
-            className="ml-2"
+            className="ml-2 mr-2"
             onClick={onLogOut}
           >
             Sair

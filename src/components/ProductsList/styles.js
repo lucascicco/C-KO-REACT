@@ -6,14 +6,15 @@ export const DivProduct = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: padding 0.7s;
 
   :hover {
     background: #9e9e9e;
 
     h4 {
       color: white;
-      font-weight: bold;
     }
+
     h5 {
       color: white;
     }
@@ -21,6 +22,16 @@ export const DivProduct = styled.div`
     button {
       background: #9e9e9e;
     }
+  }
+`;
+
+export const DivSecond = styled.div`
+  width: 100%;
+  transition: padding 0.7s;
+
+  ${DivProduct}:hover & {
+    cursor: pointer;
+    padding: 5px;
   }
 `;
 
@@ -78,14 +89,6 @@ export const DivPerProduct = styled.div`
   border-right: 1px solid gray;
   background: #eeeeee;
   margin: 2px;
-`;
-
-export const DivSecond = styled.div`
-  width: 100%;
-
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 export const DivWrapper = styled.div``;

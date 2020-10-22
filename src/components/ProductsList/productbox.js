@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import history from '~/services/history';
 
 import {
@@ -23,7 +22,7 @@ export default function ProductBox({ item, key }) {
   };
 
   return (
-    <DivPerProduct className="col-sm-2 p-0" key={item.id}>
+    <DivPerProduct className="col-sm-2 p-0">
       <DivProduct>
         <DivHolder>
           <DivTitle>
@@ -32,8 +31,8 @@ export default function ProductBox({ item, key }) {
             </ProductTitle>
             <FavoriteIcon favorite />
           </DivTitle>
-
-          <DivSecond onClick={MoveToProductPage}>
+          <lineMiddle />
+          <DivSecond onClick={MoveToProductPage} className="2p_item">
             <ProductImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTLdgQtDPLGEwaiHr_IHPvFYQ9TiRbg2viBTw&usqp=CAU" />
             <ProductPrice>{item.price}</ProductPrice>
           </DivSecond>

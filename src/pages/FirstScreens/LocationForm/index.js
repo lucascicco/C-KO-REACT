@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import history from '~/services/history';
 import ReactSelect from '~/components/ReactSelect';
 import LocationIcon from '~/assets/Geolocation_icon.png';
 import { Content, SkipButton, Button, FlexDiv, Title, LogoImg } from './styles';
@@ -51,7 +52,14 @@ export default function LocationFormRc() {
         <Button type="submit">Próximo</Button>
       </Form>
 
-      <SkipButton>Pular</SkipButton>
+      <SkipButton
+        onClick={() => {
+          history.push('/homepage');
+          history.go();
+        }}
+      >
+        Pular
+      </SkipButton>
     </Content>
   );
 }

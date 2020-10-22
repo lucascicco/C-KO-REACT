@@ -11,10 +11,10 @@ export function signInSuccess(token, user) {
     payload: { token, user },
   };
 }
-export function signUpRequest({ email, password, name }) {
+export function signUpRequest(data) {
   return {
     type: '@auth/SIGN_UP_REQUEST',
-    payload: { email, password, name },
+    payload: data,
   };
 }
 
@@ -34,5 +34,11 @@ export function FirstAccessSuccess(token, user) {
   return {
     type: '@auth/FIRST_ACCESS_ON',
     payload: { token, user },
+  };
+}
+
+export function TurnFirstAccessOff() {
+  return {
+    type: '@auth/TURN_OFF_FIRST_ACCESS',
   };
 }

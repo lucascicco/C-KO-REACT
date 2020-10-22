@@ -6,6 +6,17 @@ export const Content = styled.div`
   max-width: 315px;
   text-align: center;
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #37474f inset !important;
+  }
+
+  input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+  }
+
   form {
     display: flex;
     flex-direction: column;
@@ -22,13 +33,6 @@ export const Content = styled.div`
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
-      }
-
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus,
-      input:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 #37474f white inset !important;
       }
     }
 

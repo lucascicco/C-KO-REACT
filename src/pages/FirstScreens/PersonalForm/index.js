@@ -7,6 +7,7 @@ import ReactSelect from '~/components/ReactSelect';
 import ReactDatePicker from '~/components/ReactDatePicker';
 import PersonalIcon from '~/assets/Information_Icon.png';
 import { EmptyObject } from '~/utils/EmptyObjectVerifier';
+import { TurnFirstAccessOff } from '~/store/modules/auth/actions';
 import { createPersonalDataRequest } from '~/store/modules/user/actions';
 
 import {
@@ -82,6 +83,7 @@ export default function PersonalFormRc() {
 
       <SkipButton
         onClick={() => {
+          dispatch(TurnFirstAccessOff());
           history.push('/crlocation');
           history.go();
         }}

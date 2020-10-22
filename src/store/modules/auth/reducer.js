@@ -38,6 +38,10 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.first_access = true;
         break;
       }
+      case '@auth/TURN_OFF_FIRST_ACCESS': {
+        draft.first_access = false;
+        break;
+      }
       default:
         return state;
     }

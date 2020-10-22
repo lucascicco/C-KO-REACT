@@ -19,7 +19,7 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(token, user));
   } catch (e) {
-    toast.error('Houve um erro ao atualizar seus dados, verifique seus dados.');
+    toast.error('Houve um erro ao realizar o login, confira seus dados');
     yield put(signFailure());
   }
 }
@@ -40,7 +40,7 @@ export function* signUp({ payload }) {
 
     yield put(FirstAccessSuccess(token, user));
   } catch (err) {
-    toast.error('Houve um erro ao atualizar seus dados, verifique seus dados.');
+    toast.error('Houve um erro ao cadastrar a conta');
 
     yield put(signFailure());
   }

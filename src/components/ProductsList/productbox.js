@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '~/services/history';
 
 import {
@@ -15,9 +16,9 @@ import {
 
 import FavoriteIcon from '../FavoriteIcon';
 
-export default function ProductBox({ item, key }) {
+export default function ProductBox({ item }) {
   const MoveToProductPage = () => {
-    history.push('/product');
+    history.push(`/product/${item.id}`);
     history.go();
   };
 
@@ -33,11 +34,25 @@ export default function ProductBox({ item, key }) {
           </DivTitle>
           <lineMiddle />
           <DivSecond onClick={MoveToProductPage} className="2p_item">
-            <ProductImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTLdgQtDPLGEwaiHr_IHPvFYQ9TiRbg2viBTw&usqp=CAU" />
-            <ProductPrice>{item.price}</ProductPrice>
+            <ProductImage src={item.url} />
+            <ProductPrice>
+              {item.price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </ProductPrice>
           </DivSecond>
         </DivHolder>
       </DivProduct>
     </DivPerProduct>
   );
 }
+
+ProductBox.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    product_name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+};

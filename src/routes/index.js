@@ -8,6 +8,7 @@ import LocationOne from '../pages/FirstScreens/LocationForm';
 import PersonalOne from '../pages/FirstScreens/PersonalForm';
 
 import HomePage from '../pages/ProductsPage/Homepage';
+import ProductPage from '../pages/ProductsPage/ProductPage';
 
 export default function Routes() {
   return (
@@ -20,6 +21,7 @@ export default function Routes() {
         <Route path="/crlocation" component={LocationOne} isPrivate />
 
         <Route path="/homepage" component={HomePage} isPrivate />
+        <Route path="/product/:id" component={ProductPage} isPrivate />
       </Switch>
     </BrowserRouter>
   );

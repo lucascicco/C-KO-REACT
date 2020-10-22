@@ -1,26 +1,25 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Content } from './styles';
-import Logo from '~/assets/Cko_logo.png';
 import { signOut } from '~/store/modules/auth/actions';
 import NavBar from '~/components/Nav';
+import ProductList from '~/components/ProductsList';
+import FakeData from '~/utils/FakeData';
 
 export default function HomePage() {
   const dispatch = useDispatch();
 
   return (
     <Content>
-      <NavBar />
-      <img src={Logo} width={250} alt="logo" />
-      <button
-        type="button"
-        onClick={() => {
+      <NavBar
+        onLogOut={() => {
           dispatch(signOut());
         }}
-      >
-        SAIR
-      </button>
+      />
+      <Container className="mt-5 col-md-12">
+        <ProductList data={FakeData} />
+      </Container>
     </Content>
   );
 }

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Logo from '~/assets/Cko_logo.png';
 import { Text } from './styles';
 
-const NavBar = () => {
+const NavBar = ({ onLogOut }) => {
   return (
     <ReactBootStrap.Navbar
       collapseOnSelect
@@ -62,6 +62,13 @@ const NavBar = () => {
               Meu Perfil
             </ReactBootStrap.Nav.Link>
           </Link>
+          <ReactBootStrap.Button
+            variant="outline-dark"
+            className="ml-2"
+            onClick={onLogOut}
+          >
+            Sair
+          </ReactBootStrap.Button>
         </ReactBootStrap.Nav>
       </ReactBootStrap.Navbar.Collapse>
     </ReactBootStrap.Navbar>

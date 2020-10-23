@@ -7,4 +7,5 @@ export const ButtonFavorite = styled.button`
 
   outline: none !important;
   box-shadow: none !important;
+  background: transparent;
 `;

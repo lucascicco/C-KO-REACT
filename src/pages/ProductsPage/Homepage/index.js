@@ -7,6 +7,7 @@ import NavBar from '~/components/Nav';
 import ProductList from '~/components/ProductsList';
 
 import api from '~/services/api';
+
 import {
   addProducts,
   addCategory,

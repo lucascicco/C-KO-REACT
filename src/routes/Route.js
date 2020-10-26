@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import DefaultLayout from '../pages/_layouts/default';
+import AuthLayout from '../pages/_layouts/auth';
 import history from '../services/history';
 
 function RouteWrapper({
@@ -20,13 +21,15 @@ function RouteWrapper({
     return <Redirect to="/homepage" />;
   }
 
+  const Layout = signed ? DefaultLayout : AuthLayout;
+
   return (
     <Route
       {...rest}
       render={(props) => (
-        <DefaultLayout>
+        <Layout>
           <Component {...props} />
-        </DefaultLayout>
+        </Layout>
       )}
     />
   );

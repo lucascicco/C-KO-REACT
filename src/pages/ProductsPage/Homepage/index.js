@@ -36,7 +36,7 @@ export default function HomePage() {
           dispatch(signOut());
         }}
       />
-      <Container className="mt-5 col-md-12">
+      <Container className="mt-5 col-md-12 border border-dark pb-2">
         <ProductList data={products} />
       </Container>
     </Content>

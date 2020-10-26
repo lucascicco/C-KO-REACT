@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const ProductImage = styled.img`
   width: 500px;
   height: 500px;
-  border: 1px solid black;
   border-radius: 2px;
 `;
 

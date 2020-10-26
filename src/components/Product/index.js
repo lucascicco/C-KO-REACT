@@ -24,7 +24,7 @@ import {
 } from './styles';
 
 export default function ProductPage({ product }) {
-  const [dropdownValue, setDropDown] = useState('');
+  const [dropdownValue, setDropDown] = useState('Selecione uma quantidade');
   const [quantitySelected, setQuantity] = useState('');
   const [qttAvailable, setQttAvailable] = useState(true);
 
@@ -63,7 +63,7 @@ export default function ProductPage({ product }) {
     <Row className="mt-5 p-3">
       <Col lg="5" className="d-flex justify-content-center align-items-center">
         <Zoom zoomMargin={40}>
-          <ProductImage src={product.url} className="shadow" />
+          <ProductImage src={product.url} className="shadow-lg" />
         </Zoom>
       </Col>
 

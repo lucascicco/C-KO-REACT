@@ -23,7 +23,7 @@ export default function Routes() {
 
         <Route path="/homepage" component={HomePage} isPrivate />
         <Route path="/product/:id" component={ProductPage} isPrivate />
-        <Route path="/:id/address" component={AddressForm} isPrivate />
+        <Route path="/address/product/:id" component={AddressForm} isPrivate />
       </Switch>
     </BrowserRouter>
   );

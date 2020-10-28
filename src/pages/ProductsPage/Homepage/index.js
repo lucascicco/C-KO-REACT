@@ -22,8 +22,6 @@ export default function HomePage() {
   const products = useSelector((state) => state.products.products);
   const myfavorites = useSelector((state) => state.user.profile.myfavorites);
 
-  console.log(myfavorites);
-
   const loadProducts = async () => {
     const response = await api.get('productsExceptMine');
     dispatch(addProducts(response.data));

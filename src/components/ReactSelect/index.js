@@ -60,9 +60,13 @@ export default function ReactSelect({
   label,
   options,
   multiple,
+  value,
+  onChange,
+  defaultValueProps,
   ...rest
 }) {
   const ref = useRef(null);
+
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   function parseSelectValue(selectRef) {
@@ -87,13 +91,13 @@ export default function ReactSelect({
   }, [ref.current, fieldName]); // eslint-disable-line
 
   function getDefaultValue() {
-    if (!defaultValue) return null;
+    if (!defaultValueProps) return null;
 
     if (!multiple) {
-      return options.find((option) => option.id === defaultValue);
+      return options.find((option) => option.id === defaultValueProps);
     }
 
-    return options.filter((option) => defaultValue.includes(option.id));
+    return options.filter((option) => defaultValueProps.includes(option.id));
   }
 
   return (
@@ -109,6 +113,7 @@ export default function ReactSelect({
         ref={ref}
         getOptionValue={(option) => option.id}
         getOptionLabel={(option) => option.title}
+        onChange={(e) => onChange(e)}
         styles={customStyles}
         {...rest}
       />

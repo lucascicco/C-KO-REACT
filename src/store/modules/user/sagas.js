@@ -32,25 +32,9 @@ export function* UpdateAccountSaga({ payload }) {
 
 export function* CreateLocationSaga({ payload }) {
   try {
-    const {
-      street,
-      city,
-      country,
-      neighborhood,
-      postcode,
-      state,
-      street_number,
-    } = payload.data;
+    payload.data.country = 'BR';
 
-    const response = yield call(api.post, 'location', {
-      street,
-      city,
-      country,
-      neighborhood,
-      postcode,
-      state,
-      street_number,
-    });
+    const response = yield call(api.post, 'location', payload.data);
 
     yield put(updateLocationSuccess(response.data));
   } catch (err) {
@@ -60,25 +44,9 @@ export function* CreateLocationSaga({ payload }) {
 
 export function* UpdateLocationSaga({ payload }) {
   try {
-    const {
-      street,
-      city,
-      country,
-      neighborhood,
-      postcode,
-      state,
-      street_number,
-    } = payload.data;
+    payload.data.country = 'BR';
 
-    const response = yield call(api.put, 'location', {
-      street,
-      city,
-      country,
-      neighborhood,
-      postcode,
-      state,
-      street_number,
-    });
+    const response = yield call(api.put, 'location', payload.data);
 
     yield put(updateLocationSuccess(response.data));
   } catch (err) {

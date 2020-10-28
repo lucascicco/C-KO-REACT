@@ -31,7 +31,7 @@ export default function LocationFormRc() {
       </FlexDiv>
       <Form onSubmit={handleSubmit}>
         <ReactSelect
-          name="states"
+          name="state"
           placeholder="Selecione seu estado"
           options={BrazilStates}
           isSearchable

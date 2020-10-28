@@ -33,6 +33,8 @@ import history from '~/services/history';
 export default function AddressForm({ match }) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.user.profile.location);
+
+  const [loading, setLoading] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(location.id);
   const [disable, setDisable] = useState(location !== null);
   const [fretetype, setFretetype] = useState('04510');
@@ -52,7 +54,9 @@ export default function AddressForm({ match }) {
     location === null ? '' : location.street
   );
 
-  const GoNextPage = async () => {
+  async function GoNextPage() {
+    setLoading(true);
+
     const values = {
       country: 'BR',
       state: location.state,
@@ -67,6 +71,7 @@ export default function AddressForm({ match }) {
       const testing = await EmptyObjectLocation(values);
 
       if (testing) {
+        setLoading(false);
         return toast.error('Todos os campos são obrigatórios.');
       }
 
@@ -95,7 +100,9 @@ export default function AddressForm({ match }) {
         freteDays: daysMaxDeliver,
       },
     });
-  };
+
+    setLoading(false);
+  }
 
   async function handleSubmit(data) {
     const testing = await EmptyObjectLocation(data);
@@ -118,11 +125,10 @@ export default function AddressForm({ match }) {
       <Form onSubmit={handleSubmit}>
         <ReactSelect
           name="state"
-          placeholder="Selecione o estado"
+          placeholder={state || 'Selecione seu estado'}
           options={BrazilStates}
           onChange={(e) => setState(e.id)}
-          defaultValueProps={state}
-          isSearchable
+          isDisabled={disable}
         />
         <Input
           name="city"
@@ -206,7 +212,7 @@ export default function AddressForm({ match }) {
       </SendDiv>
 
       <ButtonNext className="w-100 mt-5 mb-2" onClick={GoNextPage}>
-        Prosseguir
+        {loading ? 'Carregando...' : 'Prosseguir'}
       </ButtonNext>
     </Content>
   );

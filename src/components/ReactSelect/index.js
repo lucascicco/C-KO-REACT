@@ -60,8 +60,8 @@ export default function ReactSelect({
   label,
   options,
   multiple,
-  value,
   onChange,
+  isDisabled,
   defaultValueProps,
   ...rest
 }) {
@@ -115,6 +115,7 @@ export default function ReactSelect({
         getOptionLabel={(option) => option.title}
         onChange={(e) => onChange(e)}
         styles={customStyles}
+        isDisabled={isDisabled}
         {...rest}
       />
 

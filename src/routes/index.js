@@ -9,6 +9,7 @@ import PersonalOne from '../pages/FirstScreens/PersonalForm';
 
 import HomePage from '../pages/ProductsPage/Homepage';
 import ProductPage from '../pages/ProductsPage/ProductPage';
+import AddressForm from '../pages/ProductsPage/AddressPage';
 
 export default function Routes() {
   return (
@@ -22,6 +23,7 @@ export default function Routes() {
 
         <Route path="/homepage" component={HomePage} isPrivate />
         <Route path="/product/:id" component={ProductPage} isPrivate />
+        <Route path="/:id/address" component={AddressForm} isPrivate />
       </Switch>
     </BrowserRouter>
   );

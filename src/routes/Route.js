@@ -4,13 +4,11 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import DefaultLayout from '../pages/_layouts/default';
 import AuthLayout from '../pages/_layouts/auth';
-import history from '../services/history';
 
 function RouteWrapper({
   component: Component,
   isPrivate = false,
   signed,
-  first_access,
   ...rest
 }) {
   if (!signed && isPrivate) {
@@ -20,7 +18,6 @@ function RouteWrapper({
   if (signed && !isPrivate) {
     return <Redirect to="/homepage" />;
   }
-
   const Layout = signed ? DefaultLayout : AuthLayout;
 
   return (

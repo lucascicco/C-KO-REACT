@@ -92,9 +92,3 @@ export const DivPerProduct = styled.div`
 `;
 
 export const DivWrapper = styled.div``;
-
-export const lineMiddle = styled.div`
-  height: 25px;
-  width: 90%;
-  background-color: gray;
-`;

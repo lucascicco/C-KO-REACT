@@ -8,14 +8,15 @@ import LocationIcon from '~/assets/Geolocation_icon.png';
 import { Content, SkipButton, Button, FlexDiv, Title, LogoImg } from './styles';
 import { createLocationRequest } from '~/store/modules/user/actions';
 import BrazilStates from '~/utils/BrazilStates';
-
-import { EmptyObject } from '~/utils/EmptyObjectVerifier';
+import { EmptyObjectLocation } from '~/utils/EmptyObjectVerifier';
 
 export default function LocationFormRc() {
   const dispatch = useDispatch();
 
-  function handleSubmit(data) {
-    if (EmptyObject(data)) {
+  async function handleSubmit(data) {
+    const testing = await EmptyObjectLocation(data);
+
+    if (testing) {
       toast.error('Todos os campos são obrigatórios.');
     } else {
       dispatch(createLocationRequest(data));

@@ -90,3 +90,17 @@ export const NotAvailable = styled.p`
 `;
 
 export const ProductDetails = styled.div``;
+
+export const TitleDescription = styled.h2`
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  color: white;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  margin-top: 5px;
+`;
+
+export const DescriptionText = styled.p`
+  text-align: justify;
+  word-break: break-word;
+  font-size: 20px;
+`;

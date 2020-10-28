@@ -1,13 +1,13 @@
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import localforage from 'localforage';
 
 export default (reducers) => {
   const persistedReducer = persistReducer(
     {
       key: 'products',
-      storage,
-      whitelist: ['auth'],
-      blacklist: ['products', 'user'],
+      storage: localforage,
+      whitelist: ['auth', 'user'],
+      blacklist: ['products'],
     },
     reducers
   );

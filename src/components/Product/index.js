@@ -4,6 +4,7 @@ import Zoom from 'react-medium-image-zoom';
 import PropTypes from 'prop-types';
 import Dropdown from 'react-dropdown';
 import FavoriteIcon from '~/components/FavoriteIcon';
+import history from '~/services/history';
 
 import {
   ProductImage,
@@ -21,9 +22,16 @@ import {
   QuantityInput,
   InputMoreUnitys,
   NotAvailable,
+  TitleDescription,
+  DescriptionText,
 } from './styles';
 
-export default function ProductPage({ product }) {
+export default function ProductPage({
+  product,
+  favorite,
+  onFavoritePress,
+  sellsDone,
+}) {
   const [dropdownValue, setDropDown] = useState('Selecione uma quantidade');
   const [quantitySelected, setQuantity] = useState('');
   const [qttAvailable, setQttAvailable] = useState(true);
@@ -59,72 +67,95 @@ export default function ProductPage({ product }) {
     }
   };
 
+  const buyProduct = () => {
+    if (quantitySelected > 0 && qttAvailable) {
+      history.push(`/product/address/${product.id}`);
+      history.go();
+    }
+  };
+
   return (
     <Row className="mt-5 p-3">
-      <Col lg="5" className="d-flex justify-content-center align-items-center">
-        <Zoom zoomMargin={40}>
-          <ProductImage src={product.url} className="shadow-lg" />
-        </Zoom>
-      </Col>
+      <Row>
+        <Col
+          lg="5"
+          className="d-flex justify-content-center align-items-center"
+        >
+          <Zoom zoomMargin={40}>
+            <ProductImage src={product.url} className="shadow-lg" />
+          </Zoom>
+        </Col>
 
-      <Col lg={{ span: 6, offset: 1 }}>
-        <ProductDetails>
-          <SoldFavoriteDiv>
-            <ProductsSold>13 vendidos</ProductsSold>
-            <FavoriteIcon favorite />
-          </SoldFavoriteDiv>
+        <Col lg={{ span: 6, offset: 1 }}>
+          <ProductDetails>
+            <SoldFavoriteDiv>
+              <ProductsSold>{sellsDone} vendidos</ProductsSold>
+              <FavoriteIcon favorite={favorite} onPress={onFavoritePress} />
+            </SoldFavoriteDiv>
 
-          <ProductDiv>
-            <ProductTitle>{product.product_name}</ProductTitle>
-            <Button variant="primary" size="lg" block className="shadow">
-              Comprar
-            </Button>
-          </ProductDiv>
-
-          <ProductDiv2>
-            <ProductPrice>
-              {product.price.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </ProductPrice>
-            <ProductStock>Estoque disponível</ProductStock>
-          </ProductDiv2>
-
-          <QuantityDiv>
-            <QuantityText>Quantidade: </QuantityText>
-
-            <Dropdown
-              options={options}
-              placeholder="Selecione uma quantidade"
-              onChange={(value) => {
-                setQttAvailable(true);
-                setDropDown(value.label);
-                setQuantity(value.value);
-              }}
-              value={dropdownValue}
-              className="w-50 ml-2 shadow"
-            />
-
-            <QuantitySmallText>
-              ({product.quantity}) disponíveis
-            </QuantitySmallText>
-          </QuantityDiv>
-
-          <QuantityInput>
-            {dropdownValue === 'Mais unidades' && (
-              <InputMoreUnitys
-                placeholder="Quantidade"
-                onChange={onChange}
-                value={quantitySelected}
-                maxLength="3"
-                available={qttAvailable}
+            <ProductDiv>
+              <ProductTitle>{product.product_name}</ProductTitle>
+              <Button
+                variant="primary"
+                size="lg"
+                block
                 className="shadow"
+                onClick={buyProduct}
+              >
+                Comprar
+              </Button>
+            </ProductDiv>
+
+            <ProductDiv2>
+              <ProductPrice>
+                {product.price.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </ProductPrice>
+              <ProductStock>Estoque disponível</ProductStock>
+            </ProductDiv2>
+
+            <QuantityDiv>
+              <QuantityText>Quantidade: </QuantityText>
+
+              <Dropdown
+                options={options}
+                placeholder="Selecione uma quantidade"
+                onChange={(value) => {
+                  setQttAvailable(true);
+                  setDropDown(value.label);
+                  setQuantity(value.value);
+                }}
+                value={dropdownValue}
+                className="w-50 ml-2 shadow"
               />
-            )}
-            {!qttAvailable && <NotAvailable>Sem estoque</NotAvailable>}
-          </QuantityInput>
-        </ProductDetails>
+
+              <QuantitySmallText>
+                ({product.quantity}) disponíveis
+              </QuantitySmallText>
+            </QuantityDiv>
+
+            <QuantityInput>
+              {dropdownValue === 'Mais unidades' && (
+                <InputMoreUnitys
+                  placeholder="Quantidade"
+                  onChange={onChange}
+                  value={quantitySelected}
+                  maxLength="3"
+                  available={qttAvailable}
+                  className="shadow"
+                />
+              )}
+              {!qttAvailable && <NotAvailable>Sem estoque</NotAvailable>}
+            </QuantityInput>
+          </ProductDetails>
+        </Col>
+      </Row>
+
+      <Col lg={{ span: 12 }} className="mt-4 border-top border-dark">
+        <TitleDescription>Descrição</TitleDescription>
+        <DescriptionText>{product.description}</DescriptionText>
       </Col>
     </Row>
   );
@@ -132,9 +163,14 @@ export default function ProductPage({ product }) {
 
 ProductPage.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     product_name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
   }).isRequired,
+  favorite: PropTypes.bool.isRequired,
+  onFavoritePress: PropTypes.func.isRequired,
+  sellsDone: PropTypes.number.isRequired,
 };

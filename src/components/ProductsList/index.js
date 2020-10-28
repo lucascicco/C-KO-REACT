@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ProductBox from './productbox';
 import { DivWrapper } from './styles';
 
-export default function ProductList({ data }) {
+export default function ProductList({ data, myfavorites }) {
   const productItems = data.map((item) => {
-    return <ProductBox item={item} key={item.id} />;
+    return <ProductBox item={item} key={item.id} myFavorites={myfavorites} />;
   });
 
   return <DivWrapper className="row offset-md-1">{productItems}</DivWrapper>;
@@ -20,4 +20,5 @@ ProductList.propTypes = {
       price: PropTypes.number.isRequired,
     })
   ).isRequired,
+  myfavorites: PropTypes.arrayOf([PropTypes.number]).isRequired,
 };

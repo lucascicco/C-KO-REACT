@@ -56,28 +56,28 @@ const NavBar = ({ onLogOut }) => {
 
       <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
         <ReactBootStrap.Nav className=" align-items-center">
-          <NavLink to="/homepage" style={{ textDecoration: 'none' }}>
-            <ReactBootStrap.Nav.Link href="homepage" className="h4 text-center">
-              Início
-            </ReactBootStrap.Nav.Link>
+          <NavLink
+            to="/homepage"
+            style={{ textDecoration: 'none' }}
+            className="h4 text-center text-light"
+          >
+            Início
           </NavLink>
 
-          <NavLink to="/createproduct" style={{ textDecoration: 'none' }}>
-            <ReactBootStrap.Nav.Link
-              href="createproduct"
-              className="h4 text-center"
-            >
-              Criar produto
-            </ReactBootStrap.Nav.Link>
+          <NavLink
+            to="/createproduct"
+            style={{ textDecoration: 'none' }}
+            className="h4 text-center  text-light"
+          >
+            Criar produto
           </NavLink>
 
-          <NavLink to="/myprofile" style={{ textDecoration: 'none' }}>
-            <ReactBootStrap.Nav.Link
-              href="myprofile"
-              className="h4 text-center"
-            >
-              Meu Perfil
-            </ReactBootStrap.Nav.Link>
+          <NavLink
+            to="/myprofile"
+            style={{ textDecoration: 'none' }}
+            className="h4 text-center  text-light"
+          >
+            Meu Perfil
           </NavLink>
 
           <ReactBootStrap.Button

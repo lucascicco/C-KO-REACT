@@ -29,6 +29,7 @@ export const Content = styled.div`
         color: rgba(255, 255, 255, 0.7);
       }
     }
+
     span {
       color: #fb6f91;
       align-self: flex-start;
@@ -37,6 +38,7 @@ export const Content = styled.div`
       width: 100%;
       text-align: center;
     }
+
     button {
       margin: 5px 0 0;
       height: 44px;

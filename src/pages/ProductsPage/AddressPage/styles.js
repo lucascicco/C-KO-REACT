@@ -82,6 +82,8 @@ export const Button = styled.button`
   border-radius: 4px;
   font-size: 16px;
   transition: background 0.2s;
+  outline: none !important;
+  box-shadow: none !important;
 
   &:hover {
     background: ${lighten(0.03, '#5c6bc0')};
@@ -104,23 +106,6 @@ export const SameLine = styled.div`
     &::placeholder {
       color: rgba(255, 255, 255, 0.7);
     }
-  }
-`;
-
-export const SkipButton = styled.button`
-  margin-top: 10px;
-  height: 35px;
-  width: 100%;
-  background: #d32f2f;
-  font-weight: bold;
-  color: #fff;
-  border: 0;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: background 0.2s;
-
-  &:hover {
-    background: ${lighten(0.03, '#f44336')};
   }
 `;
 
@@ -174,6 +159,8 @@ export const ButtonNext = styled.button`
   border: 0;
   font-size: 16px;
   transition: background 0.2s;
+  outline: none !important;
+  box-shadow: none !important;
 
   &:hover {
     background: ${lighten(0.03, '#3f51b5')};

@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
-import NavBar from '~/components/Nav';
 import ProductItem from '~/components/Product';
 import { RequestFavoriteItems } from '~/store/modules/user/actions';
 import history from '~/services/history';
@@ -39,7 +38,6 @@ export default function ProductPage({ match }) {
 
   return (
     <Content>
-      <NavBar />
       <Container>
         {product.length !== 0 ? (
           <ProductItem

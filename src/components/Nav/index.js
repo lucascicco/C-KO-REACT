@@ -2,11 +2,18 @@ import React from 'react';
 import * as ReactBootStrap from 'react-bootstrap';
 import { BsSearch, BsList } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Logo from '~/assets/Cko_logo.png';
 import { Text } from './styles';
+import { signOut } from '~/store/modules/auth/actions';
 
-const NavBar = ({ onLogOut }) => {
+const NavBar = () => {
+  const dispatch = useDispatch();
+
+  const LogOut = () => {
+    return dispatch(signOut());
+  };
   return (
     <ReactBootStrap.Navbar
       collapseOnSelect
@@ -83,7 +90,7 @@ const NavBar = ({ onLogOut }) => {
           <ReactBootStrap.Button
             variant="outline-dark"
             className="ml-2 mr-2"
-            onClick={onLogOut}
+            onClick={LogOut}
           >
             Sair
           </ReactBootStrap.Button>

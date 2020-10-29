@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useRef, useEffect } from 'react';
 import Select from 'react-select';
-
+import PropTypes from 'prop-types';
 import { useField } from '@rocketseat/unform';
 
 const customStyles = {
@@ -67,7 +67,7 @@ export default function ReactSelect({
 }) {
   const ref = useRef(null);
 
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
 
   function parseSelectValue(selectRef) {
     const selectValue = selectRef.state.value;
@@ -123,3 +123,18 @@ export default function ReactSelect({
     </>
   );
 }
+
+ReactSelect.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  multiple: PropTypes.bool,
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool,
+  defaultValueProps: PropTypes.string,
+};

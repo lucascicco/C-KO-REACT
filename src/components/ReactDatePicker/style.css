@@ -1,3 +1,14 @@
 .react-datepicker__input-container input {
   width: 100%;
+  background: #37474f;
+  border: 0;
+  border-radius: 2px;
+  height: 35px;
+  padding: 0 15px;
+  color: #fff;
+  margin: 0 0 10px;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }

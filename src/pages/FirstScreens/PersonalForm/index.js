@@ -52,7 +52,6 @@ export default function PersonalFormRc() {
           name="profession"
           placeholder="Selecione sua profissão"
           options={Professions}
-          isSearchable
         />
 
         <ReactDatePicker name="birthday" placeholderText="Data de nascimento" />

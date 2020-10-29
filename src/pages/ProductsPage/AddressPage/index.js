@@ -25,7 +25,7 @@ import { createLocationRequest } from '~/store/modules/user/actions';
 import BrazilStates from '~/utils/BrazilStates';
 import {
   EmptyObjectLocation,
-  CompareLocation,
+  CompareObjects,
 } from '~/utils/EmptyObjectVerifier';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -67,7 +67,7 @@ export default function AddressForm({ match }) {
       street,
     };
 
-    if (CompareLocation(values, location)) {
+    if (CompareObjects(values, location)) {
       const testing = await EmptyObjectLocation(values);
 
       if (testing) {

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Content } from './styles';
-import { signOut } from '~/store/modules/auth/actions';
 import NavBar from '~/components/Nav';
 import ProductList from '~/components/ProductsList';
 
@@ -33,11 +32,7 @@ export default function HomePage() {
 
   return (
     <Content>
-      <NavBar
-        onLogOut={() => {
-          dispatch(signOut());
-        }}
-      />
+      <NavBar />
       <Container className="mt-5 col-lg-12  pb-2">
         <ProductList data={products} myfavorites={myfavorites} />
       </Container>

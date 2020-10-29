@@ -32,7 +32,7 @@ export const EmptyObject = (obj) => {
   return nullValue || emptyValue;
 };
 
-export const CompareLocation = (obj1, obj2) => {
+export const CompareObjects = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
 

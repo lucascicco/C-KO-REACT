@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-restricted-syntax */
 import { toast } from 'react-toastify';
 import api from '~/services/api';
@@ -56,10 +57,9 @@ export const CompareObjects = (obj1, obj2) => {
 
   for (const key of keys1) {
     if (obj1[key] !== newObj2[key]) {
-      result = true;
-    } else {
-      result = false;
+      return (result = true);
     }
+    return (result = false);
   }
 
   return result;

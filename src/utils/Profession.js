@@ -66,9 +66,9 @@ export default [
   'Técnico em Radiologia',
   'Turismólogo',
   'Zootecnista',
-].map((x, index) => {
+].map((x) => {
   return {
-    id: index,
+    id: x,
     title: x,
   };
 });

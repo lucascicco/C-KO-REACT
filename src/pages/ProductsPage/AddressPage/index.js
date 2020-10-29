@@ -36,6 +36,7 @@ export default function AddressForm({ match }) {
 
   const [loading, setLoading] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(location.id);
+
   const [disable, setDisable] = useState(location !== null);
   const [fretetype, setFretetype] = useState('04510');
 
@@ -54,29 +55,23 @@ export default function AddressForm({ match }) {
     location === null ? '' : location.street
   );
 
-  async function GoNextPage() {
+  async function GoNextPage(data) {
     setLoading(true);
+    data.country = 'BR';
 
-    const values = {
-      country: 'BR',
-      state: location.state,
-      city,
-      neighborhood,
-      postcode,
-      street_number: streetnumber,
-      street,
-    };
+    const testing = await EmptyObjectLocation(data);
 
-    if (CompareObjects(values, location)) {
-      const testing = await EmptyObjectLocation(values);
+    if (testing) {
+      setLoading(false);
+      return toast.error('Todos os campos são obrigatórios.');
+    }
 
-      if (testing) {
-        setLoading(false);
-        return toast.error('Todos os campos são obrigatórios.');
-      }
-
-      const response = await api.post('location', values);
-      setCurrentLocation(response.id);
+    if (location === null) {
+      dispatch(createLocationRequest(data));
+      setCurrentLocation(location.id);
+    } else if (CompareObjects(data, location)) {
+      const response = await api.post('location', data);
+      setCurrentLocation(response.data.id);
     }
 
     const freteApi = await api.get('frete', {
@@ -91,8 +86,9 @@ export default function AddressForm({ match }) {
 
     const daysMaxDeliver = addDays(new Date(), daysSumUp);
 
-    history.push(`/personal_info/product/${match.params.id}`, {
+    history.push(`/purchase/product/${match.params.id}`, {
       purchase_quantity: history.location.state.purchase_quantity,
+      personalID: history.location.state.personalID,
       location: currentLocation,
       frete: {
         freteType: fretetype,
@@ -104,17 +100,6 @@ export default function AddressForm({ match }) {
     setLoading(false);
   }
 
-  async function handleSubmit(data) {
-    const testing = await EmptyObjectLocation(data);
-
-    if (testing) {
-      toast.error('Todos os campos são obrigatórios.');
-    } else {
-      dispatch(createLocationRequest(data));
-      setDisable(true);
-    }
-  }
-
   return (
     <Content>
       <FlexDiv>
@@ -122,7 +107,7 @@ export default function AddressForm({ match }) {
         <Title>Endereço de entrega</Title>
       </FlexDiv>
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={GoNextPage}>
         <ReactSelect
           name="state"
           placeholder={state || 'Selecione seu estado'}
@@ -173,47 +158,48 @@ export default function AddressForm({ match }) {
           onChange={(e) => setStreet(e.target.event)}
         />
 
-        {location ? (
-          <Button type="button" onClick={() => setDisable(false)}>
-            Alterar
+        <SendDiv>
+          <SendFont>Escolha o tipo de envio</SendFont>
+          <RadioGroup name="frete" onChange={(e) => setFretetype(e)}>
+            <RadioButton
+              className="radio-button-background"
+              onClick={() => setFretetype('04014')}
+            >
+              <Radio
+                value="04014"
+                className="radio-button mr-2"
+                checked={fretetype === '04014'}
+              />
+              SEDEX - ENVIO RÁPIDO
+            </RadioButton>
+
+            <RadioButton
+              className="radio-button-background"
+              onClick={() => setFretetype('04510')}
+            >
+              <Radio
+                value="04510"
+                className="radio-button mr-2"
+                checked={fretetype === '04510'}
+              />
+              PAC - ENVIO NORMAL
+            </RadioButton>
+          </RadioGroup>
+        </SendDiv>
+
+        {location && (
+          <Button
+            type="button"
+            className="mt-1"
+            onClick={() => setDisable(false)}
+          >
+            Alterar formulário
           </Button>
-        ) : (
-          <Button type="submit">Adicionar endereço</Button>
         )}
+        <ButtonNext className="w-100 mt-5 mb-2" type="submit">
+          {loading ? 'Carregando...' : 'Prosseguir'}
+        </ButtonNext>
       </Form>
-
-      <SendDiv>
-        <SendFont>Escolha o tipo de envio</SendFont>
-        <RadioGroup name="frete" onChange={(e) => setFretetype(e)}>
-          <RadioButton
-            className="radio-button-background"
-            onClick={() => setFretetype('04014')}
-          >
-            <Radio
-              value="04014"
-              className="radio-button mr-2"
-              checked={fretetype === '04014'}
-            />
-            SEDEX - ENVIO RÁPIDO
-          </RadioButton>
-
-          <RadioButton
-            className="radio-button-background"
-            onClick={() => setFretetype('04510')}
-          >
-            <Radio
-              value="04510"
-              className="radio-button mr-2"
-              checked={fretetype === '04510'}
-            />
-            PAC - ENVIO NORMAL
-          </RadioButton>
-        </RadioGroup>
-      </SendDiv>
-
-      <ButtonNext className="w-100 mt-5 mb-2" onClick={GoNextPage}>
-        {loading ? 'Carregando...' : 'Prosseguir'}
-      </ButtonNext>
     </Content>
   );
 }

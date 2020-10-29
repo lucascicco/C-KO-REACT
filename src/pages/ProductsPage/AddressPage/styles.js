@@ -146,7 +146,7 @@ export const LogoImg = styled.img`
 `;
 
 export const SendDiv = styled.div`
-  margin-top: 35px;
+  margin-top: 5px;
 `;
 
 export const SendFont = styled.h3`

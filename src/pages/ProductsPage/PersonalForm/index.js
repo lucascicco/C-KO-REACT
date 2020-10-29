@@ -55,8 +55,9 @@ export default function PersonalForm({ match }) {
   );
 
   async function GoNextPage(data) {
-    data.gender = gender;
     setLoading(true);
+    data.gender = gender;
+    data.profession = profession;
 
     const testing = EmptyObject(data);
 
@@ -67,17 +68,17 @@ export default function PersonalForm({ match }) {
 
     if (personal === null) {
       dispatch(createPersonalDataRequest(data));
-      console.log(personal.id);
       setCurrentPersonalID(personal.id);
     } else if (CompareObjects(data, personal)) {
       const response = await api.post('personal_data', data);
-      setCurrentPersonalID(response.id);
+      setCurrentPersonalID(response.data.id);
     }
 
     history.push(`/address/product/${match.params.id}`, {
       purchase_quantity: history.location.state.purchase_quantity,
       personalID: currentPersonalID,
     });
+    history.go();
 
     setLoading(false);
   }

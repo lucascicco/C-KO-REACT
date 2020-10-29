@@ -69,7 +69,7 @@ export default function ProductPage({
 
   const buyProduct = () => {
     if (quantitySelected > 0 && qttAvailable) {
-      history.push(`/address/product/${product.id}`, {
+      history.push(`/personal/product/${product.id}`, {
         purchase_quantity: quantitySelected,
       });
       history.go();

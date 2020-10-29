@@ -6,14 +6,7 @@ import ProductList from '~/components/ProductsList';
 
 import api from '~/services/api';
 
-import {
-  addProducts,
-  addCategory,
-  removeCategory,
-  addFilter,
-  removeFilter,
-  addSearchText,
-} from '~/store/modules/products/actions';
+import { addProducts } from '~/store/modules/products/actions';
 
 export default function HomePage() {
   const dispatch = useDispatch();

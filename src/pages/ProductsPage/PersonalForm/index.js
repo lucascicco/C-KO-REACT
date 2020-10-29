@@ -77,6 +77,9 @@ export default function PersonalForm({ match }) {
     history.push(`/address/product/${match.params.id}`, {
       purchase_quantity: history.location.state.purchase_quantity,
       personalID: currentPersonalID,
+      product_name: history.location.state.product_name,
+      price: history.location.state.price,
+      image_url: history.location.state.image_url,
     });
     history.go();
 

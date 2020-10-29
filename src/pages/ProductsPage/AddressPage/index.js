@@ -35,7 +35,7 @@ export default function AddressForm({ match }) {
   const location = useSelector((state) => state.user.profile.location);
 
   const [loading, setLoading] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState(location.id);
+  const [currentLocation, setCurrentLocation] = useState(location);
 
   const [disable, setDisable] = useState(location !== null);
   const [fretetype, setFretetype] = useState('04510');
@@ -58,6 +58,7 @@ export default function AddressForm({ match }) {
   async function GoNextPage(data) {
     setLoading(true);
     data.country = 'BR';
+    data.state = state;
 
     const testing = await EmptyObjectLocation(data);
 
@@ -68,15 +69,15 @@ export default function AddressForm({ match }) {
 
     if (location === null) {
       dispatch(createLocationRequest(data));
-      setCurrentLocation(location.id);
+      setCurrentLocation(location);
     } else if (CompareObjects(data, location)) {
       const response = await api.post('location', data);
-      setCurrentLocation(response.data.id);
+      setCurrentLocation(response);
     }
 
     const freteApi = await api.get('frete', {
       params: {
-        locationId: currentLocation,
+        locationId: currentLocation.id,
         product_id: Number(match.params.id),
         service: fretetype,
       },
@@ -89,6 +90,9 @@ export default function AddressForm({ match }) {
     history.push(`/purchase/product/${match.params.id}`, {
       purchase_quantity: history.location.state.purchase_quantity,
       personalID: history.location.state.personalID,
+      product_name: history.location.state.product_name,
+      image_url: history.location.state.image_url,
+      price: history.location.state.price,
       location: currentLocation,
       frete: {
         freteType: fretetype,
@@ -96,6 +100,7 @@ export default function AddressForm({ match }) {
         freteDays: daysMaxDeliver,
       },
     });
+    history.go();
 
     setLoading(false);
   }

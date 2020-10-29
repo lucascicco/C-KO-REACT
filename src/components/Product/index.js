@@ -71,6 +71,9 @@ export default function ProductPage({
     if (quantitySelected > 0 && qttAvailable) {
       history.push(`/personal/product/${product.id}`, {
         purchase_quantity: quantitySelected,
+        product_name: product.product_name,
+        price: product.price,
+        image_url: product.url,
       });
       history.go();
     }

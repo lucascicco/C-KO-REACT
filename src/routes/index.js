@@ -11,6 +11,7 @@ import HomePage from '../pages/ProductsPage/Homepage';
 import ProductPage from '../pages/ProductsPage/ProductPage';
 import AddressForm from '../pages/ProductsPage/AddressPage';
 import PersonalForm from '../pages/ProductsPage/PersonalForm';
+import PurchasePage from '../pages/ProductsPage/PurchasePage';
 
 export default function Routes() {
   return (
@@ -28,6 +29,11 @@ export default function Routes() {
         <Route
           path="/personal/product/:id"
           component={PersonalForm}
+          isPrivate
+        />
+        <Route
+          path="/purchase/product/:id"
+          component={PurchasePage}
           isPrivate
         />
       </Switch>

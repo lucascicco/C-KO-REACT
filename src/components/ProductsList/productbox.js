@@ -18,9 +18,9 @@ import {
 
 import FavoriteIcon from '../FavoriteIcon';
 
-const calc = (x, y) => [
-  -(y - window.innerHeight / 2) / 20,
-  (x - window.innerWidth / 2) / 20,
+const calc = () => [
+  window.innerHeight / 2 / 20,
+  window.innerWidth / 2 / 20,
   1.1,
 ];
 const trans = (x, y, s) =>
@@ -29,7 +29,12 @@ const trans = (x, y, s) =>
 export default function ProductBox({ item, myFavorites }) {
   const [props, set] = useSpring(() => ({
     xys: [0, 0, 1],
-    config: { mass: 5, tension: 350, friction: 120 },
+    config: {
+      mass: 1,
+      tension: 500,
+      friction: 150,
+      clamp: true,
+    },
   }));
 
   const dispatch = useDispatch();
@@ -49,7 +54,7 @@ export default function ProductBox({ item, myFavorites }) {
   return (
     <DivPerProduct lg="2">
       <DivProduct
-        onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+        onMouseMove={() => set({ xys: calc() })}
         onMouseLeave={() => set({ xys: [0, 0, 1] })}
         style={{ transform: props.xys.interpolate(trans) }}
       >

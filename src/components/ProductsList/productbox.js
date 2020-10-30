@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useSpring } from 'react-spring';
 import { RequestFavoriteItems } from '~/store/modules/user/actions';
 import history from '~/services/history';
 
@@ -17,7 +18,20 @@ import {
 
 import FavoriteIcon from '../FavoriteIcon';
 
+const calc = (x, y) => [
+  -(y - window.innerHeight / 2) / 20,
+  (x - window.innerWidth / 2) / 20,
+  1.1,
+];
+const trans = (x, y, s) =>
+  `perspective(600px) rotateX(${0}deg) rotateY(${0}deg) scale(${s})`;
+
 export default function ProductBox({ item, myFavorites }) {
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 350, friction: 120 },
+  }));
+
   const dispatch = useDispatch();
   const favoriteItem = myFavorites.includes(item.id);
   const [favorite, setFavorite] = useState(favoriteItem);
@@ -33,8 +47,12 @@ export default function ProductBox({ item, myFavorites }) {
   };
 
   return (
-    <DivPerProduct className="col-lg-2 p-0">
-      <DivProduct>
+    <DivPerProduct lg="2">
+      <DivProduct
+        onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+        onMouseLeave={() => set({ xys: [0, 0, 1] })}
+        style={{ transform: props.xys.interpolate(trans) }}
+      >
         <DivHolder>
           <DivTitle>
             <ProductTitle onClick={MoveToProductPage}>

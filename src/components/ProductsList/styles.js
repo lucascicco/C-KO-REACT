@@ -1,38 +1,27 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring';
+import { Col } from 'react-bootstrap';
 
-export const DivProduct = styled.div`
+export const DivProduct = styled(animated.div)`
   height: 255px;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: padding 0.7s;
+  transition: box-shadow 0.7s;
+  will-change: transform;
+  background: #fff;
 
   :hover {
-    background: #9e9e9e;
-
-    h4 {
-      color: white;
-    }
-
-    h5 {
-      color: white;
-    }
-
-    button {
-      background: #9e9e9e;
-    }
+    cursor: pointer;
+    z-index: 4;
+    position: absolute;
+    box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
   }
 `;
 
 export const DivSecond = styled.div`
   width: 100%;
   transition: padding 0.7s;
-
-  ${DivProduct}:hover & {
-    cursor: pointer;
-    padding: 5px;
-  }
 `;
 
 export const DivHolder = styled.div`
@@ -67,10 +56,6 @@ export const ProductTitle = styled.h4`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 export const ProductPrice = styled.h5`
@@ -84,11 +69,10 @@ export const ProductPrice = styled.h5`
   -webkit-box-orient: vertical;
 `;
 
-export const DivPerProduct = styled.div`
-  border-bottom: 1px solid gray;
-  border-right: 1px solid gray;
-  background: #eeeeee;
-  margin: 2px;
+export const DivPerProduct = styled(Col)`
+  background: #fff;
+  margin: 5px;
+  padding: 0px;
 `;
 
 export const DivWrapper = styled.div``;

@@ -7,7 +7,6 @@ export default function PurchasePage() {
   const [allow, setAllow] = useState(false);
 
   useEffect(() => {
-    console.log(history.location.state);
     if (history.location.state !== null) {
       setAllow(history.location.state.previousPage === 'addressPage');
     } else {

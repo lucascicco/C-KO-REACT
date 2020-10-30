@@ -74,6 +74,7 @@ export default function ProductPage({
         product_name: product.product_name,
         price: product.price,
         image_url: product.url,
+        previousPage: 'productPage',
       });
       history.go();
     }

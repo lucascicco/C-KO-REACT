@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,6 +34,7 @@ export default function AddressForm({ match }) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.user.profile.location);
 
+  const [allow, setAllow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(location);
 
@@ -72,7 +73,7 @@ export default function AddressForm({ match }) {
       setCurrentLocation(location);
     } else if (CompareObjects(data, location)) {
       const response = await api.post('location', data);
-      setCurrentLocation(response);
+      setCurrentLocation(response.data);
     }
 
     const freteApi = await api.get('frete', {
@@ -99,112 +100,125 @@ export default function AddressForm({ match }) {
         fretePrice: freteApi.data.Valor,
         freteDays: daysMaxDeliver,
       },
+      previousPage: 'addressPage',
     });
     history.go();
 
     setLoading(false);
   }
 
+  useEffect(() => {
+    if (history.location.state !== null) {
+      setAllow(history.location.state.previousPage === 'personalPage');
+    } else {
+      setAllow(false);
+    }
+  }, []);
+
   return (
     <Content>
-      <FlexDiv>
-        <LogoImg src={LocationIcon} alt="PersonalLogo" />
-        <Title>Endereço de entrega</Title>
-      </FlexDiv>
+      {allow && (
+        <>
+          <FlexDiv>
+            <LogoImg src={LocationIcon} alt="PersonalLogo" />
+            <Title>Endereço de entrega</Title>
+          </FlexDiv>
 
-      <Form onSubmit={GoNextPage}>
-        <ReactSelect
-          name="state"
-          placeholder={state || 'Selecione seu estado'}
-          options={BrazilStates}
-          onChange={(e) => setState(e.id)}
-          isDisabled={disable}
-        />
-        <Input
-          name="city"
-          type="text"
-          placeholder="Cidade"
-          value={city}
-          disabled={disable}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <Input
-          name="neighborhood"
-          type="text"
-          placeholder="Bairro"
-          value={neighborhood}
-          disabled={disable}
-          onChange={(e) => setNeighborhood(e.target.value)}
-        />
-        <Input
-          name="postcode"
-          type="text"
-          placeholder="CEP"
-          maxLength="9"
-          value={postcode}
-          disabled={disable}
-          onChange={(e) => setPostcode(e.target.value)}
-        />
-        <Input
-          name="street_number"
-          type="text"
-          placeholder="Número"
-          maxLength={5}
-          value={streetnumber}
-          disabled={disable}
-          onChange={(e) => setStreetNumber(e.target.value)}
-        />
-        <Input
-          name="street"
-          type="text"
-          placeholder="Endereço"
-          value={street}
-          disabled={disable}
-          onChange={(e) => setStreet(e.target.event)}
-        />
+          <Form onSubmit={GoNextPage}>
+            <ReactSelect
+              name="state"
+              placeholder={state || 'Selecione seu estado'}
+              options={BrazilStates}
+              onChange={(e) => setState(e.id)}
+              isDisabled={disable}
+            />
+            <Input
+              name="city"
+              type="text"
+              placeholder="Cidade"
+              value={city}
+              disabled={disable}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <Input
+              name="neighborhood"
+              type="text"
+              placeholder="Bairro"
+              value={neighborhood}
+              disabled={disable}
+              onChange={(e) => setNeighborhood(e.target.value)}
+            />
+            <Input
+              name="postcode"
+              type="text"
+              placeholder="CEP"
+              maxLength="9"
+              value={postcode}
+              disabled={disable}
+              onChange={(e) => setPostcode(e.target.value)}
+            />
+            <Input
+              name="street_number"
+              type="text"
+              placeholder="Número"
+              maxLength={5}
+              value={streetnumber}
+              disabled={disable}
+              onChange={(e) => setStreetNumber(e.target.value)}
+            />
+            <Input
+              name="street"
+              type="text"
+              placeholder="Endereço"
+              value={street}
+              disabled={disable}
+              onChange={(e) => setStreet(e.target.event)}
+            />
 
-        <SendDiv>
-          <SendFont>Escolha o tipo de envio</SendFont>
-          <RadioGroup name="frete" onChange={(e) => setFretetype(e)}>
-            <RadioButton
-              className="radio-button-background"
-              onClick={() => setFretetype('04014')}
-            >
-              <Radio
-                value="04014"
-                className="radio-button mr-2"
-                checked={fretetype === '04014'}
-              />
-              SEDEX - ENVIO RÁPIDO
-            </RadioButton>
+            <SendDiv>
+              <SendFont>Escolha o tipo de envio</SendFont>
+              <RadioGroup name="frete" onChange={(e) => setFretetype(e)}>
+                <RadioButton
+                  className="radio-button-background"
+                  onClick={() => setFretetype('04014')}
+                >
+                  <Radio
+                    value="04014"
+                    className="radio-button mr-2"
+                    checked={fretetype === '04014'}
+                  />
+                  SEDEX - ENVIO RÁPIDO
+                </RadioButton>
 
-            <RadioButton
-              className="radio-button-background"
-              onClick={() => setFretetype('04510')}
-            >
-              <Radio
-                value="04510"
-                className="radio-button mr-2"
-                checked={fretetype === '04510'}
-              />
-              PAC - ENVIO NORMAL
-            </RadioButton>
-          </RadioGroup>
-        </SendDiv>
+                <RadioButton
+                  className="radio-button-background"
+                  onClick={() => setFretetype('04510')}
+                >
+                  <Radio
+                    value="04510"
+                    className="radio-button mr-2"
+                    checked={fretetype === '04510'}
+                  />
+                  PAC - ENVIO NORMAL
+                </RadioButton>
+              </RadioGroup>
+            </SendDiv>
 
-        {location && (
-          <Button
-            type="button"
-            className="mt-1"
-            onClick={() => setDisable(false)}
-          >
-            Alterar formulário
-          </Button>
-        )}
-        <ButtonNext className="w-100 mt-5 mb-2" type="submit">
-          {loading ? 'Carregando...' : 'Prosseguir'}
-        </ButtonNext>
-      </Form>
+            {location && (
+              <Button
+                type="button"
+                className="mt-1"
+                onClick={() => setDisable(false)}
+              >
+                Alterar formulário
+              </Button>
+            )}
+            <ButtonNext className="w-100 mt-5 mb-2" type="submit">
+              {loading ? 'Carregando...' : 'Prosseguir'}
+            </ButtonNext>
+          </Form>
+        </>
+      )}
     </Content>
   );
 }

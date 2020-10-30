@@ -29,6 +29,7 @@ import {
 } from '~/utils/EmptyObjectVerifier';
 import api from '~/services/api';
 import history from '~/services/history';
+import { cepMask } from '~/utils/masks';
 
 export default function AddressForm({ match }) {
   const dispatch = useDispatch();
@@ -155,7 +156,7 @@ export default function AddressForm({ match }) {
               maxLength="9"
               value={postcode}
               disabled={disable}
-              onChange={(e) => setPostcode(e.target.value)}
+              onChange={(e) => setPostcode(cepMask(e.target.value))}
             />
             <Input
               name="street_number"

@@ -26,6 +26,7 @@ import {
 
 import api from '~/services/api';
 import history from '~/services/history';
+import { cpfMask, telefoneMask } from '~/utils/masks';
 
 export default function PersonalForm({ match }) {
   const dispatch = useDispatch();
@@ -127,18 +128,18 @@ export default function PersonalForm({ match }) {
                 name="cellphone"
                 type="text"
                 placeholder="Telefone"
-                maxLength={15}
+                maxLength={14}
                 value={cellphone}
-                onChange={(e) => setCellphone(e.target.value)}
+                onChange={(e) => setCellphone(telefoneMask(e.target.value))}
                 disabled={disable}
               />
               <Input
                 name="identification"
                 type="text"
                 placeholder="CPF"
-                maxLength={20}
+                maxLength={14}
                 value={identification}
-                onChange={(e) => setIdentification(e.target.value)}
+                onChange={(e) => setIdentification(cpfMask(e.target.value))}
                 disabled={disable}
               />
             </SameLine>

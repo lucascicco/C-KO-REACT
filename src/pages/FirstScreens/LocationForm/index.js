@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -9,9 +9,11 @@ import { Content, SkipButton, Button, FlexDiv, Title, LogoImg } from './styles';
 import { createLocationRequest } from '~/store/modules/user/actions';
 import BrazilStates from '~/utils/BrazilStates';
 import { EmptyObjectLocation } from '~/utils/EmptyObjectVerifier';
+import { cepMask } from '~/utils/masks';
 
 export default function LocationFormRc() {
   const dispatch = useDispatch();
+  const [postcode, setPostcode] = useState('');
 
   async function handleSubmit(data) {
     const testing = await EmptyObjectLocation(data);
@@ -34,13 +36,20 @@ export default function LocationFormRc() {
           name="state"
           placeholder="Selecione seu estado"
           options={BrazilStates}
-          isSearchable
         />
 
         <Input name="city" type="text" placeholder="Cidade" />
 
         <Input name="neighborhood" type="text" placeholder="Bairro" />
-        <Input name="postcode" type="text" placeholder="CEP" />
+        <Input
+          name="postcode"
+          value={postcode}
+          type="text"
+          placeholder="CEP"
+          onChange={(e) => {
+            setPostcode(cepMask(e.target.value));
+          }}
+        />
 
         <Input
           name="street_number"

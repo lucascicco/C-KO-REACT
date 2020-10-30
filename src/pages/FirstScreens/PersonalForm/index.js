@@ -23,10 +23,14 @@ import {
 } from './styles';
 
 import Professions from '~/utils/Profession';
+import { cpfMask, telefoneMask } from '~/utils/masks';
 
 export default function PersonalFormRc() {
   const dispatch = useDispatch();
+
   const [gender, setGender] = useState('');
+  const [cellphone, setCellphone] = useState('');
+  const [identification, setIdentification] = useState('');
 
   function handleSubmit(data) {
     data.gender = gender;
@@ -73,8 +77,22 @@ export default function PersonalFormRc() {
         </GenderDiv>
 
         <SameLine>
-          <Input name="cellphone" type="text" placeholder="Telefone" />
-          <Input name="identification" type="text" placeholder="CPF" />
+          <Input
+            name="cellphone"
+            type="text"
+            placeholder="Telefone"
+            maxLength={14}
+            value={cellphone}
+            onChange={(e) => setCellphone(telefoneMask(e.target.value))}
+          />
+          <Input
+            name="identification"
+            type="text"
+            placeholder="CPF"
+            maxLength={14}
+            value={identification}
+            onChange={(e) => setIdentification(cpfMask(e.target.value))}
+          />
         </SameLine>
 
         <Button type="submit">Próximo</Button>

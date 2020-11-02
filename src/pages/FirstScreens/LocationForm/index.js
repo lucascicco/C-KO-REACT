@@ -36,6 +36,7 @@ export default function LocationFormRc() {
           name="state"
           placeholder="Selecione seu estado"
           options={BrazilStates}
+          isDisabled={false}
         />
 
         <Input name="city" type="text" placeholder="Cidade" />

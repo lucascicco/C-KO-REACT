@@ -29,7 +29,7 @@ import {
   Strong,
 } from './styles';
 
-export default function PurchaseInfo({ state }) {
+export default function PurchaseInfo({ state, setPage }) {
   const {
     location,
     price,
@@ -44,7 +44,7 @@ export default function PurchaseInfo({ state }) {
   const total_price = parseFloat(total_products + frete_price);
 
   return (
-    <Row className="d-flex justify-content-center align-items-center mt-3">
+    <Row className="d-flex justify-content-center mt-3">
       <Col lg="8">
         <h1 className="display-4 text-light text-center">
           Informações da compra
@@ -103,7 +103,7 @@ export default function PurchaseInfo({ state }) {
           </DivPayment1>
 
           <DivPayment2 lg="6">
-            <ButtonNext>
+            <ButtonNext onClick={() => setPage('second')}>
               <ButtonText className="display-4">Prosseguir</ButtonText>
               <AiOutlineArrowRight size={60} />
             </ButtonNext>
@@ -131,4 +131,5 @@ PurchaseInfo.propTypes = {
       fretePrice: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  setPage: PropTypes.func.isRequired,
 };

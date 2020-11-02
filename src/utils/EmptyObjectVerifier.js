@@ -64,3 +64,11 @@ export const CompareObjects = (obj1, obj2) => {
 
   return result;
 };
+
+export const CreditCardVerifier = (obj) => {
+  const emptyValue = Object.values(obj).some((element) => element === '');
+  const nullValue = Object.values(obj).some((element) => element === null);
+  const cvc = obj.cvc.length < 3;
+
+  return nullValue || emptyValue || cvc || !obj.validExpiry || !obj.validNumber;
+};

@@ -1,5 +1,31 @@
 import styled from 'styled-components';
 import { Col, Row } from 'react-bootstrap';
+import { lighten } from 'polished';
+
+export const DivButton = styled(Col)`
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+`;
+
+export const Button = styled.button`
+  padding: 10px;
+  background: #283593;
+  color: white;
+  height: 45px;
+  width: 90%;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 22px;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: background 0.2s;
+  border-radius: 5px;
+
+  &:hover {
+    background: ${lighten(0.03, '#3949ab')};
+  }
+`;
 
 export const DivGeral = styled(Row)`
   input:-webkit-autofill,
@@ -30,6 +56,34 @@ export const Input = styled.input`
   height: 35px;
   border: none;
   margin-bottom: 10px;
+
+  &::placeholder {
+    color: #bdbdbd;
+  }
+`;
+
+export const InputExpiry = styled.input`
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  height: 35px;
+  border: none;
+  margin-bottom: 10px;
+  color: ${(props) => (props.validExpiry ? 'black' : '#d32f2f')};
+
+  &::placeholder {
+    color: #bdbdbd;
+  }
+`;
+
+export const InputNumber = styled.input`
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  height: 35px;
+  border: none;
+  margin-bottom: 10px;
+  color: ${(props) => (props.validNumber ? 'black' : '#d32f2f')};
 
   &::placeholder {
     color: #bdbdbd;

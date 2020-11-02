@@ -2,14 +2,20 @@ import React from 'react';
 import Cards from 'react-credit-cards';
 import {
   Input,
+  InputExpiry,
   DivGeral,
   DivOne,
   DivTwo,
   DivFlex,
-  CVC
+  CVC,
+  InputNumber,
+  DivButton,
+  Button
 } from './styles';
 import 'react-credit-cards/es/styles-compiled.css';
 import CardRegexValidator from '~/utils/CardValidator';
+import { isBefore } from 'date-fns';
+
 
 export default class PaymentForm extends React.Component {
   state = {
@@ -18,6 +24,8 @@ export default class PaymentForm extends React.Component {
     focus: '',
     name: '',
     number: '',
+    validExpiry: true,
+    validNumber: true,
   };
 
   handleInputFocus = (e) => {
@@ -28,8 +36,28 @@ export default class PaymentForm extends React.Component {
     const { name, value } = e.target;
 
     const formatValue = CardRegexValidator(name, value);
-    console.log(formatValue);
     this.setState({ [name]: formatValue });
+
+
+    if (name === 'expiry') {
+      const array = formatValue.split("/");
+      const month_x = Number(array[0]) - 1;
+      const year_x = Number(array[1]) + 2000;
+
+      if ((month_x < 0 || month_x > 11) || new Date().getFullYear() > year_x) {
+        this.setState({ validExpiry: false});
+        return;
+      }
+
+      const currentDate = new Date().setDate(0);
+      const date = new Date(year_x, month_x, 0);
+
+      this.setState({ validExpiry: isBefore(currentDate, date) });
+    }
+  }
+
+  handleSubmit = () => {
+    this.props.onSubmit(this.state)
   }
 
   render() {
@@ -45,19 +73,23 @@ export default class PaymentForm extends React.Component {
             placeholders={{
               name: 'NOME COMPLETO'
             }}
-            callback={(e, isValid) => console.log(isValid)}
+            callback={(e, isValid) => this.setState({
+              validNumber: isValid
+            })}
           />
         </DivOne>
         <DivTwo lg="6">
           <form>
-            <Input
+            <InputNumber
               type="tel"
               name="number"
               maxLength={23}
               placeholder="Número do cartão"
               value={this.state.number}
+              validNumber={this.state.validNumber}
               onChange={this.handleInputChange}
               onFocus={this.handleInputFocus}
+              required
             />
              <Input
               name="name"
@@ -66,15 +98,18 @@ export default class PaymentForm extends React.Component {
               maxLength={35}
               onChange={this.handleInputChange}
               onFocus={this.handleInputFocus}
+              required
             />
             <DivFlex>
-             <Input
+             <InputExpiry
                 name="expiry"
-                maxLength={7}
-                placeholder="Validade MM/AAAA"
+                maxLength={5}
+                placeholder="Validade MM/AA"
+                validExpiry={this.state.validExpiry}
                 value={this.state.expiry}
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
+                required
               />
               <CVC
                 name="cvc"
@@ -83,10 +118,16 @@ export default class PaymentForm extends React.Component {
                 value={this.state.cvc}
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
+                required
               />
             </DivFlex>
           </form>
         </DivTwo>
+
+        <DivButton>
+            <Button onClick={this.handleSubmit}>Efetuar pagamento</Button>
+        </DivButton>
+
       </DivGeral>
     );
   }

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Col } from 'react-bootstrap';
+
 import { lighten } from 'polished';
 
 export const DivButton = styled(Col)`

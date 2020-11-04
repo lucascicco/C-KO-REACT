@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-import { set } from 'date-fns';
 import PurchaseInfo from './PurchaseInfo';
 import PurchasePayment from './PurchasePayment';
 import history from '~/services/history';
@@ -15,10 +14,9 @@ export default function PurchasePage({ match }) {
 
   const [animation, setAnimation] = useState(false);
   const [outcome, setOutcome] = useState(null);
-  const [purchase, setPurchase] = useState([]);
 
   const onSubmit = async (data) => {
-    if (!CreditCardVerifier(data)) {
+    if (CreditCardVerifier(data)) {
       toast.error('Algum campo não foi preenchido corretamente.');
     } else {
       try {
@@ -35,8 +33,13 @@ export default function PurchasePage({ match }) {
           frete_date: history.location.state.frete.freteDays,
         });
 
-        setPurchase(response.data);
         setOutcome(true);
+
+        history.push('/homepage', {
+          purchase: response.data,
+          previousPage: 'purchasePage',
+        });
+        history.go();
       } catch (e) {
         setOutcome(false);
 

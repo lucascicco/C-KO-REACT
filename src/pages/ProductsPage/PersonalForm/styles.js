@@ -1,15 +1,18 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 import { Input as RockeseatInput } from '@rocketseat/unform';
 
 export const Input = styled(RockeseatInput)`
   background: #37474f;
   border: 0;
   border-radius: 2px;
-  height: 35px;
+  height: 45px;
+  border-radius: 5px;
+  margin-bottom: 15px;
   padding: 0 15px;
   color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
   margin: 0 0 10px;
+  font-size: 18px;
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
@@ -18,7 +21,7 @@ export const Input = styled(RockeseatInput)`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 400px;
   text-align: center;
 
   input:-webkit-autofill,
@@ -58,24 +61,29 @@ export const Content = styled.div`
 `;
 
 export const Button = styled.button`
-  margin: 5px 0 0;
+  margin: 0px auto;
+  margin-top: 15px;
   height: 44px;
-  background: #3f51b5;
+  background: #546e7a;
   font-weight: bold;
   color: #fff;
   border: 0;
+  width: 90%;
   border-radius: 4px;
   font-size: 16px;
   transition: background 0.2s;
+  transition: background 0.2s;
+  outline: none !important;
+  box-shadow: none !important;
 
   &:hover {
-    background: ${lighten(0.03, '#5c6bc0')};
+    background: ${darken(0.03, '#263238')};
   }
 `;
 
 export const SameLine = styled.div`
   display: flex;
-  height: 35px;
+  height: 45px;
   margin-bottom: 10px;
   justify-content: space-between;
 
@@ -140,7 +148,6 @@ export const SendFont = styled.h3`
 `;
 
 export const ButtonNext = styled.button`
-  margin: 5px 0 0;
   height: 44px;
   background: #283593;
   font-weight: bold;
@@ -173,10 +180,11 @@ export const GenderDivSmall = styled.button`
     props.genderActived
       ? '2px solid white'
       : '1px solid rgba(255, 255, 255, 0.7)'};
-  height: 35px;
-  line-height: 35px;
+  height: 45px;
+  line-height: 45px;
   outline: none !important;
   box-shadow: none !important;
+  font-size: 18px;
 
   &:hover {
     background: rgba(55, 71, 79, 0.7);

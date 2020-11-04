@@ -166,7 +166,7 @@ export default function PersonalForm({ match }) {
 
             {personal && (
               <Button type="button" onClick={() => setDisable(false)}>
-                Alterar
+                Alterar formulário
               </Button>
             )}
 

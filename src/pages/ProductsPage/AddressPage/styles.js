@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 import { Input as RockeseatInput } from '@rocketseat/unform';
 
 export const Input = styled(RockeseatInput)`
   background: #37474f;
   border: 0;
   border-radius: 2px;
-  height: 35px;
+  height: 45px;
   padding: 0 15px;
   color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
   margin: 0 0 10px;
+  font-size: 17px;
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
@@ -18,7 +19,7 @@ export const Input = styled(RockeseatInput)`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 400px;
   text-align: center;
 
   input:-webkit-autofill,
@@ -73,9 +74,11 @@ export const Content = styled.div`
 `;
 
 export const Button = styled.button`
-  margin: 5px 0 0;
+  margin: 0px auto;
+  margin-top: 15px;
   height: 44px;
-  background: #3f51b5;
+  width: 90%;
+  background: #546e7a;
   font-weight: bold;
   color: #fff;
   border: 0;
@@ -86,7 +89,7 @@ export const Button = styled.button`
   box-shadow: none !important;
 
   &:hover {
-    background: ${lighten(0.03, '#5c6bc0')};
+    background: ${darken(0.03, '#263238')};
   }
 `;
 
@@ -131,7 +134,8 @@ export const LogoImg = styled.img`
 `;
 
 export const SendDiv = styled.div`
-  margin-top: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 export const SendFont = styled.h3`
@@ -143,6 +147,7 @@ export const RadioButton = styled.button`
   width: 70%;
   padding: 5px;
   margin-bottom: 5px;
+  height: 35px;
   font-family: 'Raleway', sans-serif;
   border-radius: 5px;
   border: none;

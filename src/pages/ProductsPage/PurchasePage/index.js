@@ -11,7 +11,7 @@ import { CreditCardVerifier } from '~/utils/EmptyObjectVerifier';
 
 export default function PurchasePage({ match }) {
   const [allow, setAllow] = useState(false);
-  const [page, setPage] = useState('second');
+  const [page, setPage] = useState('first');
 
   const [animation, setAnimation] = useState(false);
   const [outcome, setOutcome] = useState(null);

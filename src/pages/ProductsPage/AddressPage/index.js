@@ -187,6 +187,7 @@ export default function AddressForm({ match }) {
               <SendFont>Escolha o tipo de envio</SendFont>
               <RadioGroup name="frete" onChange={(e) => setFretetype(e)}>
                 <RadioButton
+                  type="button"
                   className="radio-button-background"
                   onClick={() => setFretetype('04014')}
                 >
@@ -199,6 +200,7 @@ export default function AddressForm({ match }) {
                 </RadioButton>
 
                 <RadioButton
+                  type="button"
                   className="radio-button-background"
                   onClick={() => setFretetype('04510')}
                 >

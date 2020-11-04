@@ -89,16 +89,23 @@ export default function AddressForm({ match }) {
 
     const daysMaxDeliver = addDays(new Date(), daysSumUp);
 
+    const total_products =
+      history.location.state.purchase_quantity * history.location.state.price;
+    const frete_price = parseFloat(freteApi.data.Valor.replace(',', '.'));
+    const total_price = parseFloat(total_products + frete_price);
+
     history.push(`/purchase/product/${match.params.id}`, {
       purchase_quantity: history.location.state.purchase_quantity,
       personalID: history.location.state.personalID,
       product_name: history.location.state.product_name,
       image_url: history.location.state.image_url,
       price: history.location.state.price,
+      total_price,
+      total_products,
       location: currentLocation,
       frete: {
         freteType: fretetype,
-        fretePrice: freteApi.data.Valor,
+        fretePrice: frete_price,
         freteDays: daysMaxDeliver,
       },
       previousPage: 'addressPage',

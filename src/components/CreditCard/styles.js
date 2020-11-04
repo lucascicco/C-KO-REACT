@@ -2,10 +2,19 @@ import styled from 'styled-components';
 import { Col, Row } from 'react-bootstrap';
 import { lighten } from 'polished';
 
+export const DivWrapper = styled(Row)`
+  margin-top: 20px;
+`;
+
 export const DivButton = styled(Col)`
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
+  margin: 0px auto;
+  padding: 0px;
+`;
+export const DivNormal = styled(Row)`
+  width: 100%;
+  padding: 0px;
+  height: 45px;
+  margin-top: 20px;
 `;
 
 export const Button = styled.button`
@@ -28,6 +37,9 @@ export const Button = styled.button`
 `;
 
 export const DivGeral = styled(Row)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -43,7 +55,6 @@ export const DivGeral = styled(Row)`
 export const DivOne = styled(Col)``;
 
 export const DivTwo = styled(Col)`
-  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,9 +64,10 @@ export const Input = styled.input`
   padding: 10px;
   border-radius: 5px;
   width: 100%;
-  height: 35px;
+  height: 45px;
   border: none;
   margin-bottom: 10px;
+  font-size: 20px;
 
   &::placeholder {
     color: #bdbdbd;
@@ -66,10 +78,11 @@ export const InputExpiry = styled.input`
   padding: 10px;
   border-radius: 5px;
   width: 100%;
-  height: 35px;
+  height: 45px;
   border: none;
   margin-bottom: 10px;
   color: ${(props) => (props.validExpiry ? 'black' : '#d32f2f')};
+  font-size: 20px;
 
   &::placeholder {
     color: #bdbdbd;
@@ -80,10 +93,11 @@ export const InputNumber = styled.input`
   padding: 10px;
   border-radius: 5px;
   width: 100%;
-  height: 35px;
+  height: 45px;
   border: none;
   margin-bottom: 10px;
   color: ${(props) => (props.validNumber ? 'black' : '#d32f2f')};
+  font-size: 20px;
 
   &::placeholder {
     color: #bdbdbd;
@@ -95,9 +109,10 @@ export const CVC = styled.input`
   border-radius: 5px;
   width: 30%;
   margin-left: 20px;
-  height: 35px;
+  height: 45px;
   border: none;
   margin-bottom: 10px;
+  font-size: 20px;
 
   &::placeholder {
     color: #bdbdbd;

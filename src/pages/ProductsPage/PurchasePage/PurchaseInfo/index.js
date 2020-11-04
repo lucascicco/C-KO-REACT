@@ -37,11 +37,9 @@ export default function PurchaseInfo({ state, setPage }) {
     frete,
     product_name,
     image_url,
+    total_price,
+    total_products,
   } = state;
-
-  const total_products = purchase_quantity * price;
-  const frete_price = parseFloat(frete.fretePrice.replace(',', '.'));
-  const total_price = parseFloat(total_products + frete_price);
 
   return (
     <Row className="d-flex justify-content-center mt-3">
@@ -67,8 +65,10 @@ export default function PurchaseInfo({ state, setPage }) {
                   {ConvertBRL(price)}
                 </Text>
                 <Text>
-                  Quantidade: {purchase_quantity} x {ConvertBRL(price)}
+                  Quantidade: {purchase_quantity} x {ConvertBRL(price)} ={' '}
+                  {ConvertBRL(total_products)}
                 </Text>
+
                 <Text>Preço frete: {ConvertBRL(frete.fretePrice)}</Text>
               </DivValues>
 
@@ -124,9 +124,11 @@ PurchaseInfo.propTypes = {
       street_number: PropTypes.number.isRequired,
     }),
     price: PropTypes.number.isRequired,
+    total_price: PropTypes.number.isRequired,
     product_name: PropTypes.string.isRequired,
     image_url: PropTypes.string.isRequired,
     purchase_quantity: PropTypes.number.isRequired,
+    total_products: PropTypes.number.isRequired,
     frete: PropTypes.shape({
       fretePrice: PropTypes.number.isRequired,
     }).isRequired,

@@ -1,26 +1,32 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 import CreditCard from '~/components/CreditCard';
-import { CreditCardVerifier } from '~/utils/EmptyObjectVerifier';
 
-export default function PurchasePage() {
-  const onSubmit = (data) => {
-    if (CreditCardVerifier(data)) {
-      toast.error('Algum campo não foi preenchido corretamente.');
-    } else {
-      console.log('PAGAMENTO FEITO COM SUCESSO');
-    }
-  };
-
+export default function PurchasePage({ onSubmit, animation, outcome }) {
   return (
-    <Row className="mt-3">
+    <Row className="mt-3 w-100">
       <Col lg="12">
         <h1 className="display-4 text-light text-center">
           Finalize sua compra
         </h1>
-        <CreditCard onSubmit={onSubmit} />
+
+        <CreditCard
+          onSubmit={onSubmit}
+          animation={animation}
+          outcome={outcome}
+        />
       </Col>
     </Row>
   );
 }
+
+PurchasePage.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  animation: PropTypes.bool.isRequired,
+  outcome: PropTypes.bool,
+};
+
+PurchasePage.defaultProps = {
+  outcome: null,
+};

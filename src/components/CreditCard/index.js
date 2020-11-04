@@ -10,12 +10,13 @@ import {
   CVC,
   InputNumber,
   DivButton,
-  Button
+  DivNormal,
+  DivWrapper
 } from './styles';
 import 'react-credit-cards/es/styles-compiled.css';
 import CardRegexValidator from '~/utils/CardValidator';
 import { isBefore } from 'date-fns';
-
+import CreditButton from '../CreditButton';
 
 export default class PaymentForm extends React.Component {
   state = {
@@ -62,73 +63,80 @@ export default class PaymentForm extends React.Component {
 
   render() {
     return (
-      <DivGeral>
-        <DivOne lg="6">
-          <Cards
-            cvc={this.state.cvc}
-            expiry={this.state.expiry}
-            focused={this.state.focus}
-            name={this.state.name}
-            number={this.state.number}
-            placeholders={{
-              name: 'NOME COMPLETO'
-            }}
-            callback={(e, isValid) => this.setState({
-              validNumber: isValid
-            })}
-          />
-        </DivOne>
-        <DivTwo lg="6">
-          <form>
-            <InputNumber
-              type="tel"
-              name="number"
-              maxLength={23}
-              placeholder="Número do cartão"
-              value={this.state.number}
-              validNumber={this.state.validNumber}
-              onChange={this.handleInputChange}
-              onFocus={this.handleInputFocus}
-              required
+      <DivWrapper>
+        <DivGeral>
+          <DivOne lg={{ span: 4 }}>
+            <Cards
+              cvc={this.state.cvc}
+              expiry={this.state.expiry}
+              focused={this.state.focus}
+              name={this.state.name}
+              number={this.state.number}
+              placeholders={{
+                name: 'NOME COMPLETO'
+              }}
+              callback={(e, isValid) => this.setState({
+                validNumber: isValid
+              })}
             />
-             <Input
-              name="name"
-              placeholder="Nome completo"
-              value={this.state.name}
-              maxLength={35}
-              onChange={this.handleInputChange}
-              onFocus={this.handleInputFocus}
-              required
-            />
-            <DivFlex>
-             <InputExpiry
-                name="expiry"
-                maxLength={5}
-                placeholder="Validade MM/AA"
-                validExpiry={this.state.validExpiry}
-                value={this.state.expiry}
+          </DivOne>
+          <DivTwo lg={{ span: 5 }}>
+            <form className="w-100">
+              <InputNumber
+                type="tel"
+                name="number"
+                maxLength={23}
+                placeholder="Número do cartão"
+                value={this.state.number}
+                validNumber={this.state.validNumber}
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
                 required
               />
-              <CVC
-                name="cvc"
-                maxLength={3}
-                placeholder="CVC"
-                value={this.state.cvc}
+               <Input
+                name="name"
+                placeholder="Nome completo"
+                value={this.state.name}
+                maxLength={35}
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
                 required
               />
-            </DivFlex>
-          </form>
-        </DivTwo>
+              <DivFlex>
+               <InputExpiry
+                  name="expiry"
+                  maxLength={5}
+                  placeholder="Validade MM/AA"
+                  validExpiry={this.state.validExpiry}
+                  value={this.state.expiry}
+                  onChange={this.handleInputChange}
+                  onFocus={this.handleInputFocus}
+                  required
+                />
+                <CVC
+                  name="cvc"
+                  maxLength={3}
+                  placeholder="CVC"
+                  value={this.state.cvc}
+                  onChange={this.handleInputChange}
+                  onFocus={this.handleInputFocus}
+                  required
+                />
+              </DivFlex>
+            </form>
+          </DivTwo>
+        </DivGeral>
 
-        <DivButton>
-            <Button onClick={this.handleSubmit}>Efetuar pagamento</Button>
-        </DivButton>
-
-      </DivGeral>
+        <DivNormal>
+          <DivButton lg="6">
+            <CreditButton
+              onClick={this.handleSubmit}
+              animation={this.props.animation}
+              outcome={this.props.outcome}
+            />
+          </DivButton>
+        </DivNormal>
+      </DivWrapper>
     );
   }
 }

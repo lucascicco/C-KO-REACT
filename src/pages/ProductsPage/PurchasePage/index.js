@@ -43,33 +43,35 @@ export default function PurchasePage({ match }) {
       } catch (e) {
         setOutcome(false);
 
+        if (e.response.data.error) {
+          history.push('/homepage', {
+            error:
+              e.response.data.error === 'soldout'
+                ? 'O produto acabou de esgostar, tente mais tarde'
+                : `A quantidade em estoque acabou de ser alterada para ${e.response.data.available}, tente comprar novamente`,
+          });
+          history.go();
+          return;
+        }
+
+        toast.error(
+          'Algum erro durante a transição aconteceu, verique a situação do seu cartão'
+        );
+
         setTimeout(() => {
           setAnimation(false);
           setOutcome(null);
-        }, 1500);
+        }, 2000);
       }
     }
   };
 
   useEffect(() => {
-    window.addEventListener('beforeunload', (e) => {
-      const message =
-        'Você está bem próximo de adquirir seu produto, \n tem certeza?';
-
-      e.preventDefault();
-      e.returnValue = message;
-      return message;
-    });
-
     if (history.location.state !== null) {
       setAllow(history.location.state.previousPage === 'addressPage');
     } else {
       setAllow(false);
     }
-
-    return () => {
-      window.removeEventListener('beforeunload');
-    };
   }, []);
 
   return (

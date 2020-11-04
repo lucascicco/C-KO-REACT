@@ -34,7 +34,8 @@ export class RouteLeavingGuard extends React.Component {
  handleConfirmNavigationClick = () => this.closeModal(() => {
     const { navigate } = this.state
     const {lastLocation} = this.state
-   if (lastLocation) {
+
+    if (lastLocation) {
       this.setState({
          confirmedNavigation: true
       }, () => {

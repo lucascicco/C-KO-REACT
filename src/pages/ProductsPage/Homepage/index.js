@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { Content } from './styles';
 import ProductList from '~/components/ProductsList';
 import history from '~/services/history';
@@ -28,6 +29,9 @@ export default function HomePage() {
     loadProducts();
 
     if (history.location.state !== null) {
+      if (history.location.state.error) {
+        return toast.error(history.location.state.error);
+      }
       setAllow(history.location.state.previousPage === 'purchasePage');
       setVisible(
         history.location.state.previousPage === 'purchasePage' &&

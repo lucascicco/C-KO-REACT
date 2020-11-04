@@ -52,7 +52,9 @@ export const DivGeral = styled(Row)`
   }
 `;
 
-export const DivOne = styled(Col)``;
+export const DivOne = styled(Col)`
+  margin-bottom: 10px;
+`;
 
 export const DivTwo = styled(Col)`
   display: flex;

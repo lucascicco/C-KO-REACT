@@ -34,7 +34,7 @@ export default function HomePage() {
           history.location.state.purchase !== null
       );
       setPurchase(history.location.state.purchase);
-      history.replace('', null);
+      window.history.replaceState(null, '');
     } else {
       setAllow(false);
       setVisible(false);

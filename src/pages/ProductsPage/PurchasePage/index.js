@@ -52,11 +52,24 @@ export default function PurchasePage({ match }) {
   };
 
   useEffect(() => {
+    window.addEventListener('beforeunload', (e) => {
+      const message =
+        'Você está bem próximo de adquirir seu produto, \n tem certeza?';
+
+      e.preventDefault();
+      e.returnValue = message;
+      return message;
+    });
+
     if (history.location.state !== null) {
       setAllow(history.location.state.previousPage === 'addressPage');
     } else {
       setAllow(false);
     }
+
+    return () => {
+      window.removeEventListener('beforeunload');
+    };
   }, []);
 
   return (

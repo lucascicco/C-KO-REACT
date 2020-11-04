@@ -12,6 +12,7 @@
     "@unform/web": "^2.1.3",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.3",
+    "cuid": "^2.1.8",
     "customize-cra": "^1.0.0",
     "date-fns": "^2.16.1",
     "flatlist-react": "^1.4.3",

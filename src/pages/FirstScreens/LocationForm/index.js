@@ -31,12 +31,12 @@ export default function LocationFormRc() {
         <LogoImg src={LocationIcon} alt="PersonalLogo" />
         <Title>Localização</Title>
       </FlexDiv>
+
       <Form onSubmit={handleSubmit}>
         <ReactSelect
           name="state"
           placeholder="Selecione seu estado"
           options={BrazilStates}
-          isDisabled={false}
         />
 
         <Input name="city" type="text" placeholder="Cidade" />

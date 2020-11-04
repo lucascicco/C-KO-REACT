@@ -3,7 +3,7 @@ import { lighten } from 'polished';
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 400px;
   text-align: center;
 
   input:-webkit-autofill,
@@ -26,28 +26,14 @@ export const Content = styled.div`
       background: #37474f;
       border: 0;
       border-radius: 2px;
-      height: 35px;
+      height: 45px;
       padding: 0 15px;
       color: #fff;
       margin: 0 0 10px;
+      font-size: 18px;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
-      }
-    }
-
-    select {
-      background: rgba(0, 0, 0, 0.5);
-      border: 0;
-      border-radius: 4px;
-      height: 35px;
-      font-size: 17px;
-      padding: 0 15px;
-      color: #fff;
-      margin: 0 0 10px;
-
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.9);
       }
     }
 
@@ -87,25 +73,6 @@ export const Button = styled.button`
   }
 `;
 
-export const SameLine = styled.div`
-  display: flex;
-  height: 35px;
-  margin-bottom: 10px;
-  justify-content: space-between;
-
-  input {
-    background: rgba(0, 0, 0, 0.5);
-    border: 0;
-    border-radius: 2px;
-    padding: 0 15px;
-    color: #fff;
-    width: 48%;
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.7);
-    }
-  }
-`;
-
 export const SkipButton = styled.button`
   margin-top: 10px;
   height: 35px;
@@ -128,6 +95,7 @@ export const FlexDiv = styled.div`
   justify-content: center;
   height: 70px;
   margin-bottom: 5px;
+  margin-top: 30px;
 `;
 
 export const Title = styled.h1`

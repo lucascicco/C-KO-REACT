@@ -114,7 +114,12 @@ export default function ReactSelect({
         ref={ref}
         getOptionValue={(option) => option.id}
         getOptionLabel={(option) => option.title}
-        onChange={(e) => onChange(e)}
+        onChange={(e) => {
+          if (onChange) {
+            return onChange(e);
+          }
+          return null;
+        }}
         styles={customStyles}
         isDisabled={isDisabled}
         {...rest}
@@ -138,4 +143,12 @@ ReactSelect.propTypes = {
   onChange: PropTypes.func,
   isDisabled: PropTypes.bool,
   defaultValueProps: PropTypes.string,
+};
+
+ReactSelect.defaultProps = {
+  label: '',
+  multiple: false,
+  onChange: null,
+  isDisabled: false,
+  defaultValueProps: '',
 };

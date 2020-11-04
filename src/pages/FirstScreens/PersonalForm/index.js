@@ -31,6 +31,7 @@ export default function PersonalFormRc() {
   const [gender, setGender] = useState('');
   const [cellphone, setCellphone] = useState('');
   const [identification, setIdentification] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   function handleSubmit(data) {
     data.gender = gender;
@@ -58,7 +59,12 @@ export default function PersonalFormRc() {
           options={Professions}
         />
 
-        <ReactDatePicker name="birthday" placeholderText="Data de nascimento" />
+        <ReactDatePicker
+          name="birthday"
+          placeholderText="Data de nascimento"
+          value={birthday}
+          onChange={(e) => setBirthday(e)}
+        />
 
         <GenderDiv>
           <GenderDivSmall

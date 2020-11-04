@@ -3,7 +3,7 @@ import { lighten } from 'polished';
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 400px;
   text-align: center;
 
   input:-webkit-autofill,
@@ -26,10 +26,11 @@ export const Content = styled.div`
       background: #37474f;
       border: 0;
       border-radius: 2px;
-      height: 35px;
+      height: 45px;
       padding: 0 15px;
       color: #fff;
       margin: 0 0 10px;
+      font-size: 18px;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
@@ -73,8 +74,9 @@ export const GenderDivSmall = styled.div`
     props.genderActived
       ? '2px solid white'
       : '1px solid rgba(255, 255, 255, 0.7)'};
-  height: 35px;
-  line-height: 35px;
+  height: 45px;
+  font-size: 18px;
+  line-height: 45px;
 
   &:hover {
     background: rgba(55, 71, 79, 0.7);
@@ -85,7 +87,7 @@ export const GenderDivSmall = styled.div`
 export const SameLine = styled.div`
   display: flex;
   height: 35px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   justify-content: space-between;
 
   input {

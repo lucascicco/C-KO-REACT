@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Radio, RadioGroup } from 'react-radio-group';
 import PropTypes from 'prop-types';
 import { addDays } from 'date-fns';
-
+import ErrorWarning from '~/components/NoAccess';
 import ReactSelect from '~/components/ReactSelect';
 import LocationIcon from '~/assets/Geolocation_icon.png';
 
@@ -21,7 +21,7 @@ import {
   ButtonNext,
   Input,
 } from './styles';
-import { createLocationRequest } from '~/store/modules/user/actions';
+import { updateLocationSuccess } from '~/store/modules/user/actions';
 import BrazilStates from '~/utils/BrazilStates';
 import {
   EmptyObjectLocation,
@@ -57,6 +57,20 @@ export default function AddressForm({ match }) {
     location === null ? '' : location.street
   );
 
+  const settingPermission = async () => {
+    const response = await api.get('verifierProduct', {
+      params: {
+        product_id: Number(match.params.id),
+      },
+    });
+
+    if (history.location.state !== null && response.data.allow) {
+      setAllow(history.location.state.previousPage === 'personalPage');
+    } else {
+      setAllow(false);
+    }
+  };
+
   async function GoNextPage(data) {
     setLoading(true);
     data.country = 'BR';
@@ -70,8 +84,9 @@ export default function AddressForm({ match }) {
     }
 
     if (location === null) {
-      dispatch(createLocationRequest(data));
-      setCurrentLocation(location);
+      const response = await api.post('location', data);
+      dispatch(updateLocationSuccess(response.data));
+      setCurrentLocation(response.data);
     } else if (CompareObjects(data, location)) {
       const response = await api.post('location', data);
       setCurrentLocation(response.data);
@@ -94,7 +109,7 @@ export default function AddressForm({ match }) {
     const frete_price = parseFloat(freteApi.data.Valor.replace(',', '.'));
     const total_price = parseFloat(total_products + frete_price);
 
-    history.push(`/purchase/product/${match.params.id}`, {
+    history.push(`/purchase/payment/${match.params.id}`, {
       purchase_quantity: history.location.state.purchase_quantity,
       personalID: history.location.state.personalID,
       product_name: history.location.state.product_name,
@@ -116,16 +131,12 @@ export default function AddressForm({ match }) {
   }
 
   useEffect(() => {
-    if (history.location.state !== null) {
-      setAllow(history.location.state.previousPage === 'personalPage');
-    } else {
-      setAllow(false);
-    }
+    settingPermission();
   }, []);
 
   return (
     <Content>
-      {allow && (
+      {allow ? (
         <>
           <FlexDiv>
             <LogoImg src={LocationIcon} alt="PersonalLogo" />
@@ -228,6 +239,8 @@ export default function AddressForm({ match }) {
             </ButtonNext>
           </Form>
         </>
+      ) : (
+        <ErrorWarning />
       )}
     </Content>
   );

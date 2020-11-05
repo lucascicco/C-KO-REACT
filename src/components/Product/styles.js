@@ -32,7 +32,7 @@ export const ProductDiv2 = styled.div`
 `;
 
 export const ProductStock = styled.h5`
-  color: #00c853;
+  color: ${(props) => (props.status === 'Aberto' ? '#4caf50' : '#e53935')};
 `;
 
 export const SoldFavoriteDiv = styled.div`

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Dropdown from 'react-dropdown';
 import FavoriteIcon from '~/components/FavoriteIcon';
 import history from '~/services/history';
+import TranslateStatus from '~/utils/translateStatus';
 
 import {
   ProductImage,
@@ -35,6 +36,7 @@ export default function ProductPage({
   const [dropdownValue, setDropDown] = useState('Selecione uma quantidade');
   const [quantitySelected, setQuantity] = useState('');
   const [qttAvailable, setQttAvailable] = useState(true);
+  const status = TranslateStatus(product.status);
 
   const options = Array.from({
     length: product.quantity > 7 ? 7 : product.quantity,
@@ -69,7 +71,7 @@ export default function ProductPage({
 
   const buyProduct = () => {
     if (quantitySelected > 0 && qttAvailable) {
-      history.push(`/personal/product/${product.id}`, {
+      history.push(`/purchase/personal/${product.id}`, {
         purchase_quantity: quantitySelected,
         product_name: product.product_name,
         price: product.price,
@@ -119,7 +121,9 @@ export default function ProductPage({
                   currency: 'BRL',
                 })}
               </ProductPrice>
-              <ProductStock>Estoque disponível</ProductStock>
+              <ProductStock status={status}>
+                {status === 'Aberto' ? 'Disponível em estoque' : status}
+              </ProductStock>
             </ProductDiv2>
 
             <QuantityDiv>
@@ -175,6 +179,7 @@ ProductPage.propTypes = {
     price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
   }).isRequired,
   favorite: PropTypes.bool.isRequired,
   onFavoritePress: PropTypes.func.isRequired,

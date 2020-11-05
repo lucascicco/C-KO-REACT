@@ -7,6 +7,7 @@ import PurchasePayment from './PurchasePayment';
 import history from '~/services/history';
 import api from '~/services/api';
 import { CreditCardVerifier } from '~/utils/EmptyObjectVerifier';
+import ErrorWarning from '~/components/NoAccess';
 
 export default function PurchasePage({ match }) {
   const [allow, setAllow] = useState(false);
@@ -14,6 +15,20 @@ export default function PurchasePage({ match }) {
 
   const [animation, setAnimation] = useState(false);
   const [outcome, setOutcome] = useState(null);
+
+  const settingPermission = async () => {
+    const response = await api.get('verifierProduct', {
+      params: {
+        product_id: Number(match.params.id),
+      },
+    });
+
+    if (history.location.state !== null && response.data.allow) {
+      setAllow(history.location.state.previousPage === 'addressPage');
+    } else {
+      setAllow(false);
+    }
+  };
 
   const onSubmit = async (data) => {
     if (CreditCardVerifier(data)) {
@@ -67,16 +82,12 @@ export default function PurchasePage({ match }) {
   };
 
   useEffect(() => {
-    if (history.location.state !== null) {
-      setAllow(history.location.state.previousPage === 'addressPage');
-    } else {
-      setAllow(false);
-    }
+    settingPermission();
   }, []);
 
   return (
     <Container className="d-flex justify-content-center">
-      {allow && (
+      {allow ? (
         <>
           {page === 'first' && (
             <PurchaseInfo
@@ -92,6 +103,8 @@ export default function PurchasePage({ match }) {
             />
           )}
         </>
+      ) : (
+        <ErrorWarning />
       )}
     </Container>
   );

@@ -25,14 +25,14 @@ export default function Routes() {
 
         <Route path="/homepage" component={HomePage} isPrivate />
         <Route path="/product/:id" component={ProductPage} isPrivate />
-        <Route path="/address/product/:id" component={AddressForm} isPrivate />
+        <Route path="/purchase/address/:id" component={AddressForm} isPrivate />
         <Route
-          path="/personal/product/:id"
+          path="/purchase/personal/:id"
           component={PersonalForm}
           isPrivate
         />
         <Route
-          path="/purchase/product/:id"
+          path="/purchase/payment/:id"
           component={PurchasePage}
           isPrivate
         />

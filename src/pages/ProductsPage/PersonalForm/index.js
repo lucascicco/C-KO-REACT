@@ -4,10 +4,11 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactDatePicker from '~/components/ReactDatePicker';
+import ErrorWarning from '~/components/NoAccess';
 
 import ReactSelect from '~/components/ReactSelect';
 import PersonalIcon from '~/assets/Information_Icon.png';
-import { createPersonalDataRequest } from '~/store/modules/user/actions';
+import { updatePersonalDataSuccess } from '~/store/modules/user/actions';
 import Professions from '~/utils/Profession';
 import { EmptyObject, CompareObjects } from '~/utils/EmptyObjectVerifier';
 
@@ -56,6 +57,20 @@ export default function PersonalForm({ match }) {
     personal === null ? '' : personal.identification
   );
 
+  const settingPermission = async () => {
+    const response = await api.get('verifierProduct', {
+      params: {
+        product_id: Number(match.params.id),
+      },
+    });
+
+    if (history.location.state !== null && response.data.allow) {
+      setAllow(history.location.state.previousPage === 'productPage');
+    } else {
+      setAllow(false);
+    }
+  };
+
   async function GoNextPage(data) {
     setLoading(true);
     data.gender = gender;
@@ -69,14 +84,15 @@ export default function PersonalForm({ match }) {
     }
 
     if (personal === null) {
-      dispatch(createPersonalDataRequest(data));
-      setCurrentPersonalID(personal.id);
+      const response = await api.post('personal_data', data);
+      dispatch(updatePersonalDataSuccess(response.data));
+      setCurrentPersonalID(response.data.id);
     } else if (CompareObjects(data, personal)) {
       const response = await api.post('personal_data', data);
       setCurrentPersonalID(response.data.id);
     }
 
-    history.push(`/address/product/${match.params.id}`, {
+    history.push(`/purchase/address/${match.params.id}`, {
       purchase_quantity: history.location.state.purchase_quantity,
       personalID: currentPersonalID,
       product_name: history.location.state.product_name,
@@ -90,16 +106,12 @@ export default function PersonalForm({ match }) {
   }
 
   useEffect(() => {
-    if (history.location.state !== null) {
-      setAllow(history.location.state.previousPage === 'productPage');
-    } else {
-      setAllow(false);
-    }
+    settingPermission();
   }, []);
 
   return (
     <Content>
-      {allow && (
+      {allow ? (
         <>
           <FlexDiv>
             <LogoImg src={PersonalIcon} alt="PersonalLogo" />
@@ -175,6 +187,8 @@ export default function PersonalForm({ match }) {
             </ButtonNext>
           </Form>
         </>
+      ) : (
+        <ErrorWarning />
       )}
     </Content>
   );

@@ -15,6 +15,7 @@ export default function ProductPage({ match }) {
   const profile = useSelector((state) => state.user.profile);
   const isFavorite = profile.myfavorites.includes(Number(match.params.id));
 
+  const [error, setError] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
 
   const loadProduct = async () => {
@@ -23,6 +24,11 @@ export default function ProductPage({ match }) {
         product_id: match.params.id,
       },
     });
+
+    setError(
+      response.data.product.seller === profile.user.id ||
+        response.data.product.status !== 'open'
+    );
 
     setProduct(response.data);
   };
@@ -41,6 +47,8 @@ export default function ProductPage({ match }) {
       <Container>
         {product.length !== 0 ? (
           <ProductItem
+            error={error}
+            profile_id={profile.user.id}
             product={product.product}
             sellsDone={product.sellsDone}
             favorite={favorite}

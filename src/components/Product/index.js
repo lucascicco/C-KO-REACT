@@ -3,6 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 import Zoom from 'react-medium-image-zoom';
 import PropTypes from 'prop-types';
 import Dropdown from 'react-dropdown';
+import { AiFillEdit } from 'react-icons/ai';
 import FavoriteIcon from '~/components/FavoriteIcon';
 import history from '~/services/history';
 import TranslateStatus from '~/utils/translateStatus';
@@ -25,6 +26,12 @@ import {
   NotAvailable,
   TitleDescription,
   DescriptionText,
+  RowGeral,
+  DescriptionCol,
+  SellerRow,
+  WarningText,
+  ButtonEdit,
+  TextAbsolute,
 } from './styles';
 
 export default function ProductPage({
@@ -32,6 +39,8 @@ export default function ProductPage({
   favorite,
   onFavoritePress,
   sellsDone,
+  error,
+  profile_id,
 }) {
   const [dropdownValue, setDropDown] = useState('Selecione uma quantidade');
   const [quantitySelected, setQuantity] = useState('');
@@ -84,7 +93,30 @@ export default function ProductPage({
 
   return (
     <Row className="mt-5 p-3">
-      <Row>
+      {error && product.status !== 'open' && (
+        <TextAbsolute className="display-2">{status}</TextAbsolute>
+      )}
+
+      {error && product.seller === profile_id && (
+        <SellerRow>
+          <Col
+            lg="12"
+            className="d-flex justify-content-between align-items-center"
+          >
+            <WarningText>Você é o proprietário desse produto</WarningText>
+
+            <ButtonEdit
+              onClick={() => {
+                console.log('Trying');
+              }}
+            >
+              <AiFillEdit size={60} />
+            </ButtonEdit>
+          </Col>
+        </SellerRow>
+      )}
+
+      <RowGeral error={!!error}>
         <Col
           lg="5"
           className="d-flex justify-content-center align-items-center"
@@ -98,7 +130,11 @@ export default function ProductPage({
           <ProductDetails>
             <SoldFavoriteDiv>
               <ProductsSold>{sellsDone} vendidos</ProductsSold>
-              <FavoriteIcon favorite={favorite} onPress={onFavoritePress} />
+              <FavoriteIcon
+                favorite={favorite}
+                onPress={onFavoritePress}
+                disabled={error}
+              />
             </SoldFavoriteDiv>
 
             <ProductDiv>
@@ -109,6 +145,7 @@ export default function ProductPage({
                 block
                 className="shadow"
                 onClick={buyProduct}
+                disabled={error}
               >
                 Comprar
               </Button>
@@ -139,6 +176,7 @@ export default function ProductPage({
                 }}
                 value={dropdownValue}
                 className="w-50 ml-2 shadow"
+                disabled={!!error}
               />
 
               <QuantitySmallText>
@@ -161,12 +199,16 @@ export default function ProductPage({
             </QuantityInput>
           </ProductDetails>
         </Col>
-      </Row>
+      </RowGeral>
 
-      <Col lg={{ span: 12 }} className="mt-4 border-top border-dark">
+      <DescriptionCol
+        lg={{ span: 12 }}
+        className="mt-4 border-top border-dark"
+        error={error}
+      >
         <TitleDescription>Descrição</TitleDescription>
         <DescriptionText>{product.description}</DescriptionText>
-      </Col>
+      </DescriptionCol>
     </Row>
   );
 }
@@ -180,8 +222,11 @@ ProductPage.propTypes = {
     quantity: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
+    seller: PropTypes.number.isRequired,
   }).isRequired,
   favorite: PropTypes.bool.isRequired,
   onFavoritePress: PropTypes.func.isRequired,
   sellsDone: PropTypes.number.isRequired,
+  error: PropTypes.bool.isRequired,
+  profile_id: PropTypes.number.isRequired,
 };

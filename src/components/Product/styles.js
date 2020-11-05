@@ -1,7 +1,41 @@
 import styled from 'styled-components';
+import { Row, Col } from 'react-bootstrap';
+
+export const RowGeral = styled(Row)`
+  opacity: ${(props) => (props.error ? '0.5' : '1.0')};
+`;
+
+export const DescriptionCol = styled(Col)`
+  opacity: ${(props) => (props.error ? '0.5' : '1.0')};
+`;
+
+export const SellerRow = styled(Row)`
+  width: 100%;
+  margin-bottom: 15px;
+`;
+
+export const WarningText = styled.h2`
+  color: white;
+`;
+
+export const ButtonEdit = styled.button`
+  border: none;
+  height: 60px;
+  width: 60px;
+
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent;
+
+  transition: opacity 0.3s;
+
+  :hover {
+    opacity: 0.5;
+  }
+`;
 
 export const ProductImage = styled.img`
-  width: 500px;
+  width: 100%;
   height: 500px;
   border-radius: 2px;
 `;
@@ -103,4 +137,16 @@ export const DescriptionText = styled.p`
   text-align: justify;
   word-break: break-word;
   font-size: 20px;
+`;
+
+export const DivImage = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const TextAbsolute = styled.h3`
+  position: absolute;
+  z-index: 100;
+  color: #e53935;
+  background: white;
 `;

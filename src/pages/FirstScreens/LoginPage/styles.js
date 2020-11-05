@@ -72,18 +72,6 @@ export const Content = styled.div`
   }
 `;
 
-export const SkipButton = styled.button`
-  margin: 5px 0 0;
-  height: 35px;
-  background: #d32f2f;
-  font-weight: bold;
-  color: #fff;
-  border: 0;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: background 0.2s;
-
-  &:hover {
-    background: ${lighten(0.03, '#3b9eff')};
-  }
+export const Image = styled.img`
+  width: 250px;
 `;

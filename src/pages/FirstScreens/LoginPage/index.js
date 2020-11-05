@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { Content } from './styles';
+import { Content, Image } from './styles';
 import Logo from '~/assets/Cko_logo.png';
+
 import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
@@ -24,7 +25,7 @@ export default function LoginPage() {
 
   return (
     <Content>
-      <img src={Logo} width={250} alt="logo" />
+      <Image src={Logo} width={250} alt="logo" />
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />

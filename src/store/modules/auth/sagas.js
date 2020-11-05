@@ -4,6 +4,8 @@ import { signInSuccess, signFailure, FirstAccessSuccess } from './actions';
 
 import api from '~/services/api';
 
+import history from '~/services/history';
+
 export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
@@ -39,6 +41,9 @@ export function* signUp({ payload }) {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(FirstAccessSuccess(token, user));
+
+    history.push('/crpersonal');
+    history.go();
   } catch (err) {
     toast.error('Houve um erro ao cadastrar a conta');
 

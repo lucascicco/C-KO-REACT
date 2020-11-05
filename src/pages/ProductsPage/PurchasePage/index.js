@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+import { Motion, spring } from 'react-motion';
 import PurchaseInfo from './PurchaseInfo';
 import PurchasePayment from './PurchasePayment';
 import history from '~/services/history';
@@ -96,11 +97,19 @@ export default function PurchasePage({ match }) {
             />
           )}
           {page === 'second' && (
-            <PurchasePayment
-              onSubmit={onSubmit}
-              animation={animation}
-              outcome={outcome}
-            />
+            <Motion
+              defaultStyle={{ y: 700 }}
+              style={{ y: spring(0, { stiffness: 200, damping: 100 }) }}
+            >
+              {(style) => (
+                <PurchasePayment
+                  style={{ transform: `translateY(${style.y}px)` }}
+                  onSubmit={onSubmit}
+                  animation={animation}
+                  outcome={outcome}
+                />
+              )}
+            </Motion>
           )}
         </>
       ) : (

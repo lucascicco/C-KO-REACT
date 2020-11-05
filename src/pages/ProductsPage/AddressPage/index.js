@@ -57,20 +57,6 @@ export default function AddressForm({ match }) {
     location === null ? '' : location.street
   );
 
-  const settingPermission = async () => {
-    const response = await api.get('verifierProduct', {
-      params: {
-        product_id: Number(match.params.id),
-      },
-    });
-
-    if (history.location.state !== null && response.data.allow) {
-      setAllow(history.location.state.previousPage === 'personalPage');
-    } else {
-      setAllow(false);
-    }
-  };
-
   async function GoNextPage(data) {
     setLoading(true);
     data.country = 'BR';
@@ -131,7 +117,11 @@ export default function AddressForm({ match }) {
   }
 
   useEffect(() => {
-    settingPermission();
+    if (history.location.state !== null) {
+      setAllow(history.location.state.previousPage === 'personalPage');
+    } else {
+      setAllow(false);
+    }
   }, []);
 
   return (

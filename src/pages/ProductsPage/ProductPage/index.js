@@ -7,7 +7,7 @@ import ProductItem from '~/components/Product';
 import { RequestFavoriteItems } from '~/store/modules/user/actions';
 import history from '~/services/history';
 
-import { Content } from './styles';
+import { Content, ProductTitle } from './styles';
 
 export default function ProductPage({ match }) {
   const dispatch = useDispatch();
@@ -55,7 +55,9 @@ export default function ProductPage({ match }) {
             onFavoritePress={handleFavoriteItem}
             history={history}
           />
-        ) : null}
+        ) : (
+          <ProductTitle className="display-1">Produto inexistente</ProductTitle>
+        )}
       </Container>
     </Content>
   );

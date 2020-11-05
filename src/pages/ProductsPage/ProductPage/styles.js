@@ -8,4 +8,7 @@ export const Content = styled.div`
 export const ProductTitle = styled.h1`
   color: white;
   font-family: 'Raleway', sans-serif;
+  margin-top: 25px;
+  width: 100%;
+  text-align: center;
 `;

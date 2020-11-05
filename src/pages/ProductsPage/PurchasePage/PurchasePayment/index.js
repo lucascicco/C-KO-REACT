@@ -3,9 +3,9 @@ import { Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import CreditCard from '~/components/CreditCard';
 
-export default function PurchasePage({ onSubmit, animation, outcome }) {
+export default function PurchasePage({ onSubmit, animation, outcome, style }) {
   return (
-    <Row className="mt-3 w-100">
+    <Row className="mt-3 w-100" style={style}>
       <Col lg="12">
         <h1 className="display-4 text-light text-center">
           Finalize sua compra

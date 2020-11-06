@@ -53,13 +53,13 @@ export const CompareObjects = (obj1, obj2) => {
     })
   );
 
-  let result;
+  let result = false;
 
   for (const key of keys1) {
     if (obj1[key] !== newObj2[key]) {
-      return (result = true);
+      result = true;
+      break;
     }
-    return (result = false);
   }
 
   return result;

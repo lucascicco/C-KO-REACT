@@ -57,30 +57,10 @@ export default function AddressForm({ match }) {
     location === null ? '' : location.street
   );
 
-  async function GoNextPage(data) {
-    setLoading(true);
-    data.country = 'BR';
-    data.state = state;
-
-    const testing = await EmptyObjectLocation(data);
-
-    if (testing) {
-      setLoading(false);
-      return toast.error('Todos os campos são obrigatórios.');
-    }
-
-    if (location === null) {
-      const response = await api.post('location', data);
-      dispatch(updateLocationSuccess(response.data));
-      setCurrentLocation(response.data);
-    } else if (CompareObjects(data, location)) {
-      const response = await api.post('location', data);
-      setCurrentLocation(response.data);
-    }
-
+  const NextPage = async (objLoc) => {
     const freteApi = await api.get('frete', {
       params: {
-        locationId: currentLocation.id,
+        locationId: objLoc.id,
         product_id: Number(match.params.id),
         service: fretetype,
       },
@@ -103,7 +83,7 @@ export default function AddressForm({ match }) {
       price: history.location.state.price,
       total_price,
       total_products,
-      location: currentLocation,
+      location: objLoc,
       frete: {
         freteType: fretetype,
         fretePrice: frete_price,
@@ -111,9 +91,36 @@ export default function AddressForm({ match }) {
       },
       previousPage: 'addressPage',
     });
+
     history.go();
 
     setLoading(false);
+  };
+
+  async function SendForm(data) {
+    setLoading(true);
+    data.country = 'BR';
+    data.state = state;
+
+    const testing = await EmptyObjectLocation(data);
+
+    if (testing) {
+      setLoading(false);
+      return toast.error('Todos os campos são obrigatórios.');
+    }
+
+    if (location === null || CompareObjects(data, location)) {
+      const response = await api.post('location', data);
+
+      if (location === null) {
+        dispatch(updateLocationSuccess(response.data));
+      }
+
+      setCurrentLocation(response.data);
+      NextPage(response.data);
+    } else {
+      NextPage(currentLocation);
+    }
   }
 
   useEffect(() => {
@@ -133,7 +140,7 @@ export default function AddressForm({ match }) {
             <Title>Endereço de entrega</Title>
           </FlexDiv>
 
-          <Form onSubmit={GoNextPage}>
+          <Form onSubmit={SendForm}>
             <ReactSelect
               name="state"
               placeholder={state || 'Selecione seu estado'}

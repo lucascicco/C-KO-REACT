@@ -121,7 +121,7 @@ PurchaseInfo.propTypes = {
       street: PropTypes.string.isRequired,
       city: PropTypes.string.isRequired,
       postcode: PropTypes.string.isRequired,
-      street_number: PropTypes.number.isRequired,
+      street_number: PropTypes.string.isRequired,
     }),
     price: PropTypes.number.isRequired,
     total_price: PropTypes.number.isRequired,

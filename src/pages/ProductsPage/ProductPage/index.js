@@ -17,20 +17,25 @@ export default function ProductPage({ match }) {
 
   const [error, setError] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
+  const [noExist, setNoExist] = useState(false);
 
   const loadProduct = async () => {
-    const response = await api.get('product', {
-      params: {
-        product_id: match.params.id,
-      },
-    });
+    try {
+      const response = await api.get('product', {
+        params: {
+          product_id: match.params.id,
+        },
+      });
 
-    setError(
-      response.data.product.seller === profile.user.id ||
-        response.data.product.status !== 'open'
-    );
+      setError(
+        response.data.product.seller === profile.user.id ||
+          response.data.product.status !== 'open'
+      );
 
-    setProduct(response.data);
+      setProduct(response.data);
+    } catch (e) {
+      setNoExist(true);
+    }
   };
 
   const handleFavoriteItem = () => {
@@ -56,7 +61,13 @@ export default function ProductPage({ match }) {
             history={history}
           />
         ) : (
-          <ProductTitle className="display-1">Produto inexistente</ProductTitle>
+          <>
+            {noExist && (
+              <ProductTitle className="display-1">
+                Produto inexistente
+              </ProductTitle>
+            )}
+          </>
         )}
       </Container>
     </Content>

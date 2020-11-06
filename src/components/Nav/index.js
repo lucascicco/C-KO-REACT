@@ -83,10 +83,10 @@ const NavBarStandard = () => {
                   className="d-none d-xl-block"
                 />
 
-                <Dropdown id="dropdown-basic" className="dropdown-menu-left">
+                <Dropdown id="dropdown-basic">
                   <Toggle>{name[0]}</Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu alignRight>
                     <Dropdown.Item>
                       <LinkSmall to="/">Minha conta</LinkSmall>
                     </Dropdown.Item>

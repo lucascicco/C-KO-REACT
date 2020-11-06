@@ -26,7 +26,6 @@ export const Link = styled(NavLink)`
   &:hover {
     text-decoration: none;
     color: black;
-    font-weight: bold;
   }
 `;
 
@@ -57,7 +56,6 @@ export const FormStyled = styled(Form)`
 
 export const DivNav = styled.div`
   display: flex;
-  border: 1px solid red;
   align-items: center;
 `;
 
@@ -90,9 +88,15 @@ export const DivImageProfile = styled.img`
   margin: 0 auto;
 `;
 
-export const DivProfile = styled.div``;
+export const DivProfile = styled.div`
+  margin-left: 5px;
+`;
 
 export const Toggle = styled(Dropdown.Toggle)`
   background: none;
   font-size: 16px;
+
+  :hover {
+    color: black;
+  }
 `;

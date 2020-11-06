@@ -35,7 +35,7 @@ export default function AddressForm({ match }) {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.user.profile.location);
 
-  const [allow, setAllow] = useState(false);
+  const [allow, setAllow] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(location);
 
@@ -237,7 +237,7 @@ export default function AddressForm({ match }) {
           </Form>
         </>
       ) : (
-        <ErrorWarning />
+        <>{!allow && allow !== null && <ErrorWarning />}</>
       )}
     </Content>
   );

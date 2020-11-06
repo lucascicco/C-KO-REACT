@@ -1,103 +1,131 @@
 import React from 'react';
-import * as ReactBootStrap from 'react-bootstrap';
 import { BsSearch, BsList } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Dropdown, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import Logo from '~/assets/Cko_logo.png';
-import { Text } from './styles';
+import {
+  Text,
+  Link,
+  NavBarStyled,
+  FormStyled,
+  NavStyled,
+  FormControlStyled,
+  ButtonStyled,
+  RowTesting,
+  divButtons,
+  DivNav,
+  DivImageProfile,
+  DivProfile,
+  LinkSmall,
+  Toggle,
+} from './styles';
 import { signOut } from '~/store/modules/auth/actions';
 
-const NavBar = () => {
+const NavBarStandard = () => {
   const dispatch = useDispatch();
+  const name = useSelector((state) => state.user.profile.user.name).split(' ');
 
   const LogOut = () => {
     return dispatch(signOut());
   };
+
   return (
-    <ReactBootStrap.Navbar
-      collapseOnSelect
-      expand="xl"
-      bg="primary"
-      variant="dark"
-      className="border border-dark p-1 justify-content-center"
-    >
-      <ReactBootStrap.Navbar.Brand className="p-0">
-        <img src={Logo} width={50} alt="logo" />
-        <Text>C-CKO</Text>
-      </ReactBootStrap.Navbar.Brand>
+    <NavBarStyled bg="primary" variant="dark" className="p-2">
+      <RowTesting>
+        <Col xl="1" className="d-none d-xl-block">
+          <NavBarStyled.Brand className="p-1">
+            <img src={Logo} width={60} alt="logo" />
+            <Text>C-CKO</Text>
+          </NavBarStyled.Brand>
+        </Col>
 
-      <ReactBootStrap.Form className="justify-content-center  w-100 p-3" inline>
-        <ReactBootStrap.FormControl
-          type="text"
-          placeholder="Pesquisar produto"
-          className="w-50 p-2"
-        />
+        <Col xl="7">
+          <FormStyled inline>
+            <FormControlStyled type="text" placeholder="Pesquisar produto" />
 
-        <ReactBootStrap.Button
-          variant="outline-dark"
-          className="ml-2"
-          onClick={() => console.log('hello')}
-        >
-          <BsSearch size={25} />
-        </ReactBootStrap.Button>
+            <divButtons>
+              <ButtonStyled
+                variant="outline-dark"
+                className="ml-2"
+                onClick={() => console.log('hello')}
+              >
+                <BsSearch size={25} />
+              </ButtonStyled>
 
-        <ReactBootStrap.Button
-          variant="outline-dark"
-          className="ml-2"
-          onClick={() => console.log('testing')}
-        >
-          <BsList size={25} />
-        </ReactBootStrap.Button>
+              <ButtonStyled
+                variant="outline-dark"
+                className="ml-2"
+                onClick={() => console.log('testing')}
+              >
+                <BsList size={25} />
+              </ButtonStyled>
 
-        <ReactBootStrap.Button
-          variant="outline-dark"
-          className="ml-2"
-          onClick={() => console.log('testing')}
-        >
-          <AiOutlineShoppingCart size={25} />
-        </ReactBootStrap.Button>
-      </ReactBootStrap.Form>
+              <ButtonStyled
+                variant="outline-dark"
+                className="ml-2"
+                onClick={() => console.log('testing')}
+              >
+                <AiOutlineShoppingCart size={25} />
+              </ButtonStyled>
+            </divButtons>
+          </FormStyled>
+        </Col>
 
-      <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Col xl="4">
+          <NavStyled className="justify-content-xl-end justify-content-center ">
+            <DivNav className="pt-2 pt-xl-0">
+              <Link to="/homepage">Início</Link>
+              <Link to="/createproduct">Criar produto</Link>
+              <DivProfile>
+                <DivImageProfile
+                  src="https://www.rover.com/blog/wp-content/uploads/2019/07/maltese-puppy.jpg"
+                  className="d-none d-xl-block"
+                />
 
-      <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
-        <ReactBootStrap.Nav className=" align-items-center">
-          <NavLink
-            to="/homepage"
-            style={{ textDecoration: 'none' }}
-            className="h4 text-center text-light"
-          >
-            Início
-          </NavLink>
+                <Dropdown id="dropdown-basic" className="dropdown-menu-left">
+                  <Toggle>{name[0]}</Toggle>
 
-          <NavLink
-            to="/createproduct"
-            style={{ textDecoration: 'none' }}
-            className="h4 text-center  text-light"
-          >
-            Criar produto
-          </NavLink>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <LinkSmall to="/">Minha conta</LinkSmall>
+                    </Dropdown.Item>
 
-          <NavLink
-            to="/myprofile"
-            style={{ textDecoration: 'none' }}
-            className="h4 text-center  text-light"
-          >
-            Meu Perfil
-          </NavLink>
+                    <Dropdown.Item>
+                      <LinkSmall to="/">Minha localização</LinkSmall>
+                    </Dropdown.Item>
 
-          <ReactBootStrap.Button
-            variant="outline-dark"
-            className="ml-2 mr-2"
-            onClick={LogOut}
-          >
-            Sair
-          </ReactBootStrap.Button>
-        </ReactBootStrap.Nav>
-      </ReactBootStrap.Navbar.Collapse>
-    </ReactBootStrap.Navbar>
+                    <Dropdown.Item>
+                      <LinkSmall to="/">Meus dados pessoais</LinkSmall>
+                    </Dropdown.Item>
+
+                    <Dropdown.Item>
+                      <LinkSmall to="/">Meus produtos</LinkSmall>
+                    </Dropdown.Item>
+
+                    <Dropdown.Item>
+                      <LinkSmall to="/">Minhas vendas</LinkSmall>
+                    </Dropdown.Item>
+
+                    <Dropdown.Item>
+                      <LinkSmall to="/">Minhas compras</LinkSmall>
+                    </Dropdown.Item>
+
+                    <Dropdown.Item>
+                      <LinkSmall to="/">Meu carrinho</LinkSmall>
+                    </Dropdown.Item>
+
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={LogOut}>Sair</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </DivProfile>
+            </DivNav>
+          </NavStyled>
+        </Col>
+      </RowTesting>
+    </NavBarStyled>
   );
 };
 
-export default NavBar;
+export default NavBarStandard;

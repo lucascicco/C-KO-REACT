@@ -33,7 +33,7 @@ export default function PersonalForm({ match }) {
   const dispatch = useDispatch();
   const personal = useSelector((state) => state.user.profile.personal_data);
 
-  const [allow, setAllow] = useState(false);
+  const [allow, setAllow] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [currentPersonalID, setCurrentPersonalID] = useState(
@@ -178,7 +178,7 @@ export default function PersonalForm({ match }) {
           </Form>
         </>
       ) : (
-        <ErrorWarning />
+        <>{!allow && allow !== null && <ErrorWarning />}</>
       )}
     </Content>
   );

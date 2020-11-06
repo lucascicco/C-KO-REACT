@@ -11,7 +11,7 @@ import { CreditCardVerifier } from '~/utils/EmptyObjectVerifier';
 import ErrorWarning from '~/components/NoAccess';
 
 export default function PurchasePage({ match }) {
-  const [allow, setAllow] = useState(false);
+  const [allow, setAllow] = useState(null);
   const [page, setPage] = useState('first');
 
   const [animation, setAnimation] = useState(false);
@@ -113,7 +113,7 @@ export default function PurchasePage({ match }) {
           )}
         </>
       ) : (
-        <ErrorWarning />
+        <>{!allow && allow !== null && <ErrorWarning />}</>
       )}
     </Container>
   );

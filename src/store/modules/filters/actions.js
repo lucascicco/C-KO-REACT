@@ -1,10 +1,3 @@
-export function addProducts(products) {
-  return {
-    type: '@product/ADD_PRODUCTS',
-    payload: { products },
-  };
-}
-
 export function addCategory(categorySelected) {
   return {
     type: '@product/ADD_CATEGORY_SELECTED',

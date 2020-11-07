@@ -87,7 +87,11 @@ export default function PurchasePage({ match }) {
   }, []);
 
   return (
-    <Container className="d-flex justify-content-center">
+    <Container
+      style={{
+        height: window.innerHeight,
+      }}
+    >
       {allow ? (
         <>
           {page === 'first' && (
@@ -98,7 +102,9 @@ export default function PurchasePage({ match }) {
           )}
           {page === 'second' && (
             <Motion
-              defaultStyle={{ y: 700 }}
+              defaultStyle={{
+                y: window.innerHeight - (window.innerHeight / 100) * 20,
+              }}
               style={{ y: spring(0, { stiffness: 200, damping: 100 }) }}
             >
               {(style) => (

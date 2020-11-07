@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'products',
       storage: localforage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth', 'user', 'filters'],
       blacklist: ['products'],
     },
     reducers

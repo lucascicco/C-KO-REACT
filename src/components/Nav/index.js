@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BsSearch, BsList } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Dropdown, Col } from 'react-bootstrap';
@@ -13,7 +13,7 @@ import {
   FormControlStyled,
   ButtonStyled,
   RowTesting,
-  divButtons,
+  DivButtons,
   DivNav,
   DivImageProfile,
   DivProfile,
@@ -21,10 +21,33 @@ import {
   Toggle,
 } from './styles';
 import { signOut } from '~/store/modules/auth/actions';
+import history from '~/services/history';
+import Categories from '../Categories';
+
+import {
+  OpenModal,
+  CloseModal,
+  addCategory,
+} from '~/store/modules/filters/actions';
 
 const NavBarStandard = () => {
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.user.profile.user.name).split(' ');
+  const profile = useSelector((state) => state.user.profile.user);
+  const filters = useSelector((state) => state.filters);
+
+  const [category, setCategory] = useState(filters.categorySelectedId);
+
+  const name = profile.name.split(' ');
+  const UserName = name[0].length > 10 ? `${name[0].slice(0, 7)}...` : name[0];
+
+  const SelectCategory = () => {
+    dispatch(addCategory(category));
+    dispatch(CloseModal());
+  };
+
+  const CategoryAdd = (id) => {
+    setCategory(id);
+  };
 
   const LogOut = () => {
     return dispatch(signOut());
@@ -44,7 +67,7 @@ const NavBarStandard = () => {
           <FormStyled inline>
             <FormControlStyled type="text" placeholder="Pesquisar produto" />
 
-            <divButtons>
+            <DivButtons>
               <ButtonStyled
                 variant="outline-dark"
                 className="ml-2"
@@ -56,7 +79,7 @@ const NavBarStandard = () => {
               <ButtonStyled
                 variant="outline-dark"
                 className="ml-2"
-                onClick={() => console.log('testing')}
+                onClick={() => dispatch(OpenModal())}
               >
                 <BsList size={25} />
               </ButtonStyled>
@@ -64,11 +87,14 @@ const NavBarStandard = () => {
               <ButtonStyled
                 variant="outline-dark"
                 className="ml-2"
-                onClick={() => console.log('testing')}
+                onClick={() => {
+                  history.push('/mycart');
+                  history.go();
+                }}
               >
                 <AiOutlineShoppingCart size={25} />
               </ButtonStyled>
-            </divButtons>
+            </DivButtons>
           </FormStyled>
         </Col>
 
@@ -76,43 +102,55 @@ const NavBarStandard = () => {
           <NavStyled className="justify-content-xl-end justify-content-center ">
             <DivNav className="pt-2 pt-xl-0">
               <Link to="/homepage">Início</Link>
-              <Link to="/createproduct">Criar produto</Link>
+              <Link
+                to="/createproduct"
+                activeStyle={{
+                  color: 'black',
+                }}
+              >
+                Criar produto
+              </Link>
               <DivProfile>
                 <DivImageProfile
-                  src="https://www.rover.com/blog/wp-content/uploads/2019/07/maltese-puppy.jpg"
+                  src={
+                    profile.avatar ||
+                    'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png'
+                  }
                   className="d-none d-xl-block"
                 />
 
                 <Dropdown id="dropdown-basic">
-                  <Toggle>{name[0]}</Toggle>
+                  <Toggle>{UserName}</Toggle>
 
                   <Dropdown.Menu alignRight>
                     <Dropdown.Item>
-                      <LinkSmall to="/">Minha conta</LinkSmall>
+                      <LinkSmall to="/myaccount">Minha conta</LinkSmall>
                     </Dropdown.Item>
 
                     <Dropdown.Item>
-                      <LinkSmall to="/">Minha localização</LinkSmall>
+                      <LinkSmall to="/mylocation">Minha localização</LinkSmall>
                     </Dropdown.Item>
 
                     <Dropdown.Item>
-                      <LinkSmall to="/">Meus dados pessoais</LinkSmall>
+                      <LinkSmall to="/mypersonal">
+                        Meus dados pessoais
+                      </LinkSmall>
                     </Dropdown.Item>
 
                     <Dropdown.Item>
-                      <LinkSmall to="/">Meus produtos</LinkSmall>
+                      <LinkSmall to="/myproducts">Meus produtos</LinkSmall>
                     </Dropdown.Item>
 
                     <Dropdown.Item>
-                      <LinkSmall to="/">Minhas vendas</LinkSmall>
+                      <LinkSmall to="/mysells">Minhas vendas</LinkSmall>
                     </Dropdown.Item>
 
                     <Dropdown.Item>
-                      <LinkSmall to="/">Minhas compras</LinkSmall>
+                      <LinkSmall to="/mypurchases">Minhas compras</LinkSmall>
                     </Dropdown.Item>
 
                     <Dropdown.Item>
-                      <LinkSmall to="/">Meu carrinho</LinkSmall>
+                      <LinkSmall to="/mycart">Meu carrinho</LinkSmall>
                     </Dropdown.Item>
 
                     <Dropdown.Divider />
@@ -123,6 +161,17 @@ const NavBarStandard = () => {
             </DivNav>
           </NavStyled>
         </Col>
+
+        <Categories
+          addCategory={CategoryAdd}
+          selectedButton={SelectCategory}
+          categorySelected={filters.categorySelectedId}
+          visible={filters.category_modal}
+          category={category}
+          closeModal={() => {
+            dispatch(CloseModal());
+          }}
+        />
       </RowTesting>
     </NavBarStyled>
   );

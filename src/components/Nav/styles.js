@@ -10,12 +10,16 @@ import {
   Dropdown,
 } from 'react-bootstrap';
 
+const activeClassName = 'active';
+
 export const Text = styled.h6`
   margin-top: 5px;
   font-family: 'Raleway', sans-serif;
 `;
 
-export const Link = styled(NavLink)`
+export const Link = styled(NavLink).attrs({
+  activeClassName,
+})`
   color: white;
   font-size: 23px;
   margin-left: 15px;
@@ -25,11 +29,17 @@ export const Link = styled(NavLink)`
 
   &:hover {
     text-decoration: none;
+    color: #455a64;
+  }
+
+  &.${activeClassName} {
     color: black;
   }
 `;
 
-export const LinkSmall = styled(NavLink)`
+export const LinkSmall = styled(NavLink).attrs({
+  activeClassName,
+})`
   color: black;
   font-size: 16px;
   text-decoration: none;
@@ -37,8 +47,14 @@ export const LinkSmall = styled(NavLink)`
 
   &:hover {
     text-decoration: none;
+    color: #455a64;
+    font-weight: bold;
+  }
+
+  &.${activeClassName} {
     color: black;
     font-weight: bold;
+    font-size: 18px;
   }
 `;
 
@@ -59,7 +75,7 @@ export const DivNav = styled.div`
   align-items: center;
 `;
 
-export const divButtons = styled.div`
+export const DivButtons = styled.div`
   margin-top: 5px;
 `;
 

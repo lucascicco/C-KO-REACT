@@ -21,7 +21,7 @@ export const ButtonItem = styled.button`
   margin: 5px 0 5px 0;
   border: none;
   border-radius: 2px;
-  background: ${(props) => (props.selected ? '#212121' : '#424242')};
+  background: ${(props) => (props.selected ? '#212121' : '#9e9e9e')};
 
   &:hover {
     background: #757575;

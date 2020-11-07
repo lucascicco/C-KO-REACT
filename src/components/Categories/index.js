@@ -28,16 +28,12 @@ export default function Categories({
               {Categorias.map((item) => {
                 return (
                   <ButtonItem
+                    selected={category === item.category_id}
                     onClick={() => {
                       addCategory(item.category_id);
                     }}
                   >
-                    <Item
-                      id={item.category_id}
-                      selected={category === item.category_id}
-                    >
-                      {item.category}
-                    </Item>
+                    <Item id={item.category_id}>{item.category}</Item>
                   </ButtonItem>
                 );
               })}

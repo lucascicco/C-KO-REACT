@@ -35,7 +35,7 @@ const NavBarStandard = () => {
   const profile = useSelector((state) => state.user.profile.user);
   const filters = useSelector((state) => state.filters);
 
-  const [category, setCategory] = useState(filters.categorySelectedId);
+  const [category, setCategory] = useState(filters.filters.categorySelectedId);
 
   const name = profile.name.split(' ');
   const UserName = name[0].length > 10 ? `${name[0].slice(0, 7)}...` : name[0];

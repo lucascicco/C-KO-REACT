@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Motion, spring } from 'react-motion';
@@ -13,14 +13,22 @@ export default function CreateProduct() {
   const [currentPage, setCurrentPage] = useState('second');
 
   const [image, setImage] = useState('');
+  const [data, setData] = useState('');
 
   const HandleImage = (img) => {
     if (!img) {
-      return toast.warn('Por favor, escolha uma image.');
+      toast.warn('Por favor, escolha uma image.');
+    } else {
+      setImage(img);
+      setCurrentPage('second');
     }
-    setImage(img);
-    setCurrentPage('second');
   };
+
+  const HandleForm = (dataParam) => {
+    setData(dataParam);
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <Container>
@@ -41,7 +49,7 @@ export default function CreateProduct() {
               )}
             </Motion>
           )}
-          {currentPage === 'second' && <ProductData />}
+          {currentPage === 'second' && <ProductData HandleForm={HandleForm} />}
           {currentPage === 'third' && <ProductMeasures />}
         </>
       ) : (

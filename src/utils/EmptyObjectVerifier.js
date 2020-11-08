@@ -33,6 +33,14 @@ export const EmptyObject = (obj) => {
   return nullValue || emptyValue;
 };
 
+export const ObjectProduct = (obj) => {
+  const emptyValue = Object.values(obj).some((element) => element === '');
+  const nullValue = Object.values(obj).some((element) => element === null);
+  const priceValue = obj.price.length < 4;
+
+  return nullValue || emptyValue || priceValue;
+};
+
 export const CompareObjects = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);

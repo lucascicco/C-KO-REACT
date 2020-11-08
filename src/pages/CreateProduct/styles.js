@@ -41,3 +41,20 @@ export const Input = styled(RockeseatInput)`
     color: rgba(255, 255, 255, 0.7);
   }
 `;
+
+export const Description = styled(RockeseatInput)`
+  background: #37474f;
+  border: 0;
+  border-radius: 2px;
+  height: 100px;
+  width: 100%;
+  padding: 0 15px;
+  color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
+  margin: 0 0 10px;
+  font-size: 17px;
+  vertical-align: top;
+  line-height: initial;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+`;

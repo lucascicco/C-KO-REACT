@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
 import { Wrapper, ColWrapper, Title } from './styles';
-import { Input } from '../styles';
+import { Input, Button, Description } from '../styles';
 import ReactSelect from '~/components/ReactSelect';
 import Categories from '~/utils/Categorias';
+import { ObjectProduct } from '~/utils/EmptyObjectVerifier';
+import {
+  onChange_onlyNumber,
+  onChange_onlyTextandNumber,
+} from '~/utils/RestrictInputs';
+import { formatarMoeda, currencyDecimalST } from '~/utils/masks';
 
 export default function ProductData({ style, HandleForm }) {
-  const [category, setCategory] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -20,21 +26,31 @@ export default function ProductData({ style, HandleForm }) {
     };
   });
 
+  const HandleSubmit = (data) => {
+    data.price = currencyDecimalST(price);
+
+    if (ObjectProduct(data)) {
+      toast.error('Preencha todos os campos');
+    } else {
+      HandleForm(data);
+    }
+  };
+
   return (
     <Wrapper style={style}>
       <ColWrapper xl="5" md="8" lg="6">
         <Title>Formulário do produto</Title>
-        <Form>
+        <Form onSubmit={HandleSubmit}>
           <ReactSelect
-            name="state"
+            name="category"
             placeholder="Selecione a categoria"
             options={categories}
-            onChange={(e) => setCategory(e.id)}
           />
           <Input
-            name="name"
+            name="product_name"
             type="text"
             placeholder="Nome do produto"
+            maxLength={100}
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -42,25 +58,32 @@ export default function ProductData({ style, HandleForm }) {
             name="price"
             type="text"
             placeholder="Preço"
-            maxLength="9"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            maxLength="10"
+            value={price === 'NaN' ? 0 : price}
+            onChange={(e) => setPrice(formatarMoeda(e.target.value))}
           />
           <Input
-            name="street"
+            name="quantity"
             type="text"
+            maxLength={3}
             placeholder="Quantidade"
             value={quantity}
-            onChange={(e) => setQuantity(e.target.event)}
+            onChange={(e) => {
+              onChange_onlyNumber(e.target.value, setQuantity);
+            }}
           />
-          <Input
-            name="street_number"
+
+          <Description
+            name="description"
             type="text"
-            placeholder="Número"
-            maxLength={5}
+            maxLength={349}
+            placeholder="Descrição"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => {
+              onChange_onlyTextandNumber(e.target.value, setDescription);
+            }}
           />
+          <Button type="submit">Próximo</Button>
         </Form>
       </ColWrapper>
     </Wrapper>

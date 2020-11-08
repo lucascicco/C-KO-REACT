@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import {
   Wrapper,
   ColWrapper,
@@ -13,7 +13,7 @@ import {
 } from './styles';
 import { Button } from '../styles';
 
-export default function ImagePicking() {
+export default function ImagePicking({ style, HandleImage }) {
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
 
@@ -32,31 +32,40 @@ export default function ImagePicking() {
   };
 
   return (
-    <Container>
-      <Wrapper>
-        <ColWrapper xl="5" md="8" lg="6">
-          <Title>Escolha a imagem</Title>
+    <Wrapper style={style}>
+      <ColWrapper xl="5" md="8" lg="6">
+        <Title>Escolha a imagem</Title>
 
-          <DivLabel>
-            <Label htmlFor="avatar">
-              <DivWrapper>
-                <ProductImage src={preview} />
-                {!preview && <Descriptrion>Clique aqui</Descriptrion>}
-              </DivWrapper>
+        <DivLabel>
+          <Label htmlFor="avatar">
+            <DivWrapper>
+              <ProductImage src={preview} />
+              {!preview && <Descriptrion>Clique aqui</Descriptrion>}
+            </DivWrapper>
 
-              <InputFile
-                type="file"
-                id="avatar"
-                accept="image/*"
-                data-file={image}
-                onChange={HandleChange}
-              />
-            </Label>
-          </DivLabel>
+            <InputFile
+              type="file"
+              id="avatar"
+              accept="image/*"
+              data-file={image}
+              onChange={HandleChange}
+            />
+          </Label>
+        </DivLabel>
 
-          <Button>Próximo</Button>
-        </ColWrapper>
-      </Wrapper>
-    </Container>
+        <Button
+          onClick={() => {
+            HandleImage(image);
+          }}
+        >
+          Próximo
+        </Button>
+      </ColWrapper>
+    </Wrapper>
   );
 }
+
+ImagePicking.propTypes = {
+  style: PropTypes.string.isRequired,
+  HandleImage: PropTypes.func.isRequired,
+};

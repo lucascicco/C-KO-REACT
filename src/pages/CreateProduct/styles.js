@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Container } from 'react-bootstrap';
 import { lighten } from 'polished';
+import { Input as RockeseatInput } from '@rocketseat/unform';
 
 export const WarningText = styled.h1`
   color: white;
@@ -23,5 +23,21 @@ export const Button = styled.button`
 
   &:hover {
     background: ${lighten(0.03, '#3f51b5')};
+  }
+`;
+
+export const Input = styled(RockeseatInput)`
+  background: #37474f;
+  border: 0;
+  border-radius: 2px;
+  height: 45px;
+  width: 100%;
+  padding: 0 15px;
+  color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
+  margin: 0 0 10px;
+  font-size: 17px;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
   }
 `;

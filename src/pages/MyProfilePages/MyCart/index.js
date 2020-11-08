@@ -5,11 +5,12 @@ import { RequestFavoriteItems } from '~/store/modules/user/actions';
 import api from '~/services/api';
 import CartList from '~/components/MyCartItem';
 import history from '~/services/history';
-import { InputFilter, DivWrapper, ColWrapper } from './styles';
+import { InputFilter, DivWrapper, ColWrapper, WarningText } from './styles';
 
 export default function MyCart() {
   const dispatch = useDispatch();
 
+  const [allow, setAllow] = useState(null);
   const [visible, setVisible] = useState([]);
   const [products, setProducts] = useState([]);
 
@@ -18,6 +19,8 @@ export default function MyCart() {
 
     setProducts(response.data);
     setVisible(response.data);
+
+    setAllow(true);
   };
 
   const onDeleteProduct = (id) => {
@@ -25,6 +28,7 @@ export default function MyCart() {
       return item.id !== id;
     });
 
+    setVisible(removedItem);
     setProducts(removedItem);
 
     dispatch(RequestFavoriteItems(id, false));
@@ -53,22 +57,32 @@ export default function MyCart() {
 
   return (
     <Container>
-      <DivWrapper>
-        <ColWrapper xl="8">
-          <InputFilter
-            type="text"
-            placeholder="Digite o nome do seu item favorito"
-            onChange={(e) => filterCart(e.target.value)}
-            autoFocus={false}
-          />
-        </ColWrapper>
-      </DivWrapper>
+      {products.length !== 0 ? (
+        <>
+          <DivWrapper>
+            <ColWrapper xl="8">
+              <InputFilter
+                type="text"
+                placeholder="Digite o nome do seu item favorito"
+                onChange={(e) => filterCart(e.target.value)}
+                autoFocus={false}
+              />
+            </ColWrapper>
+          </DivWrapper>
 
-      <CartList
-        products={visible}
-        onDeleteProduct={onDeleteProduct}
-        navigate={Navigate}
-      />
+          <CartList
+            products={visible}
+            onDeleteProduct={onDeleteProduct}
+            navigate={Navigate}
+          />
+        </>
+      ) : (
+        <>
+          {allow !== null && (
+            <WarningText>Seu carrinho está vazio.</WarningText>
+          )}
+        </>
+      )}
     </Container>
   );
 }

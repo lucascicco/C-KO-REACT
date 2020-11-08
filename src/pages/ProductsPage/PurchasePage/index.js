@@ -119,7 +119,7 @@ export default function PurchasePage({ match }) {
           )}
         </>
       ) : (
-        <>{!allow && allow !== null && <ErrorWarning />}</>
+        <>{allow !== null && <ErrorWarning />}</>
       )}
     </Container>
   );

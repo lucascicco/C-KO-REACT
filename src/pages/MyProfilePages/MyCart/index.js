@@ -45,10 +45,6 @@ export default function MyCart() {
     });
 
     setVisible(FiltredByText);
-
-    if (!text) {
-      setVisible(products);
-    }
   };
 
   useEffect(() => {

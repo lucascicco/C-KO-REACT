@@ -21,6 +21,8 @@ import MyProducts from '../pages/MyProfilePages/MyProducts';
 import MyPurchases from '../pages/MyProfilePages/MyPurchases';
 import MySells from '../pages/MyProfilePages/MySells';
 
+import CreateProduct from '../pages/CreateProduct';
+
 export default function Routes() {
   return (
     <BrowserRouter history={history}>
@@ -52,6 +54,8 @@ export default function Routes() {
         <Route path="/myproducts" component={MyProducts} isPrivate />
         <Route path="/mypurchases" component={MyPurchases} isPrivate />
         <Route path="/mysells" component={MySells} isPrivate />
+
+        <Route path="/createproduct" component={CreateProduct} isPrivate />
       </Switch>
     </BrowserRouter>
   );

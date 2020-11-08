@@ -32,7 +32,7 @@ export const DivHolder = styled.div`
 
 export const ProductImage = styled.img`
   height: 150px;
-  width: 65%;
+  width: 70%;
   border: 1px solid black;
   object-fit: cover;
 `;

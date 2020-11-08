@@ -20,5 +20,5 @@ ProductList.propTypes = {
       price: PropTypes.number.isRequired,
     })
   ).isRequired,
-  myfavorites: PropTypes.arrayOf([PropTypes.number]).isRequired,
+  myfavorites: PropTypes.arrayOf(PropTypes.number).isRequired,
 };

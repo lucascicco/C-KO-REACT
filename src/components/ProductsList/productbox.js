@@ -87,5 +87,5 @@ ProductBox.propTypes = {
     product_name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
-  myFavorites: PropTypes.arrayOf([PropTypes.number]).isRequired,
+  myFavorites: PropTypes.arrayOf(PropTypes.number).isRequired,
 };

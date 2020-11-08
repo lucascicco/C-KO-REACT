@@ -54,8 +54,9 @@ export default function Categories({
                       addCategory(item.category_id);
                       setFilter(item.category);
                     }}
+                    key={item.category_id.toString()}
                   >
-                    <Item id={item.category_id}>{item.category}</Item>
+                    <Item>{item.category}</Item>
                   </ButtonItem>
                 );
               })}
@@ -79,8 +80,8 @@ Categories.propTypes = {
   closeModal: PropTypes.func.isRequired,
   category: PropTypes.number.isRequired,
   visible: PropTypes.bool.isRequired,
-  setFilter: PropTypes.bool.isRequired,
+  setFilter: PropTypes.func.isRequired,
   currentCategory: PropTypes.number.isRequired,
   currentFilter: PropTypes.string.isRequired,
-  removeCategory: PropTypes.bool.isRequired,
+  removeCategory: PropTypes.func.isRequired,
 };

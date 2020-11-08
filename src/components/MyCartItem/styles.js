@@ -102,4 +102,6 @@ export const StatusText = styled.h3`
   color: ${(props) => (props.open ? '#7cb342' : '#e53935')};
 `;
 
-export const ColWrapper = styled(Col)``;
+export const ColWrapper = styled(Col)`
+  max-height: 100%;
+`;

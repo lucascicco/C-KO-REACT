@@ -19,7 +19,7 @@ import {
 import TranslateStatus from '~/utils/translateStatus';
 import ConvertMoney from '~/utils/ConvertMoney';
 
-export default function MyCartItem({ product, onDeleteProduct }) {
+export default function MyCartItem({ product, onDeleteProduct, navigate }) {
   return (
     <RowGeral>
       <ColTitle md="12">
@@ -39,7 +39,11 @@ export default function MyCartItem({ product, onDeleteProduct }) {
 
         <DivTwo>
           {product.status === 'open' && (
-            <Button>
+            <Button
+              onClick={() => {
+                navigate(product.id);
+              }}
+            >
               <ButtonText>Comprar</ButtonText>
             </Button>
           )}

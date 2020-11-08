@@ -106,6 +106,7 @@ const NavBarStandard = () => {
               <ButtonStyled
                 variant="outline-dark"
                 className="ml-2"
+                active={window.location.href.includes('/mycart')}
                 onClick={() => {
                   history.push('/mycart');
                   history.go();

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { RequestFavoriteItems } from '~/store/modules/user/actions';
 import api from '~/services/api';

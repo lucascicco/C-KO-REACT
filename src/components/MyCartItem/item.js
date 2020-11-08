@@ -29,12 +29,7 @@ export default function MyCartItem({ product, onDeleteProduct }) {
       <ColOne md="3">
         <ImageItem src={product.url} />
       </ColOne>
-      <ColTwo
-        md={{
-          span: 8,
-          offset: 1,
-        }}
-      >
+      <ColTwo md="9">
         <DivOne>
           <PriceText>{ConvertMoney(product.price)}</PriceText>
           <StatusText open={product.status === 'open'}>

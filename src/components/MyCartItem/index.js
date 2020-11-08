@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Item from './item';
-import { Div } from './styles';
+import { Div, ColWrapper } from './styles';
 
 export default function MyCartList({ products, onDeleteProduct }) {
   return (
     <Div>
-      {products.map((product) => {
-        return <Item product={product} onDeleteProduct={onDeleteProduct} />;
-      })}
+      <ColWrapper xl="7">
+        {products.map((product) => {
+          return <Item product={product} onDeleteProduct={onDeleteProduct} />;
+        })}
+      </ColWrapper>
     </Div>
   );
 }

@@ -2,7 +2,16 @@ import React from 'react';
 import { Modal, Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Categorias from '~/utils/Categorias';
-import { List, Item, ButtonItem, ButtonSelect } from './styles';
+import {
+  List,
+  Item,
+  ButtonItem,
+  ButtonSelect,
+  DivForCategory,
+  TextCategory,
+  ButtonRemove,
+  TextButton,
+} from './styles';
 
 export default function Categories({
   addCategory,
@@ -10,6 +19,10 @@ export default function Categories({
   closeModal,
   category,
   visible,
+  setFilter,
+  currentCategory,
+  currentFilter,
+  removeCategory,
 }) {
   return (
     <Modal
@@ -22,6 +35,14 @@ export default function Categories({
         <Modal.Title className="text-dark">Escolha a categoria</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {currentCategory !== 0 && (
+          <DivForCategory>
+            <TextCategory>{currentFilter}</TextCategory>
+            <ButtonRemove onClick={removeCategory}>
+              <TextButton>Remover filtro</TextButton>
+            </ButtonRemove>
+          </DivForCategory>
+        )}
         <Row>
           <Col xs={12} md={12}>
             <List>
@@ -31,6 +52,7 @@ export default function Categories({
                     selected={category === item.category_id}
                     onClick={() => {
                       addCategory(item.category_id);
+                      setFilter(item.category);
                     }}
                   >
                     <Item id={item.category_id}>{item.category}</Item>
@@ -57,4 +79,8 @@ Categories.propTypes = {
   closeModal: PropTypes.func.isRequired,
   category: PropTypes.number.isRequired,
   visible: PropTypes.bool.isRequired,
+  setFilter: PropTypes.bool.isRequired,
+  currentCategory: PropTypes.number.isRequired,
+  currentFilter: PropTypes.string.isRequired,
+  removeCategory: PropTypes.bool.isRequired,
 };

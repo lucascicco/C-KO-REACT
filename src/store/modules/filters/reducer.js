@@ -18,7 +18,7 @@ export default function filters(state = INITIAL_STATE, action) {
       }
       case '@product/REMOVE_CATEGORY_SELECTED': {
         draft.filters.categorySelectedId =
-          INITIAL_STATE.filters.categorySelected;
+          INITIAL_STATE.filters.categorySelectedId;
         break;
       }
       case '@product/ADD_FILTER': {

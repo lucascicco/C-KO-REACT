@@ -28,20 +28,27 @@ import {
   OpenModal,
   CloseModal,
   addCategory,
+  addFilter,
+  addSearchText,
+  removeCategory,
+  removeFilter,
 } from '~/store/modules/filters/actions';
 
 const NavBarStandard = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.user.profile.user);
+  const modal = useSelector((state) => state.products.category_modal);
   const filters = useSelector((state) => state.filters);
 
   const [category, setCategory] = useState(filters.filters.categorySelectedId);
+  const [filter, setFilter] = useState('');
 
   const name = profile.name.split(' ');
   const UserName = name[0].length > 10 ? `${name[0].slice(0, 7)}...` : name[0];
 
   const SelectCategory = () => {
     dispatch(addCategory(category));
+    dispatch(addFilter(filter));
     dispatch(CloseModal());
   };
 
@@ -65,13 +72,25 @@ const NavBarStandard = () => {
 
         <Col xl="7">
           <FormStyled inline>
-            <FormControlStyled type="text" placeholder="Pesquisar produto" />
+            <FormControlStyled
+              type="text"
+              placeholder="Pesquisar produto"
+              value={filters.filters.searchText}
+              onChange={(e) => dispatch(addSearchText(e.target.value))}
+            />
 
             <DivButtons>
               <ButtonStyled
                 variant="outline-dark"
                 className="ml-2"
-                onClick={() => console.log('hello')}
+                onClick={() => {
+                  if (history.location.pathname !== '/homepage') {
+                    history.push('/homepage');
+                    history.go();
+                  } else {
+                    history.go(0);
+                  }
+                }}
               >
                 <BsSearch size={25} />
               </ButtonStyled>
@@ -165,11 +184,21 @@ const NavBarStandard = () => {
         <Categories
           addCategory={CategoryAdd}
           selectedButton={SelectCategory}
-          categorySelected={filters.categorySelectedId}
-          visible={filters.category_modal}
+          visible={modal}
           category={category}
+          setFilter={(filterName) => {
+            setFilter(filterName);
+          }}
           closeModal={() => {
             dispatch(CloseModal());
+          }}
+          currentCategory={filters.filters.categorySelectedId}
+          currentFilter={filters.filters.filter}
+          removeCategory={() => {
+            dispatch(removeCategory());
+            dispatch(removeFilter());
+            setFilter('');
+            setCategory(0);
           }}
         />
       </RowTesting>

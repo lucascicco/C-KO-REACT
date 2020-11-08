@@ -3,11 +3,6 @@ import produce from 'immer';
 const INITIAL_STATE = {
   products: [],
   category_modal: false,
-  filters: {
-    categorySelectedId: 0,
-    filter: '',
-    searchText: '',
-  },
 };
 
 export default function products(state = INITIAL_STATE, action) {
@@ -19,6 +14,14 @@ export default function products(state = INITIAL_STATE, action) {
       }
       case '@auth/SIGN_OUT': {
         return INITIAL_STATE;
+      }
+      case '@product/MODAL_ON': {
+        draft.category_modal = true;
+        break;
+      }
+      case '@product/MODAL_OFF': {
+        draft.category_modal = false;
+        break;
       }
       default:
         return state;

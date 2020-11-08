@@ -4,9 +4,9 @@ import { Button } from 'react-bootstrap';
 export const List = styled.ul`
   max-height: 300px;
   margin-bottom: 10px;
-  -webkit-overflow-scrolling: touch;
   padding: 10px;
-  overflow-y: auto;
+
+  overflow-y: scroll;
 `;
 
 export const Item = styled.li`
@@ -30,4 +30,30 @@ export const ButtonItem = styled.button`
 
 export const ButtonSelect = styled(Button)`
   width: 100%;
+`;
+
+export const DivForCategory = styled.div`
+  margin-bottom: 0px;
+`;
+
+export const TextCategory = styled.h5`
+  width: 70%;
+  font-family: 'Raleway', sans-serif;
+`;
+
+export const ButtonRemove = styled.button`
+  border: none;
+
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent;
+`;
+
+export const TextButton = styled.h6`
+  font-family: 'Raleway', sans-serif;
+  color: red;
+
+  &:hover {
+    font-weight: bold;
+  }
 `;

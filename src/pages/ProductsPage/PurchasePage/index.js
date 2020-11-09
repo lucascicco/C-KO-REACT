@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-import { Motion, spring } from 'react-motion';
 import PurchaseInfo from './PurchaseInfo';
 import PurchasePayment from './PurchasePayment';
 import history from '~/services/history';
 import api from '~/services/api';
 import { CreditCardVerifier } from '~/utils/EmptyObjectVerifier';
 import ErrorWarning from '~/components/NoAccess';
+import SecurityComponent from '~/components/SecurityAnimation';
 
 export default function PurchasePage({ match }) {
   const [allow, setAllow] = useState(null);
-  const [page, setPage] = useState('first');
+  const [page, setPage] = useState('second');
 
   const [animation, setAnimation] = useState(false);
   const [outcome, setOutcome] = useState(null);
@@ -87,11 +87,7 @@ export default function PurchasePage({ match }) {
   }, []);
 
   return (
-    <Container
-      style={{
-        height: window.innerHeight,
-      }}
-    >
+    <Container>
       {allow ? (
         <>
           {page === 'first' && (
@@ -100,22 +96,14 @@ export default function PurchasePage({ match }) {
               setPage={() => setPage('second')}
             />
           )}
-          {page === 'second' && (
-            <Motion
-              defaultStyle={{
-                y: window.innerHeight - (window.innerHeight / 100) * 20,
-              }}
-              style={{ y: spring(0, { stiffness: 200, damping: 100 }) }}
-            >
-              {(style) => (
-                <PurchasePayment
-                  style={{ transform: `translateY(${style.y}px)` }}
-                  onSubmit={onSubmit}
-                  animation={animation}
-                  outcome={outcome}
-                />
-              )}
-            </Motion>
+          {page === 'second' && <SecurityComponent />}
+
+          {page === 'third' && (
+            <PurchasePayment
+              onSubmit={onSubmit}
+              animation={animation}
+              outcome={outcome}
+            />
           )}
         </>
       ) : (

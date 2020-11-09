@@ -8,7 +8,7 @@ import ErrorWarning from '~/components/NoAccess';
 
 import ReactSelect from '~/components/ReactSelect';
 import PersonalIcon from '~/assets/Information_Icon.png';
-import { updatePersonalDataSuccess } from '~/store/modules/user/actions';
+import { createPersonalDataRequest } from '~/store/modules/user/actions';
 import Professions from '~/utils/Profession';
 import { EmptyObject, CompareObjects } from '~/utils/EmptyObjectVerifier';
 
@@ -71,7 +71,7 @@ export default function PersonalForm({ match }) {
 
     if (personal === null) {
       const response = await api.post('personal_data', data);
-      dispatch(updatePersonalDataSuccess(response.data));
+      dispatch(createPersonalDataRequest(response.data));
       setCurrentPersonalID(response.data.id);
     } else if (CompareObjects(data, personal)) {
       const response = await api.post('personal_data', data);

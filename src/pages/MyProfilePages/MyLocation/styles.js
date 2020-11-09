@@ -52,4 +52,5 @@ export const Title = styled.h1`
   color: white;
   font-family: 'Raleway', sans-serif;
   text-align: center;
+  margin-bottom: 35px;
 `;

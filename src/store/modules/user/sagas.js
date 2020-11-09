@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify';
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import {
   updateAccountSuccess,
   updateLocationSuccess,
@@ -99,6 +99,7 @@ export function* UpdatePersonalSaga({ payload }) {
     });
 
     yield put(updatePersonalDataSuccess(response.data));
+    toast.success('Dados pessoais atualizados com sucesso');
   } catch (err) {
     toast.error('Houve um erro ao atualizar seus dados, verifique seus dados.');
   }

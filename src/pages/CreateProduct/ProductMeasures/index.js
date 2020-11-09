@@ -4,17 +4,19 @@ import { Form } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import {
-  Wrapper,
-  ColWrapper,
   SameDiv,
   Input,
   Title,
   InputSmaller,
   WarningText,
   WarningButton,
+  DivButtonWarning,
   DivButton,
+  Progress,
+  Content,
+  Text,
 } from './styles';
-import { Button } from '../styles';
+import { Wrapper, ColWrapper } from '../styles';
 import ReactSelect from '~/components/ReactSelect';
 import { onChange_onlyNumber } from '~/utils/RestrictInputs';
 import CorreiosValidation from '~/utils/CorreiosValidation';
@@ -34,7 +36,12 @@ const formats = [
   },
 ];
 
-export default function ProductMeasures({ handleSubmit, animationOne }) {
+export default function ProductMeasures({
+  handleSubmit,
+  animationOne,
+  loading,
+  success,
+}) {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const [length, setLenght] = useState('');
@@ -103,7 +110,7 @@ export default function ProductMeasures({ handleSubmit, animationOne }) {
           >
             <Title>Medidas do produto</Title>
 
-            <Form onSubmit={HandleSubmit}>
+            <Form onSubmit={HandleSubmit} autoComplete="off">
               <ReactSelect
                 name="format"
                 placeholder="Selecione o formato"
@@ -177,7 +184,7 @@ export default function ProductMeasures({ handleSubmit, animationOne }) {
                 números inteiros.
               </WarningText>
 
-              <DivButton>
+              <DivButtonWarning>
                 <WarningButton
                   type="button"
                   onClick={() => {
@@ -188,9 +195,18 @@ export default function ProductMeasures({ handleSubmit, animationOne }) {
                 >
                   Ver medidas
                 </WarningButton>
-              </DivButton>
+              </DivButtonWarning>
 
-              <Button type="submit">Próximo</Button>
+              <DivButton type="submit" disabled={loading} outcome={success}>
+                <Progress animation={loading} outcome={success} />
+                <Content>
+                  <Text>
+                    {!loading && !success && 'Registrar produto'}
+                    {loading && !success && 'Carregando...'}
+                    {!loading && success && 'Produto criado com sucesso'}
+                  </Text>
+                </Content>
+              </DivButton>
             </Form>
           </ColWrapper>
         )}
@@ -202,4 +218,7 @@ export default function ProductMeasures({ handleSubmit, animationOne }) {
 ProductMeasures.propTypes = {
   animationOne: PropTypes.number.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+
+  success: PropTypes.bool.isRequired,
 };

@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import { Form } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { Motion, spring } from 'react-motion';
-import { Wrapper, ColWrapper, Title } from './styles';
-import { Input, Button, Description } from '../styles';
+
+import {
+  Title,
+  Input,
+  Button,
+  Description,
+  Wrapper,
+  ColWrapper,
+} from '../styles';
 import ReactSelect from '~/components/ReactSelect';
 import Categories from '~/utils/Categorias';
 import { ObjectProduct } from '~/utils/EmptyObjectVerifier';
@@ -54,7 +61,7 @@ export default function ProductData({ animationOne, HandleForm }) {
             style={{ transform: `translateX(${style.x}px)` }}
           >
             <Title>Formulário do produto</Title>
-            <Form onSubmit={HandleSubmit}>
+            <Form onSubmit={HandleSubmit} autoComplete="off">
               <ReactSelect
                 name="category"
                 placeholder="Selecione a categoria"

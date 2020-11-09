@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -16,6 +16,8 @@ export default function CreateProduct() {
   const [image, setImage] = useState('');
   const [data, setData] = useState('');
   const [measures, setMeasures] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const NextPageAnimation = (nextPage) => {
     setAnimationOne(window.innerWidth - (window.innerWidth / 100) * 30);
@@ -40,12 +42,10 @@ export default function CreateProduct() {
     NextPageAnimation('third');
   };
 
-  const handleMeasures = (dataMeasures) => {
-    setMeasures(dataMeasures);
-  };
-
   const createProduct = async () => {
     try {
+      setLoading(true);
+
       const formData = new FormData();
 
       formData.append('file', image);
@@ -63,10 +63,19 @@ export default function CreateProduct() {
       await api.post('product', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-    } catch (e) {}
+
+      setSuccess(true);
+    } catch (e) {
+      toast.error('Erro no servidor, tente mais tarde. Agradecemos.');
+    }
+
+    setLoading(false);
   };
 
-  useEffect(() => {}, []);
+  const handleMeasures = (dataMeasures) => {
+    setMeasures(dataMeasures);
+    createProduct();
+  };
 
   return (
     <Container>
@@ -87,6 +96,8 @@ export default function CreateProduct() {
             <ProductMeasures
               handleSubmit={handleMeasures}
               animationOne={animationOne}
+              loading={loading}
+              success={success}
             />
           )}
         </>

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Motion, spring } from 'react-motion';
 import {
-  Wrapper,
-  ColWrapper,
   ProductImage,
   Label,
   InputFile,
@@ -12,7 +10,7 @@ import {
   DivWrapper,
   Descriptrion,
 } from './styles';
-import { Button } from '../styles';
+import { Button, Wrapper, ColWrapper } from '../styles';
 
 export default function ImagePicking({ animationOne, HandleImage }) {
   const [image, setImage] = useState('');

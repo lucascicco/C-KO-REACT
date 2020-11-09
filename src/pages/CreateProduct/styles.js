@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
 import { Input as RockeseatInput } from '@rocketseat/unform';
+import { Row, Col } from 'react-bootstrap';
+
+export const Wrapper = styled(Row)`
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+`;
+
+export const ColWrapper = styled(Col)``;
 
 export const WarningText = styled.h1`
   color: white;
@@ -59,4 +68,11 @@ export const Description = styled.textarea`
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
+`;
+
+export const Title = styled.h1`
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
 `;

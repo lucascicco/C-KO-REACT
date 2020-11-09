@@ -81,3 +81,15 @@ export const CreditCardVerifier = (obj) => {
 
   return nullValue || emptyValue || cvc || !obj.validExpiry || !obj.validNumber;
 };
+
+export const AccountVerifierChange = (obj) => {
+  const nameValue = obj.name.length < 6;
+  const emailValue = !obj.email.includes('@') || obj.email.length < 7;
+  let checkingPasswords = false;
+
+  if (obj.password || obj.oldPassword) {
+    checkingPasswords = obj.password === obj.oldPassword || obj.password < 6;
+  }
+
+  return checkingPasswords || emailValue || nameValue;
+};

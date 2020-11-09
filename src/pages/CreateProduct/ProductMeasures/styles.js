@@ -53,3 +53,32 @@ export const Title = styled.h1`
   font-family: 'Raleway', sans-serif;
   text-align: center;
 `;
+
+export const WarningText = styled.p`
+  color: white;
+  font-size: 20px;
+  text-align: justify;
+  text-justify: inter-word;
+`;
+
+export const WarningButton = styled.button`
+  width: 30%;
+  border: 0;
+  border-radius: 3px;
+  font-size: 20px;
+  transition: border-radius 0.7s;
+  outline: none !important;
+  box-shadow: none !important;
+
+  &:hover {
+    opacity: 0.8;
+    border-radius: 15px;
+  }
+`;
+
+export const DivButton = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  margin-bottom: 10px;
+`;

@@ -6,6 +6,7 @@ import { WarningText } from './styles';
 import ImagePicker from './ImagePicking';
 import ProductData from './ProductData';
 import ProductMeasures from './ProductMeasures';
+import api from '~/services/api';
 
 export default function CreateProduct() {
   const profile = useSelector((state) => state.user.profile);
@@ -14,6 +15,7 @@ export default function CreateProduct() {
   const [animationOne, setAnimationOne] = useState(0);
   const [image, setImage] = useState('');
   const [data, setData] = useState('');
+  const [measures, setMeasures] = useState('');
 
   const NextPageAnimation = (nextPage) => {
     setAnimationOne(window.innerWidth - (window.innerWidth / 100) * 30);
@@ -38,6 +40,32 @@ export default function CreateProduct() {
     NextPageAnimation('third');
   };
 
+  const handleMeasures = (dataMeasures) => {
+    setMeasures(dataMeasures);
+  };
+
+  const createProduct = async () => {
+    try {
+      const formData = new FormData();
+
+      formData.append('file', image);
+
+      formData.append('product_name', data.product_name);
+      formData.append('category', data.category);
+      formData.append('quantity', data.quantity);
+      formData.append('description', data.description);
+      formData.append('price', data.price);
+
+      const response_one = await api.post('features', measures);
+
+      formData.append('features', response_one.data.id);
+
+      await api.post('product', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+    } catch (e) {}
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -55,7 +83,12 @@ export default function CreateProduct() {
             <ProductData HandleForm={HandleForm} animationOne={animationOne} />
           )}
 
-          {currentPage === 'third' && <ProductMeasures />}
+          {currentPage === 'third' && (
+            <ProductMeasures
+              handleSubmit={handleMeasures}
+              animationOne={animationOne}
+            />
+          )}
         </>
       ) : (
         <WarningText>

@@ -20,6 +20,8 @@ export const Button = styled.button`
   border-radius: 4px;
   font-size: 20px;
   transition: background 0.2s;
+  outline: none !important;
+  box-shadow: none !important;
 
   &:hover {
     background: ${lighten(0.03, '#3f51b5')};

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
 import { Motion, spring } from 'react-motion';
 import { Form } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 import {
   Wrapper,
   ColWrapper,
@@ -9,9 +10,14 @@ import {
   Input,
   Title,
   InputSmaller,
+  WarningText,
+  WarningButton,
+  DivButton,
 } from './styles';
-import { Button, Description } from '../styles';
+import { Button } from '../styles';
 import ReactSelect from '~/components/ReactSelect';
+import { onChange_onlyNumber } from '~/utils/RestrictInputs';
+import CorreiosValidation from '~/utils/CorreiosValidation';
 
 const formats = [
   {
@@ -28,8 +34,7 @@ const formats = [
   },
 ];
 
-export default function ProductMeasures() {
-  const [format, setFormat] = useState('');
+export default function ProductMeasures({ handleSubmit, animationOne }) {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const [length, setLenght] = useState('');
@@ -41,8 +46,6 @@ export default function ProductMeasures() {
   const [disabledDiameter, setDisableDiameter] = useState(true);
 
   const handlePickingFormat = (itemValue) => {
-    setFormat(itemValue);
-
     switch (itemValue) {
       case 3:
         setDisableHeight(true);
@@ -76,77 +79,127 @@ export default function ProductMeasures() {
       data[key] = Number(data[key]);
     });
 
-    console.log(data);
+    if (CorreiosValidation(data)) {
+      handleSubmit(data);
+    } else {
+      toast.error('Preencha os campos de acordo com as medidas corretas.');
+    }
   };
 
   return (
-    <Container>
-      <Wrapper>
-        <ColWrapper xl="6" md="9" lg="7">
-          <Title>Medidas do produto</Title>
+    <Wrapper>
+      <Motion
+        defaultStyle={{
+          x: -window.innerWidth,
+        }}
+        style={{ x: spring(animationOne, { stiffness: 200, damping: 100 }) }}
+      >
+        {(style) => (
+          <ColWrapper
+            xl="6"
+            md="9"
+            lg="7"
+            style={{ transform: `translateX(${style.x}px)` }}
+          >
+            <Title>Medidas do produto</Title>
 
-          <Form onSubmit={HandleSubmit}>
-            <ReactSelect
-              name="format"
-              placeholder="Selecione o formato"
-              options={formats}
-              onChange={(e) => handlePickingFormat(e.id)}
-            />
-
-            <SameDiv>
-              <Input
-                name="weight"
-                type="text"
-                placeholder="Peso"
-                maxLength={2}
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-              />
-              <Input
-                name="length"
-                type="text"
-                maxLength={3}
-                placeholder="Comprimento"
-                value={length}
-                onChange={(e) => setLenght(e.target.value)}
-              />
-            </SameDiv>
-
-            <SameDiv>
-              <InputSmaller
-                name="height"
-                type="text"
-                placeholder="Altura"
-                maxLength={3}
-                value={height === 0 ? '' : height}
-                onChange={(e) => setHeight(e.target.value)}
-                disabled={disabledHeight}
+            <Form onSubmit={HandleSubmit}>
+              <ReactSelect
+                name="format"
+                placeholder="Selecione o formato"
+                options={formats}
+                onChange={(e) => handlePickingFormat(e.id)}
               />
 
-              <InputSmaller
-                name="width"
-                type="text"
-                maxLength={3}
-                placeholder="Largura"
-                value={width === 0 ? '' : width}
-                onChange={(e) => setWidth(e.target.value)}
-                disabled={disabledWidth}
-              />
-              <InputSmaller
-                name="diameter"
-                type="text"
-                maxLength={3}
-                placeholder="Diamêtro"
-                value={diameter === 0 ? '' : diameter}
-                onChange={(e) => setDiameter(e.target.value)}
-                disabled={disabledDiameter}
-              />
-            </SameDiv>
+              <SameDiv>
+                <Input
+                  name="weight"
+                  type="text"
+                  placeholder="Peso"
+                  maxLength={2}
+                  value={weight}
+                  onChange={(e) =>
+                    onChange_onlyNumber(e.target.value, setWeight)
+                  }
+                />
+                <Input
+                  name="length"
+                  type="text"
+                  maxLength={3}
+                  placeholder="Comprimento"
+                  value={length}
+                  onChange={(e) =>
+                    onChange_onlyNumber(e.target.value, setLenght)
+                  }
+                />
+              </SameDiv>
 
-            <Button type="submit">Próximo</Button>
-          </Form>
-        </ColWrapper>
-      </Wrapper>
-    </Container>
+              <SameDiv>
+                <InputSmaller
+                  name="height"
+                  type="text"
+                  placeholder="Altura"
+                  maxLength={3}
+                  value={height === 0 ? '' : height}
+                  onChange={(e) =>
+                    onChange_onlyNumber(e.target.value, setHeight)
+                  }
+                  disabled={disabledHeight}
+                />
+
+                <InputSmaller
+                  name="width"
+                  type="text"
+                  maxLength={3}
+                  placeholder="Largura"
+                  value={width === 0 ? '' : width}
+                  onChange={(e) =>
+                    onChange_onlyNumber(e.target.value, setWidth)
+                  }
+                  disabled={disabledWidth}
+                />
+                <InputSmaller
+                  name="diameter"
+                  type="text"
+                  maxLength={3}
+                  placeholder="Diamêtro"
+                  value={diameter === 0 ? '' : diameter}
+                  onChange={(e) =>
+                    onChange_onlyNumber(e.target.value, setDiameter)
+                  }
+                  disabled={disabledDiameter}
+                />
+              </SameDiv>
+
+              <WarningText>
+                Todas as medidas devem ser feitas incluindo a embalagem. Valores
+                de dimensões são dados em (CM). Já, o peso é dado (KG). Apenas
+                números inteiros.
+              </WarningText>
+
+              <DivButton>
+                <WarningButton
+                  type="button"
+                  onClick={() => {
+                    window.open(
+                      'https://www.correios.com.br/enviar-e-receber/precisa-de-ajuda/limites-de-dimensoes-e-peso'
+                    );
+                  }}
+                >
+                  Ver medidas
+                </WarningButton>
+              </DivButton>
+
+              <Button type="submit">Próximo</Button>
+            </Form>
+          </ColWrapper>
+        )}
+      </Motion>
+    </Wrapper>
   );
 }
+
+ProductMeasures.propTypes = {
+  animationOne: PropTypes.number.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};

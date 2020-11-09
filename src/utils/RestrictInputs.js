@@ -7,7 +7,6 @@ export const onChange_onlyText = (text, callback) => {
 
 export const onChange_onlyNumber = (text, callback) => {
   if (/^[0-9]+$/.test(text) || text === '') {
-    console.log(text);
     return callback(text);
   }
   return null;

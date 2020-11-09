@@ -25,6 +25,7 @@ export function* UpdateAccountSaga({ payload }) {
     const { user } = response.data;
 
     yield put(updateAccountSuccess(user));
+    toast.success('Conta atualizada com sucesso!');
   } catch (e) {
     toast.error('Houve um erro ao atualizar seus dados, verifique seus dados.');
   }
@@ -49,6 +50,7 @@ export function* UpdateLocationSaga({ payload }) {
     const response = yield call(api.put, 'location', payload.data);
 
     yield put(updateLocationSuccess(response.data));
+    toast.success('Localização atualizada com sucesso');
   } catch (err) {
     toast.error('Houve um erro ao atualizar seus dados, verifique seus dados.');
   }

@@ -107,7 +107,7 @@ export default function MyAccount() {
             />
 
             <Input
-              name="oldpassword"
+              name="oldPassword"
               type="password"
               placeholder="Senha antiga"
               value={oldPassword}
@@ -120,7 +120,7 @@ export default function MyAccount() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-            <Button>Atualizar</Button>
+            <Button type="submit">Atualizar</Button>
           </FormInput>
         </ColWrapper>
       </RowWrapper>

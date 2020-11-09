@@ -1,8 +1,9 @@
 import React from 'react';
 import { Motion, spring } from 'react-motion';
+import PropTypes from 'prop-types';
 import { Wrapper, ColWrapper, DivWrapper, Icon, FontSize } from './styles';
 
-export default function SecurityAnimation({}) {
+export default function SecurityAnimation({ opacityControl }) {
   return (
     <Wrapper>
       <Motion
@@ -12,9 +13,9 @@ export default function SecurityAnimation({}) {
           opacity: 0,
         }}
         style={{
-          opacity: spring(1),
-          fontSize: spring(45),
-          iconSize: spring(120),
+          opacity: spring(opacityControl, { stiffness: 200, damping: 100 }),
+          fontSize: spring(45, { stiffness: 200, damping: 100 }),
+          iconSize: spring(120, { stiffness: 200, damping: 100 }),
         }}
       >
         {(style) => (
@@ -39,3 +40,7 @@ export default function SecurityAnimation({}) {
     </Wrapper>
   );
 }
+
+SecurityAnimation.propTypes = {
+  opacityControl: PropTypes.number.isRequired,
+};

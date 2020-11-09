@@ -12,10 +12,23 @@ import SecurityComponent from '~/components/SecurityAnimation';
 
 export default function PurchasePage({ match }) {
   const [allow, setAllow] = useState(null);
-  const [page, setPage] = useState('second');
+  const [page, setPage] = useState('first');
 
   const [animation, setAnimation] = useState(false);
   const [outcome, setOutcome] = useState(null);
+  const [opacityControl, setOpacityControl] = useState(1);
+
+  const animationTwo = () => {
+    setPage('second');
+
+    setTimeout(() => {
+      setOpacityControl(0);
+    }, 1500);
+
+    setTimeout(() => {
+      setPage('third');
+    }, 2500);
+  };
 
   const settingPermission = async () => {
     const response = await api.get('verifierProduct', {
@@ -93,10 +106,12 @@ export default function PurchasePage({ match }) {
           {page === 'first' && (
             <PurchaseInfo
               state={history.location.state}
-              setPage={() => setPage('second')}
+              setPage={animationTwo}
             />
           )}
-          {page === 'second' && <SecurityComponent />}
+          {page === 'second' && (
+            <SecurityComponent opacityControl={opacityControl} />
+          )}
 
           {page === 'third' && (
             <PurchasePayment

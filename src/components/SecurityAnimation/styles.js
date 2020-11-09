@@ -14,12 +14,9 @@ export const ColWrapper = styled(Col)``;
 
 export const DivWrapper = styled.div`
   text-align: center;
-  border: 1px solid red;
 `;
 
-export const Icon = styled(MdSecurity)`
-  border: 1px solid red;
-`;
+export const Icon = styled(MdSecurity)``;
 
 export const FontSize = styled.h2`
   color: white;

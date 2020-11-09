@@ -12,7 +12,8 @@ export const RowWrapper = styled(Row)`
 export const ColWrapper = styled(Col)``;
 
 export const FormInput = styled(Form)`
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Button = styled.button`

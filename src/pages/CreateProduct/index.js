@@ -7,15 +7,15 @@ import ImagePicker from './ImagePicking';
 import ProductData from './ProductData';
 import ProductMeasures from './ProductMeasures';
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function CreateProduct() {
   const profile = useSelector((state) => state.user.profile);
-  const [currentPage, setCurrentPage] = useState('third');
+  const [currentPage, setCurrentPage] = useState('first');
 
   const [animationOne, setAnimationOne] = useState(0);
   const [image, setImage] = useState('');
   const [data, setData] = useState('');
-  const [measures, setMeasures] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -42,10 +42,10 @@ export default function CreateProduct() {
     NextPageAnimation('third');
   };
 
-  const createProduct = async () => {
-    try {
-      setLoading(true);
+  const handleMeasures = async (measures) => {
+    setLoading(true);
 
+    try {
       const formData = new FormData();
 
       formData.append('file', image);
@@ -65,16 +65,13 @@ export default function CreateProduct() {
       });
 
       setSuccess(true);
+
+      history.push('/myproducts');
+      history.go();
     } catch (e) {
       toast.error('Erro no servidor, tente mais tarde. Agradecemos.');
     }
-
     setLoading(false);
-  };
-
-  const handleMeasures = (dataMeasures) => {
-    setMeasures(dataMeasures);
-    createProduct();
   };
 
   return (

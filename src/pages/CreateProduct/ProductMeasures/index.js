@@ -197,7 +197,11 @@ export default function ProductMeasures({
                 </WarningButton>
               </DivButtonWarning>
 
-              <DivButton type="submit" disabled={loading} outcome={success}>
+              <DivButton
+                type="submit"
+                disabled={loading || success}
+                outcome={success}
+              >
                 <Progress animation={loading} outcome={success} />
                 <Content>
                   <Text>

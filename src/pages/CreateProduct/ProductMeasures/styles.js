@@ -76,16 +76,14 @@ export const DivButtonWarning = styled.div`
 
 export const DivButton = styled.button`
   display: flex;
-  align-items: center;
   justify-content: center;
-  border: 1px solid red;
   height: 45px;
   width: 100%;
-  border: none;
   outline: none !important;
   box-shadow: none !important;
   transition: background 0.2s;
   border-radius: 5px;
+  border: none;
   background: ${(props) => (props.outcome ? '#43a047' : '#3949ab')};
 
   &:hover {
@@ -98,14 +96,13 @@ export const DivButton = styled.button`
 export const Progress = styled.span`
   z-index: 1;
   transition: width 3s;
-  width: ${(props) =>
-    props.animation && props.outcome === null ? '100%' : '0px'};
-  height: 100%;
+  width: ${(props) => (props.animation && !props.outcome ? '95%' : '0px')};
+  height: 45px;
   position: absolute;
   background: #283593;
   border-radius: 5px;
-  left: 0px;
-  top: 0px;
+  bottom: 0px;
+  left: 15px;
   padding: 0px;
 `;
 

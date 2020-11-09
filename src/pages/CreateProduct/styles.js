@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import { Input as RockeseatInput } from '@rocketseat/unform';
+import { Input as RockeseatInput, Textarea } from '@rocketseat/unform';
 import { Row, Col } from 'react-bootstrap';
 
 export const Wrapper = styled(Row)`
@@ -53,7 +53,7 @@ export const Input = styled(RockeseatInput)`
   }
 `;
 
-export const Description = styled.textarea`
+export const Description = styled(Textarea)`
   background: #37474f;
   border: 0;
   border-radius: 2px;
@@ -61,6 +61,7 @@ export const Description = styled.textarea`
   width: 100%;
   color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
   margin: 0 0 10px;
+
   font-size: 17px;
   max-height: 200px;
   padding: 15px;

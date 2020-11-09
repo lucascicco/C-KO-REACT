@@ -42,18 +42,18 @@ export const Input = styled(RockeseatInput)`
   }
 `;
 
-export const Description = styled(RockeseatInput)`
+export const Description = styled.textarea`
   background: #37474f;
   border: 0;
   border-radius: 2px;
   height: 100px;
   width: 100%;
-  padding: 0 15px;
   color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
   margin: 0 0 10px;
   font-size: 17px;
-  vertical-align: top;
-  line-height: initial;
+  max-height: 200px;
+  padding: 15px;
+
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }

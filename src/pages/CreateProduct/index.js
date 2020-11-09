@@ -12,20 +12,31 @@ export default function CreateProduct() {
   const profile = useSelector((state) => state.user.profile);
   const [currentPage, setCurrentPage] = useState('second');
 
+  const [animationOne, setAnimationOne] = useState(0);
   const [image, setImage] = useState('');
   const [data, setData] = useState('');
+
+  const NextPageAnimation = (nextPage) => {
+    setAnimationOne(window.innerWidth - (window.innerWidth / 100) * 30);
+
+    setTimeout(() => {
+      setCurrentPage(nextPage);
+      setAnimationOne(0);
+    }, 1000);
+  };
 
   const HandleImage = (img) => {
     if (!img) {
       toast.warn('Por favor, escolha uma image.');
     } else {
       setImage(img);
-      setCurrentPage('second');
+      NextPageAnimation('second');
     }
   };
 
   const HandleForm = (dataParam) => {
     setData(dataParam);
+    NextPageAnimation('third');
   };
 
   useEffect(() => {}, []);
@@ -35,21 +46,16 @@ export default function CreateProduct() {
       {profile.personal_data !== null && profile.location !== null ? (
         <>
           {currentPage === 'first' && (
-            <Motion
-              defaultStyle={{
-                x: -window.innerWidth,
-              }}
-              style={{ x: spring(0, { stiffness: 200, damping: 100 }) }}
-            >
-              {(style) => (
-                <ImagePicker
-                  style={{ transform: `translateX(${style.x}px)` }}
-                  HandleImage={HandleImage}
-                />
-              )}
-            </Motion>
+            <ImagePicker
+              animationOne={animationOne}
+              HandleImage={HandleImage}
+            />
           )}
-          {currentPage === 'second' && <ProductData HandleForm={HandleForm} />}
+
+          {currentPage === 'second' && (
+            <ProductData HandleForm={HandleForm} animationOne={animationOne} />
+          )}
+
           {currentPage === 'third' && <ProductMeasures />}
         </>
       ) : (

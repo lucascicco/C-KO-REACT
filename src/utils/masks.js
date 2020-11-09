@@ -33,5 +33,5 @@ export const formatarMoeda = (valor) => {
 };
 
 export const currencyDecimalST = (currency) => {
-  return currency.replace('.', '').replace(',', '.');
+  return Number(currency.replace('.', '').replace(',', '.'));
 };

@@ -37,8 +37,9 @@ export const ObjectProduct = (obj) => {
   const emptyValue = Object.values(obj).some((element) => element === '');
   const nullValue = Object.values(obj).some((element) => element === null);
   const priceValue = obj.price.length < 4;
+  const descriptionValue = obj.description.length < 50;
 
-  return nullValue || emptyValue || priceValue;
+  return nullValue || emptyValue || priceValue || descriptionValue;
 };
 
 export const CompareObjects = (obj1, obj2) => {

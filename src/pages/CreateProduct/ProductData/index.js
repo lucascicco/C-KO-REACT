@@ -91,7 +91,7 @@ export default function ProductData({ animationOne, HandleForm }) {
                 name="description"
                 type="text"
                 maxLength={349}
-                placeholder="Descrição"
+                placeholder="Descrição - Mínino 50 caracteres"
                 value={description}
                 onChange={(e) => {
                   onChange_onlyTextandNumber(e.target.value, setDescription);

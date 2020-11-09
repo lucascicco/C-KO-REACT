@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Motion, spring } from 'react-motion';
 import { toast } from 'react-toastify';
 import { WarningText } from './styles';
 import ImagePicker from './ImagePicking';
@@ -10,7 +9,7 @@ import ProductMeasures from './ProductMeasures';
 
 export default function CreateProduct() {
   const profile = useSelector((state) => state.user.profile);
-  const [currentPage, setCurrentPage] = useState('second');
+  const [currentPage, setCurrentPage] = useState('third');
 
   const [animationOne, setAnimationOne] = useState(0);
   const [image, setImage] = useState('');

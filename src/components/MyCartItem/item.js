@@ -70,4 +70,5 @@ MyCartItem.propTypes = {
     status: PropTypes.string.isRequired,
   }).isRequired,
   onDeleteProduct: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
 };

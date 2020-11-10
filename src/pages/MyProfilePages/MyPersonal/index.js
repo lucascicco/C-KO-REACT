@@ -17,7 +17,7 @@ import {
   updatePersonalDataRequest,
   createPersonalDataRequest,
 } from '~/store/modules/user/actions';
-import { EmptyObject } from '~/utils/EmptyObjectVerifier';
+import { EmptyObject, CompareObjects } from '~/utils/EmptyObjectVerifier';
 import Professions from '~/utils/Profession';
 import ReactSelect from '~/components/ReactSelect';
 import history from '~/services/history';
@@ -44,18 +44,22 @@ export default function MyPersonalData() {
     personal === null ? '' : personal.identification
   );
 
-  const handleSubmit = (PersonalInfo) => {
-    PersonalInfo.gender = gender;
-    PersonalInfo.profession = profession;
+  const handleSubmit = (personalInfo) => {
+    personalInfo.gender = gender;
+    personalInfo.profession = profession;
 
-    if (EmptyObject(PersonalInfo)) {
-      toast.error('Preencha corretamente os campos de informações pessoais.');
-    } else if (personal === null) {
-      dispatch(createPersonalDataRequest(PersonalInfo));
+    if (EmptyObject(personalInfo)) {
+      return toast.error(
+        'Preencha corretamente os campos de informações pessoais.'
+      );
+    }
+
+    if (personal === null) {
+      dispatch(createPersonalDataRequest(personalInfo));
       history.push('/homepage');
       history.go();
-    } else {
-      dispatch(updatePersonalDataRequest(PersonalInfo));
+    } else if (CompareObjects(personalInfo, personal)) {
+      dispatch(updatePersonalDataRequest(personalInfo));
     }
   };
 

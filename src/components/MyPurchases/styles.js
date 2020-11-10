@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import { Row, Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 export const RowGeral = styled(Row)`
-  background: white;
-  padding: 15px;
-  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
 `;
 
-export const RowOne = styled(Row)`
-  width: 100%;
-`;
+export const ColWrapper = styled(Col)``;
 
 export const ColTitle = styled(Col)`
   margin-bottom: 5px;
@@ -18,13 +16,24 @@ export const ColTitle = styled(Col)`
 
 export const ColOne = styled(Col)`
   @media (max-width: 767.98px) {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   max-height: 160px;
 `;
 
 export const ColTwo = styled(Col)``;
+
+export const ColThree = styled(Col)`
+  @media (max-width: 767.98px) {
+    margin-top: 15px;
+  }
+  border: 1px solid red;
+`;
+
+export const ColFour = styled(Col)`
+  margin-top: 15px;
+`;
 
 export const DivOne = styled.div``;
 
@@ -51,6 +60,23 @@ export const Title = styled.h3`
   -webkit-box-orient: vertical;
 `;
 
+export const ButtonText = styled.h6`
+  @media (max-width: 767.98px) {
+    font-size: 14px;
+  }
+  font-size: 18px;
+  color: #388e3c;
+  font-family: 'Raleway', sans-serif;
+`;
+
+export const ButtonContactText = styled.h6`
+  @media (max-width: 767.98px) {
+    font-size: 14px;
+  }
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+`;
+
 export const Button = styled.button`
   width: 48%;
   border: 1px solid #388e3c;
@@ -64,12 +90,16 @@ export const Button = styled.button`
 
   &:hover {
     background: #dcedc8;
+
+    ${ButtonText} {
+      font-weight: bold;
+    }
   }
 `;
 
-export const ButtonDelete = styled.button`
+export const ButtonContact = styled.button`
   flex: 1;
-  border: 1px solid #d32f2f;
+  border: 1px solid #424242;
   padding: 10px;
   background: white;
 
@@ -78,18 +108,12 @@ export const ButtonDelete = styled.button`
   transition: background 0.5s;
 
   &:hover {
-    background: #ef9a9a;
+    background: #bdbdbd;
+
+    ${ButtonContactText} {
+      font-weight: bold;
+    }
   }
-`;
-
-export const ButtonText = styled.h6`
-  font-size: 18px;
-  color: #388e3c;
-`;
-
-export const ButtonTextDelete = styled.h6`
-  font-size: 18px;
-  color: #d32f2f;
 `;
 
 export const Div = styled(Row)`
@@ -100,8 +124,24 @@ export const Div = styled(Row)`
 
 export const PriceText = styled.h3``;
 
-export const StatusText = styled.h3`
+export const StatusText = styled.h5`
   color: ${(props) => (props.open ? '#7cb342' : '#e53935')};
 `;
 
-export const ColWrapper = styled(Col)``;
+export const RowItem = styled(Row)`
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+`;
+
+export const StrongText = styled.h6`
+  font-family: 'Raleway', sans-serif;
+`;
+
+export const TextNormal = styled.strong`
+  font-family: Arial;
+`;
+
+export const DivTextWrapper = styled.div`
+  margin-top: 15px;
+`;

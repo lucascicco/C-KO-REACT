@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 export const RowGeral = styled(Row)`
   display: flex;
   justify-content: center;
-  margin-top: 35px;
+  margin-top: 15px;
 `;
 
 export const ColWrapper = styled(Col)``;
@@ -17,7 +17,6 @@ export const ColTitle = styled(Col)`
 export const ColOne = styled(Col)`
   @media (max-width: 767.98px) {
     margin-bottom: 10px;
-    height: 100%;
   }
 
   max-height: 160px;

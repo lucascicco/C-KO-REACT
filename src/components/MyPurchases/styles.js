@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 export const RowGeral = styled(Row)`
   display: flex;
   justify-content: center;
-  margin-top: 35px;
+  margin-top: 15px;
 `;
 
 export const ColWrapper = styled(Col)``;
@@ -28,7 +28,8 @@ export const ColThree = styled(Col)`
   @media (max-width: 767.98px) {
     margin-top: 15px;
   }
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ColFour = styled(Col)`
@@ -143,5 +144,18 @@ export const TextNormal = styled.strong`
 `;
 
 export const DivTextWrapper = styled.div`
-  margin-top: 15px;
+  margin-top: 10px;
+`;
+
+export const AddressDiv = styled.div`
+  flex: 1;
+`;
+
+export const AddressText = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  font-weight: bold;
 `;

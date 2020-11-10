@@ -8,7 +8,7 @@ export default function MySellsList({ data }) {
     <RowGeral>
       <ColWrapper xl="7">
         {data.map((item) => {
-          return <Item sell={item} />;
+          return <Item item={item} key={item.id.toString()} />;
         })}
       </ColWrapper>
     </RowGeral>

@@ -10,6 +10,7 @@ export default function MyCartList({ products, onDeleteProduct, navigate }) {
         {products.map((product) => {
           return (
             <Item
+              key={product.id.toString()}
               product={product}
               onDeleteProduct={onDeleteProduct}
               navigate={navigate}

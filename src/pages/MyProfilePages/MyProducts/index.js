@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import api from '~/services/api';
 import MyProductList from '~/components/MyProducts';
+import { Title } from './styles';
 
 export default function MyProducts() {
   const [myProducts, SetMyProducts] = useState([]);
@@ -19,7 +20,9 @@ export default function MyProducts() {
   const loadMyProducts = async () => {
     const response = await api.get('myProducts');
 
-    SetMyProducts(response.data.sort(sortItems));
+    const sortPerStatus = response.data.sort(sortItems);
+
+    SetMyProducts(sortPerStatus);
   };
 
   useEffect(() => {
@@ -28,6 +31,7 @@ export default function MyProducts() {
 
   return (
     <Container>
+      <Title>Meus produtos</Title>
       <MyProductList data={myProducts} />
     </Container>
   );

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import api from '~/services/api';
+import history from '~/services/history';
+import SellsList from '~/components/MySells';
+import { Title } from './styles';
 
 export default function MySells() {
   const [mySells, SetMySells] = useState([]);
@@ -19,5 +22,10 @@ export default function MySells() {
     loadMySells();
   }, []);
 
-  return <Container>x</Container>;
+  return (
+    <Container>
+      <Title>Minhas vendas</Title>
+      <SellsList data={mySells} />
+    </Container>
+  );
 }

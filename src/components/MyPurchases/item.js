@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import {
   RowItem,
   ColOne,
@@ -15,15 +16,15 @@ import {
   ButtonContactText,
   StrongText,
   TextNormal,
-  StatusText,
+  AddressDiv,
+  AddressText,
   ColThree,
   DivTextWrapper,
   ColFour,
 } from './styles';
-import TranslateStatus from '~/utils/translateStatus';
 import ConvertMoney from '~/utils/ConvertMoney';
 
-export default function PurchaseItem({ item }) {
+export default function PurchaseItem({ item, navigate }) {
   const { purchase_product, location, user_seller } = item;
 
   return (
@@ -38,10 +39,8 @@ export default function PurchaseItem({ item }) {
 
       <ColTwo md="4">
         <DivOne>
-          <StrongText>
-            Preço total:{' '}
-            <TextNormal>{ConvertMoney(item.total_price)}</TextNormal>
-          </StrongText>
+          <StrongText>Preço total</StrongText>
+          <TextNormal>{ConvertMoney(item.total_price)}</TextNormal>
 
           <DivTextWrapper>
             <StrongText>Data da compra</StrongText>
@@ -60,30 +59,29 @@ export default function PurchaseItem({ item }) {
       </ColTwo>
 
       <ColThree md="5">
-        <StrongText>Endereço para entrega</StrongText>
+        <AddressDiv>
+          <StrongText>Endereço para entrega</StrongText>
 
-        <TextNormal>
-          {location.postcode}. {location.state}, {location.city}
-        </TextNormal>
+          <AddressText>
+            {location.state}, {location.city}. {location.postcode} <br />
+            {location.street}, {location.street_number} -{' '}
+            {location.neighborhood}
+          </AddressText>
+        </AddressDiv>
 
+        <StrongText>Data estimada para entrega</StrongText>
         <TextNormal>
-          {location.street}, {location.street_number}. {location.neighborhood}
+          {format(new Date(item.deliver_date), 'dd/MM/yyyy')}
         </TextNormal>
-
-        <TextNormal>
-          {location.street}, {location.street_number}. {location.neighborhood}
-        </TextNormal>
-        <DivTextWrapper>
-          <StrongText>Data estimada para entrega</StrongText>
-          <TextNormal>
-            {format(new Date(item.deliver_date), 'dd/MM/yyyy')}
-          </TextNormal>
-        </DivTextWrapper>
       </ColThree>
 
       <ColFour md="12">
         <DivTwo>
-          <Button>
+          <Button
+            onClick={() => {
+              navigate(purchase_product.id);
+            }}
+          >
             <ButtonText>Comprar novamente</ButtonText>
           </Button>
 
@@ -95,3 +93,48 @@ export default function PurchaseItem({ item }) {
     </RowItem>
   );
 }
+
+PurchaseItem.propTypes = {
+  item: PropTypes.shape({
+    buyer: PropTypes.number,
+    canceled_at: PropTypes.oneOfType([
+      PropTypes.oneOf([null]),
+      PropTypes.string,
+    ]),
+    createdAt: PropTypes.string,
+    frete_price: PropTypes.number,
+    deliver_date: PropTypes.string,
+    id: PropTypes.number,
+    location: PropTypes.shape({
+      city: PropTypes.string,
+      country: PropTypes.string,
+      neighborhood: PropTypes.string,
+      postcode: PropTypes.string,
+      state: PropTypes.string,
+      street: PropTypes.string,
+      street_number: PropTypes.string,
+    }),
+    payment_form: PropTypes.string,
+    product: PropTypes.number,
+    purchase_code: PropTypes.string,
+    purchase_location: PropTypes.number,
+    purchase_product: PropTypes.shape({
+      id: PropTypes.number,
+      category: PropTypes.number,
+      path: PropTypes.string,
+      price: PropTypes.number,
+      product_name: PropTypes.string,
+      url: PropTypes.string,
+    }),
+    purchase_quantity: PropTypes.number,
+    seller: PropTypes.number,
+    total_price: PropTypes.number,
+    updatedAt: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
+    user_seller: PropTypes.shape({
+      personal_info: PropTypes.number,
+      name: PropTypes.string,
+      email: PropTypes.string,
+    }),
+  }).isRequired,
+  navigate: PropTypes.func.isRequired,
+};

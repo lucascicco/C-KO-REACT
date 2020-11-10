@@ -87,8 +87,6 @@ const NavBarStandard = () => {
                   if (history.location.pathname !== '/homepage') {
                     history.push('/homepage');
                     history.go();
-                  } else {
-                    history.go(0);
                   }
                 }}
               >

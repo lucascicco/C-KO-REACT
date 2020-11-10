@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import Item from './item';
 import { RowGeral, ColWrapper } from './styles';
 
-export default function MyPurchases({ data }) {
+export default function MyPurchases({ data, navigate }) {
   return (
     <RowGeral>
       <ColWrapper xl="7">
         {data.map((item) => {
-          return <Item item={item} />;
+          return (
+            <Item item={item} key={item.id.toString()} navigate={navigate} />
+          );
         })}
       </ColWrapper>
     </RowGeral>
@@ -63,4 +65,5 @@ MyPurchases.propTypes = {
       }),
     })
   ).isRequired,
+  navigate: PropTypes.func.isRequired,
 };

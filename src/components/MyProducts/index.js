@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Item from './item';
 import { RowGeral, ColWrapper } from './styles';
 
-export default function MyProducts({ data, goNextClick }) {
+export default function MyProducts({ data, goNextClick, goEditProduct }) {
   return (
     <RowGeral>
       <ColWrapper xl="7">
@@ -14,6 +14,7 @@ export default function MyProducts({ data, goNextClick }) {
               product={item.product}
               soldQuantity={item.quantity_sold}
               sellsDone={item.sellsdone}
+              goEditProduct={goEditProduct}
             />
           );
         })}
@@ -57,4 +58,5 @@ MyProducts.propTypes = {
     }).isRequired
   ).isRequired,
   goNextClick: PropTypes.func.isRequired,
+  goEditProduct: PropTypes.func.isRequired,
 };

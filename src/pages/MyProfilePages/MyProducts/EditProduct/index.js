@@ -1,31 +1,45 @@
-import React,  { useState } from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 import {
   Input,
   Button,
-  RowWrapper,
+  RowGeral,
   ColWrapper,
   FormInput,
-  Title,
-  Description
+  Description,
 } from './styles';
-
 import {
   onChange_onlyNumber,
   onChange_onlyTextandNumber,
 } from '~/utils/RestrictInputs';
-
+import { ObjectProduct } from '~/utils/EmptyObjectVerifier';
 import { formatarMoeda, currencyDecimalST } from '~/utils/masks';
 
-
-export default EditProduct({ }){
+export default function EditProduct({ handleSubmit }) {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState('');
 
-  return(
+  const PressedSubmit = (data) => {
+    if (ObjectProduct(data)) {
+      return toast.error('Verifique se algum campo foi preenchido errado.');
+    }
+
+    data.price = currencyDecimalST(price);
+    data.quantity = Number(data.quantity);
+
+    return handleSubmit({
+      price,
+      description,
+      quantity,
+    });
+  };
+
+  return (
     <RowGeral>
       <ColWrapper>
-        <FormInput>
+        <FormInput autoComplete="off" onSubmit={PressedSubmit}>
           <Input
             name="price"
             type="text"
@@ -33,7 +47,7 @@ export default EditProduct({ }){
             maxLength="10"
             value={price === 'NaN' ? 0 : price}
             onChange={(e) => setPrice(formatarMoeda(e.target.value))}
-           />
+          />
           <Input
             name="quantity"
             type="text"
@@ -59,5 +73,9 @@ export default EditProduct({ }){
         </FormInput>
       </ColWrapper>
     </RowGeral>
-  )
+  );
 }
+
+EditProduct.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};

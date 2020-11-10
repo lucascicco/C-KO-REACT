@@ -24,6 +24,7 @@ export default function ProductItem({
   sellsDone,
   soldQuantity,
   goNextClick,
+  goEditProduct,
 }) {
   return (
     <RowItem>
@@ -62,7 +63,11 @@ export default function ProductItem({
             <ButtonText>Ver vendas</ButtonText>
           </Button>
 
-          <ButtonEdit>
+          <ButtonEdit
+            onClick={() => {
+              goEditProduct(product.id);
+            }}
+          >
             <ButtonEditText>Editar produto</ButtonEditText>
           </ButtonEdit>
         </DivTwo>

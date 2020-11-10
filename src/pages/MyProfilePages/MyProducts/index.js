@@ -7,6 +7,8 @@ import MyProductList from '~/components/MyProducts';
 import { Title, DisplayFlex, ButtonBack } from './styles';
 import SellsMyItem from './SellsByProduct';
 import ModalPS from '~/components/ModalPS';
+import TitleChoice from '~/utils/TitleProduct';
+import EditPage from './EditProduct';
 
 export default function MyProducts() {
   const [page, setPage] = useState('first');
@@ -15,6 +17,7 @@ export default function MyProducts() {
   const [visible, setVisible] = useState(false);
   const [modalData, setModalData] = useState('');
   const [text, setText] = useState('Enviar mensagem');
+  const [productId, setProductId] = useState('');
 
   const sortItems = (a, b) => {
     if (a.product.status_id > b.product.status_id) {
@@ -85,6 +88,26 @@ export default function MyProducts() {
     setVisible(true);
   };
 
+  const handleSubmit = async ({ quantity, description, price }) => {
+    try {
+      await api.put('product', {
+        product_id: productId,
+        quantity,
+        description,
+        price,
+      });
+
+      setPage('first');
+    } catch (e) {
+      toast.error('Verique se os campos foram preenchidos corretamente.');
+    }
+  };
+
+  const GoThird = (id) => {
+    setProductId(id);
+    setPage('third');
+  };
+
   useEffect(() => {
     loadMyProducts();
   }, []);
@@ -100,28 +123,22 @@ export default function MyProducts() {
           </ButtonBack>
         )}
 
-        <Title>{page === 'first' ? 'Meus produtos' : 'Vendas feitas'}</Title>
+        <Title>{TitleChoice(page)}</Title>
       </DisplayFlex>
 
       {page === 'first' && (
         <MyProductList
           data={myProducts}
           goNextClick={goNextClick}
-          goEditProduct={() => {
-            setPage('third');
-          }}
+          goEditProduct={GoThird}
         />
       )}
       {page === 'second' && (
-        <SellsMyItem
-          data={dataSells}
-          goBackButton={goBackButton}
-          openModal={OpenModal}
-        />
+        <SellsMyItem data={dataSells} openModal={OpenModal} />
       )}
 
       {page === 'third' && (
-        <SellsMyItem data={dataSells} goBackButton={goBackButton} />
+        <EditPage data={dataSells} handleSubmit={handleSubmit} />
       )}
 
       {visible && (

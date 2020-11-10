@@ -104,6 +104,7 @@ export default function ProductData({ animationOne, HandleForm }) {
                   onChange_onlyTextandNumber(e.target.value, setDescription);
                 }}
               />
+
               <Button type="submit">Próximo</Button>
             </Form>
           </ColWrapper>

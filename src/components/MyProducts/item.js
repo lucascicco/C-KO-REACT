@@ -19,7 +19,12 @@ import {
 } from './styles';
 import TranslateStatus from '~/utils/translateStatus';
 
-export default function ProductItem({ product, sellsDone, soldQuantity }) {
+export default function ProductItem({
+  product,
+  sellsDone,
+  soldQuantity,
+  goNextClick,
+}) {
   return (
     <RowItem>
       <ColTitle md="12">
@@ -49,7 +54,11 @@ export default function ProductItem({ product, sellsDone, soldQuantity }) {
         </DivOne>
 
         <DivTwo>
-          <Button>
+          <Button
+            onClick={() => {
+              goNextClick(product.id);
+            }}
+          >
             <ButtonText>Ver vendas</ButtonText>
           </Button>
 
@@ -64,6 +73,7 @@ export default function ProductItem({ product, sellsDone, soldQuantity }) {
 
 ProductItem.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     product_name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
@@ -71,4 +81,5 @@ ProductItem.propTypes = {
   }).isRequired,
   sellsDone: PropTypes.number.isRequired,
   soldQuantity: PropTypes.number.isRequired,
+  goNextClick: PropTypes.func.isRequired,
 };

@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import Item from './item';
 import { RowGeral, ColWrapper } from './styles';
 
-export default function MyProducts({ data }) {
+export default function MyProducts({ data, goNextClick }) {
   return (
     <RowGeral>
       <ColWrapper xl="7">
         {data.map((item) => {
           return (
             <Item
+              goNextClick={goNextClick}
               product={item.product}
               soldQuantity={item.quantity_sold}
               sellsDone={item.sellsdone}
@@ -55,4 +56,5 @@ MyProducts.propTypes = {
       sellsdone: PropTypes.number,
     }).isRequired
   ).isRequired,
+  goNextClick: PropTypes.func.isRequired,
 };

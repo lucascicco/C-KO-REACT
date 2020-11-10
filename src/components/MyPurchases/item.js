@@ -21,6 +21,7 @@ import {
   ColThree,
   DivTextWrapper,
   ColFour,
+  ItalicText,
 } from './styles';
 import ConvertMoney from '~/utils/ConvertMoney';
 
@@ -31,6 +32,7 @@ export default function PurchaseItem({ item, navigate, openModal }) {
     <RowItem>
       <ColTitle md="12">
         <Title>{purchase_product.product_name}</Title>
+        <ItalicText>{item.purchase_code}</ItalicText>
       </ColTitle>
 
       <ColOne md="3">

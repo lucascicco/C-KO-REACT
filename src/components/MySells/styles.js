@@ -159,3 +159,8 @@ export const AddressText = styled.p`
   -webkit-box-orient: vertical;
   font-weight: bold;
 `;
+
+export const ItalicText = styled.h6`
+  font-style: italic;
+  color: black;
+`;

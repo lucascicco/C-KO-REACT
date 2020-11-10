@@ -10,8 +10,6 @@ import {
   DivTwo,
   ImageItem,
   Title,
-  Button,
-  ButtonText,
   ButtonContact,
   ButtonContactText,
   StrongText,
@@ -24,7 +22,7 @@ import {
 } from './styles';
 import ConvertMoney from '~/utils/ConvertMoney';
 
-export default function SellItem({ item }) {
+export default function SellItem({ item, openModal }) {
   const { purchase_product, location, user_buyer } = item;
 
   return (
@@ -77,7 +75,14 @@ export default function SellItem({ item }) {
 
       <ColFour md="12">
         <DivTwo>
-          <ButtonContact>
+          <ButtonContact
+            onClick={() => {
+              openModal({
+                person: user_buyer,
+                code: item.purchase_code,
+              });
+            }}
+          >
             <ButtonContactText>Contato do comprador</ButtonContactText>
           </ButtonContact>
         </DivTwo>
@@ -128,4 +133,5 @@ SellItem.propTypes = {
       email: PropTypes.string,
     }),
   }).isRequired,
+  openModal: PropTypes.func.isRequired,
 };

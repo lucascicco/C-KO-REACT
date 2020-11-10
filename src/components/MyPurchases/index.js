@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 import Item from './item';
 import { RowGeral, ColWrapper } from './styles';
 
-export default function MyPurchases({
-  data,
-  navigate,
-  visible,
-  openModal,
-  closeModal,
-}) {
+export default function MyPurchases({ data, navigate, openModal }) {
   return (
     <RowGeral>
       <ColWrapper xl="7">
@@ -19,8 +13,6 @@ export default function MyPurchases({
               item={item}
               key={item.id.toString()}
               navigate={navigate}
-              closeModal={closeModal}
-              visible={visible}
               openModal={openModal}
             />
           );
@@ -79,4 +71,5 @@ MyPurchases.propTypes = {
     })
   ).isRequired,
   navigate: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
 };

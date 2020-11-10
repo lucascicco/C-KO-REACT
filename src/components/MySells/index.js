@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import Item from './item';
 import { RowGeral, ColWrapper } from './styles';
 
-export default function MySellsList({ data }) {
+export default function MySellsList({ data, openModal }) {
   return (
     <RowGeral>
       <ColWrapper xl="7">
         {data.map((item) => {
-          return <Item item={item} key={item.id.toString()} />;
+          return (
+            <Item item={item} key={item.id.toString()} openModal={openModal} />
+          );
         })}
       </ColWrapper>
     </RowGeral>
@@ -63,4 +65,5 @@ MySellsList.propTypes = {
       }),
     })
   ).isRequired,
+  openModal: PropTypes.func.isRequired,
 };

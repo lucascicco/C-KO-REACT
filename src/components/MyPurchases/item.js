@@ -23,15 +23,8 @@ import {
   ColFour,
 } from './styles';
 import ConvertMoney from '~/utils/ConvertMoney';
-import ModalPS from '../ModalPS';
 
-export default function PurchaseItem({
-  item,
-  navigate,
-  visible,
-  openModal,
-  closeModal,
-}) {
+export default function PurchaseItem({ item, navigate, openModal }) {
   const { purchase_product, location, user_seller } = item;
 
   return (
@@ -92,19 +85,18 @@ export default function PurchaseItem({
             <ButtonText>Comprar novamente</ButtonText>
           </Button>
 
-          <ButtonContact onClick={openModal}>
+          <ButtonContact
+            onClick={() => {
+              openModal({
+                person: user_seller,
+                code: item.purchase_code,
+              });
+            }}
+          >
             <ButtonContactText>Contato do vendedor</ButtonContactText>
           </ButtonContact>
         </DivTwo>
       </ColFour>
-
-      <ModalPS
-        person={user_seller}
-        visible={visible}
-        purchaseCode={item.purchase_code}
-        closeModal={closeModal}
-        sell
-      />
     </RowItem>
   );
 }
@@ -152,4 +144,5 @@ PurchaseItem.propTypes = {
     }),
   }).isRequired,
   navigate: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
 };

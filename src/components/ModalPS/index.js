@@ -1,80 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 import { Modal, Col, Row } from 'react-bootstrap';
-import api from '~/services/api';
 
-import { SellerText, TextInfo, TextNormal, Button, EmailBox } from './styles';
+import { TextInfo, TextNormal, Button, EmailBox } from './styles';
 
 export default function ModalContact({
   sell,
-  purchaseCode,
   visible,
   closeModal,
   person,
+  text,
+  sendFunction,
 }) {
   const [message, setMessage] = useState('');
-  const [text, setText] = useState('Enviar mensagem');
-
-  const sendMessagetoSeller = async () => {
-    try {
-      if (message.length < 20) {
-        toast.error(
-          'Precisamos de uma mensagem maior para envia-la ao vendedor.'
-        );
-      } else {
-        setText('Enviando mensagem...');
-
-        await api.post('sendingEmailSeller', {
-          name: person.name,
-          email: person.email,
-          purchaseCode,
-          message,
-        });
-
-        setText('Mensagem enviada');
-
-        setTimeout(() => {
-          closeModal();
-        }, 1500);
-      }
-    } catch (e) {
-      setText('Falha ao enviar');
-    }
-  };
-
-  const sendMessagetoBuyer = async () => {
-    try {
-      if (message.length < 20) {
-        toast.error(
-          'Mensagem curta',
-          'Precisamos de uma mensagem maior para envia-la ao comprador.'
-        );
-      } else {
-        setText('Enviando mensagem...');
-
-        await api.post('sendingEmailBuyer', {
-          name: person.name,
-          email: person.email,
-          purchaseCode,
-          message,
-        });
-
-        setText('Mensagem enviada');
-
-        setTimeout(() => {
-          closeModal();
-        }, 1500);
-      }
-    } catch (e) {
-      setText('Falha ao enviar');
-    }
-  };
 
   const ButtonPress = () => {
     if (text === 'Enviar mensagem') {
-      return sell ? sendMessagetoSeller() : sendMessagetoBuyer();
+      return sendFunction(message);
     }
+
     return null;
   };
 
@@ -120,7 +64,7 @@ export default function ModalContact({
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={ButtonPress}>Enviar email</Button>
+          <Button onClick={ButtonPress}>{text}</Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -134,9 +78,11 @@ ModalContact.propTypes = {
     email: PropTypes.string,
     cellphone: PropTypes.string,
   }).isRequired,
-  purchaseCode: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
+
+  sendFunction: PropTypes.func.isRequired,
 };
 
 ModalContact.defaultProps = {

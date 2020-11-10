@@ -3,13 +3,26 @@ import PropTypes from 'prop-types';
 import Item from './item';
 import { RowGeral, ColWrapper } from './styles';
 
-export default function MyPurchases({ data, navigate }) {
+export default function MyPurchases({
+  data,
+  navigate,
+  visible,
+  openModal,
+  closeModal,
+}) {
   return (
     <RowGeral>
       <ColWrapper xl="7">
         {data.map((item) => {
           return (
-            <Item item={item} key={item.id.toString()} navigate={navigate} />
+            <Item
+              item={item}
+              key={item.id.toString()}
+              navigate={navigate}
+              closeModal={closeModal}
+              visible={visible}
+              openModal={openModal}
+            />
           );
         })}
       </ColWrapper>

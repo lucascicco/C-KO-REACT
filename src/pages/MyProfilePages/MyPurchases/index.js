@@ -7,6 +7,7 @@ import { Title } from './styles';
 
 export default function MyPurchases() {
   const [myPurchases, setMyPurchases] = useState([]);
+  const [visible, setVisible] = useState(false);
 
   const loadMySells = async () => {
     const response = await api.get('myPurchases');
@@ -30,7 +31,17 @@ export default function MyPurchases() {
   return (
     <Container>
       <Title>Minhas compras</Title>
-      <PurchaseList data={myPurchases} navigate={navigate} />
+      <PurchaseList
+        data={myPurchases}
+        navigate={navigate}
+        visible={visible}
+        closeModal={() => {
+          setVisible(false);
+        }}
+        openModal={() => {
+          setVisible(true);
+        }}
+      />
     </Container>
   );
 }

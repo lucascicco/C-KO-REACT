@@ -8,6 +8,7 @@ import {
   ColWrapper,
   FormInput,
   Description,
+  PauseButton,
 } from './styles';
 import {
   onChange_onlyNumber,
@@ -16,7 +17,7 @@ import {
 import { ObjectProduct } from '~/utils/EmptyObjectVerifier';
 import { formatarMoeda, currencyDecimalST } from '~/utils/masks';
 
-export default function EditProduct({ handleSubmit, latestInfo }) {
+export default function EditProduct({ handleSubmit, latestInfo, openModal }) {
   const [price, setPrice] = useState(formatarMoeda(latestInfo.price));
   const [description, setDescription] = useState(latestInfo.description);
   const [quantity, setQuantity] = useState(latestInfo.quantity);
@@ -67,6 +68,11 @@ export default function EditProduct({ handleSubmit, latestInfo }) {
           />
 
           <Button type="submit">Editar</Button>
+          <PauseButton type="button" onClick={openModal}>
+            {latestInfo.status === 'open'
+              ? 'Pausar anúncio'
+              : 'Acompanhar processo'}
+          </PauseButton>
         </FormInput>
       </ColWrapper>
     </RowGeral>
@@ -80,5 +86,7 @@ EditProduct.propTypes = {
     price: PropTypes.number,
     description: PropTypes.func,
     quantity: PropTypes.number,
+    status: PropTypes.string,
   }).isRequired,
+  openModal: PropTypes.func.isRequired,
 };

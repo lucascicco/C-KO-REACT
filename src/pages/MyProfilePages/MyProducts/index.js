@@ -9,6 +9,7 @@ import SellsMyItem from './SellsByProduct';
 import ModalPS from '~/components/ModalPS';
 import TitleChoice from '~/utils/TitleProduct';
 import EditPage from './EditProduct';
+import ModalPause from '~/components/ModalPause';
 
 export default function MyProducts() {
   const [page, setPage] = useState('first');
@@ -17,7 +18,8 @@ export default function MyProducts() {
   const [visible, setVisible] = useState(false);
   const [modalData, setModalData] = useState('');
   const [text, setText] = useState('Enviar mensagem');
-  const [latestInfo, setLastest] = useState('');
+  const [latestInfo, setLastest] = useState([]);
+  const [visibleTwo, setVisibleTwo] = useState(false);
 
   const sortItems = (a, b) => {
     if (a.product.status_id > b.product.status_id) {
@@ -54,6 +56,8 @@ export default function MyProducts() {
 
   const goBackButton = () => {
     setPage('first');
+    setDataSells([]);
+    setLastest([]);
   };
 
   const sendMessagetoBuyer = async (message) => {
@@ -118,6 +122,39 @@ export default function MyProducts() {
     setPage('third');
   };
 
+  const PauseProduct = async () => {
+    await api.put('changestatus', {
+      product_id: latestInfo.product.id,
+      status: 'closed',
+    });
+
+    setVisibleTwo(false);
+    window.location.reload();
+  };
+
+  const RemovePause = async () => {
+    const status = latestInfo.product.quantity === 0 ? 'soldout' : 'open';
+
+    await api.put('changestatus', {
+      product_id: latestInfo.product.id,
+      status,
+      paused_at: null,
+    });
+
+    setVisibleTwo(false);
+    window.location.reload();
+  };
+
+  const DeleteItem = async () => {
+    await api.put('changestatus', {
+      product_id: latestInfo.product.id,
+      status: 'deleted',
+    });
+
+    setVisibleTwo(false);
+    window.location.reload();
+  };
+
   useEffect(() => {
     loadMyProducts();
   }, []);
@@ -149,9 +186,11 @@ export default function MyProducts() {
 
       {page === 'third' && (
         <EditPage
-          data={dataSells}
           handleSubmit={handleSubmit}
           latestInfo={latestInfo.product}
+          openModal={() => {
+            setVisibleTwo(true);
+          }}
         />
       )}
 
@@ -165,6 +204,19 @@ export default function MyProducts() {
           }}
           text={text}
           sendFunction={sendMessagetoBuyer}
+        />
+      )}
+
+      {visibleTwo && (
+        <ModalPause
+          visible={visibleTwo}
+          closeModal={() => {
+            setVisibleTwo(false);
+          }}
+          product={latestInfo.product}
+          pauseFunction={PauseProduct}
+          unPauseFunction={RemovePause}
+          deleteFunction={DeleteItem}
         />
       )}
     </Container>

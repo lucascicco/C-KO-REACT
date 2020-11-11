@@ -72,3 +72,22 @@ export const Description = styled(Textarea)`
     color: rgba(255, 255, 255, 0.7);
   }
 `;
+
+export const PauseButton = styled.button`
+  margin-top: 15px;
+  height: 44px;
+  background: #e53935;
+  font-weight: bold;
+  color: #fff;
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  font-size: 20px;
+  transition: background 0.2s;
+  outline: none !important;
+  box-shadow: none !important;
+
+  &:hover {
+    background: ${lighten(0.03, '#f44336')};
+  }
+`;

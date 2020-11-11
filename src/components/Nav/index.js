@@ -131,7 +131,7 @@ const NavBarStandard = () => {
               <DivProfile>
                 <DivImageProfile
                   src={
-                    profile.avatar ||
+                    profile.avatar.url ||
                     'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png'
                   }
                   className="d-none d-xl-block"

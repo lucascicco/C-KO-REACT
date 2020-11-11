@@ -27,7 +27,7 @@ export default function MyAccount() {
   const dispatch = useDispatch();
   const myAccount = useSelector((state) => state.user.profile.user);
 
-  const [image, setImage] = useState(myAccount.avatar);
+  const [image, setImage] = useState(myAccount.avatar.url);
   const [preview, setPreview] = useState('');
 
   const [name, setName] = useState(myAccount.name);
@@ -54,7 +54,7 @@ export default function MyAccount() {
     });
 
     setImage(response.data.url);
-    dispatch(addAvatarPicture(response.data.url));
+    dispatch(addAvatarPicture(response.data));
   };
 
   const handleSubmit = (AccountInfo) => {

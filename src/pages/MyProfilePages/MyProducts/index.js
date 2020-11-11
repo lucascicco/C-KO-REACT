@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { BiArrowBack } from 'react-icons/bi';
 import { toast } from 'react-toastify';
+import { isSameDay } from 'date-fns';
 import api from '~/services/api';
 import MyProductList from '~/components/MyProducts';
 import { Title, DisplayFlex, ButtonBack } from './styles';
@@ -20,6 +21,8 @@ export default function MyProducts() {
   const [text, setText] = useState('Enviar mensagem');
   const [latestInfo, setLastest] = useState([]);
   const [visibleTwo, setVisibleTwo] = useState(false);
+  const [visibleSells, setVisibleSells] = useState([]);
+  const [filterDate, setFilterDate] = useState('');
 
   const sortItems = (a, b) => {
     if (a.product.status_id > b.product.status_id) {
@@ -51,6 +54,7 @@ export default function MyProducts() {
     });
 
     setDataSells(organizedData);
+    setVisibleSells(organizedData);
     setPage(organizedData.length > 0 ? 'second' : 'first');
   };
 
@@ -166,6 +170,25 @@ export default function MyProducts() {
     setVisibleTwo(true);
   };
 
+  const onFilterChange = (data) => {
+    setFilterDate(data);
+
+    if (data === null) {
+      return setVisibleSells(dataSells);
+    }
+
+    const FilterByDate = dataSells.filter((e) => {
+      return isSameDay(new Date(e.createdAt), data);
+    });
+
+    return setVisibleSells(FilterByDate);
+  };
+
+  const RemoveFilter = () => {
+    setFilterDate('');
+    setVisibleSells(dataSells);
+  };
+
   useEffect(() => {
     loadMyProducts();
   }, []);
@@ -193,7 +216,13 @@ export default function MyProducts() {
         />
       )}
       {page === 'second' && (
-        <SellsMyItem data={dataSells} openModal={OpenModal} />
+        <SellsMyItem
+          data={visibleSells}
+          openModal={OpenModal}
+          onFilterChange={onFilterChange}
+          RemoveFilter={RemoveFilter}
+          filterDate={filterDate}
+        />
       )}
 
       {page === 'third' && (

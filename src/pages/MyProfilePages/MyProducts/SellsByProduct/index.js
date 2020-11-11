@@ -2,11 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Motion, spring } from 'react-motion';
 import Item from './item';
-import { RowGeral, ColWrapper } from './styles';
+import { RowGeral, ColWrapper, RemoveText, DivFilter } from './styles';
+import ReactDatePicker from '~/components/DataFilter';
 
-export default function MySellsList({ data, openModal }) {
+export default function MySellsList({
+  data,
+  openModal,
+  onFilterChange,
+  RemoveFilter,
+  filterDate,
+}) {
   return (
     <RowGeral>
+      <DivFilter>
+        <ReactDatePicker
+          name="date"
+          placeholderText="Filtrar por data"
+          onChange={(e) => onFilterChange(e)}
+          value={filterDate}
+        />
+        {filterDate && (
+          <RemoveText onClick={RemoveFilter}>Remover filtro</RemoveText>
+        )}
+      </DivFilter>
+
       <Motion
         defaultStyle={{
           x: window.innerHeight - (window.innerHeight / 100) * 20,
@@ -80,4 +99,7 @@ MySellsList.propTypes = {
     })
   ).isRequired,
   openModal: PropTypes.func.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+  RemoveFilter: PropTypes.func.isRequired,
+  filterDate: PropTypes.string.isRequired,
 };

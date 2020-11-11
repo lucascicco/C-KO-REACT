@@ -42,7 +42,9 @@ export default function PurchaseItem({ item, navigate, openModal }) {
       <ColTwo md="4">
         <DivOne>
           <StrongText>Preço total</StrongText>
-          <TextNormal>{ConvertMoney(item.total_price)}</TextNormal>
+          <TextNormal>
+            {ConvertMoney(item.total_price)} x {item.purchase_quantity}
+          </TextNormal>
 
           <DivTextWrapper>
             <StrongText>Data da compra</StrongText>

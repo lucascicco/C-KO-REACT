@@ -164,3 +164,32 @@ export const ItalicText = styled.h6`
   font-style: italic;
   color: black;
 `;
+
+export const DivFilter = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30px;
+`;
+
+export const RemoveText = styled.button`
+  @media (max-width: 767.98px) {
+    width: 10%;
+  }
+
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  border: none;
+  font-size: 15px;
+  width: 10%;
+  text-align: start;
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+
+  background: none;
+
+  transition: background 0.2s;
+  outline: none !important;
+  box-shadow: none !important;
+`;

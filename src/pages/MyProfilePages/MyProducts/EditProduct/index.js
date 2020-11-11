@@ -16,29 +16,26 @@ import {
 import { ObjectProduct } from '~/utils/EmptyObjectVerifier';
 import { formatarMoeda, currencyDecimalST } from '~/utils/masks';
 
-export default function EditProduct({ handleSubmit }) {
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState('');
+export default function EditProduct({ handleSubmit, latestInfo }) {
+  const [price, setPrice] = useState(formatarMoeda(latestInfo.price));
+  const [description, setDescription] = useState(latestInfo.description);
+  const [quantity, setQuantity] = useState(latestInfo.quantity);
 
   const PressedSubmit = (data) => {
     if (ObjectProduct(data)) {
       return toast.error('Verifique se algum campo foi preenchido errado.');
     }
 
+    data.id = latestInfo.id;
     data.price = currencyDecimalST(price);
     data.quantity = Number(data.quantity);
 
-    return handleSubmit({
-      price,
-      description,
-      quantity,
-    });
+    return handleSubmit(data);
   };
 
   return (
     <RowGeral>
-      <ColWrapper>
+      <ColWrapper xl="5" md="8" lg="6">
         <FormInput autoComplete="off" onSubmit={PressedSubmit}>
           <Input
             name="price"
@@ -78,4 +75,10 @@ export default function EditProduct({ handleSubmit }) {
 
 EditProduct.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  latestInfo: PropTypes.shape({
+    id: PropTypes.number,
+    price: PropTypes.number,
+    description: PropTypes.func,
+    quantity: PropTypes.number,
+  }).isRequired,
 };

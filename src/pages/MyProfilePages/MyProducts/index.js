@@ -17,7 +17,7 @@ export default function MyProducts() {
   const [visible, setVisible] = useState(false);
   const [modalData, setModalData] = useState('');
   const [text, setText] = useState('Enviar mensagem');
-  const [productId, setProductId] = useState('');
+  const [latestInfo, setLastest] = useState('');
 
   const sortItems = (a, b) => {
     if (a.product.status_id > b.product.status_id) {
@@ -88,23 +88,33 @@ export default function MyProducts() {
     setVisible(true);
   };
 
-  const handleSubmit = async ({ quantity, description, price }) => {
+  const handleSubmit = async ({ id, quantity, description, price }) => {
     try {
       await api.put('product', {
-        product_id: productId,
+        product_id: id,
         quantity,
         description,
         price,
       });
 
-      setPage('first');
+      toast.success('Atualizado com sucesso');
+
+      setTimeout(() => {
+        setPage('first');
+      }, 1000);
     } catch (e) {
-      toast.error('Verique se os campos foram preenchidos corretamente.');
+      toast.error('Erro ao editar produto');
     }
   };
 
-  const GoThird = (id) => {
-    setProductId(id);
+  const GoThird = async (id) => {
+    const response = await api.get('product', {
+      params: {
+        product_id: id,
+      },
+    });
+
+    setLastest(response.data);
     setPage('third');
   };
 
@@ -138,7 +148,11 @@ export default function MyProducts() {
       )}
 
       {page === 'third' && (
-        <EditPage data={dataSells} handleSubmit={handleSubmit} />
+        <EditPage
+          data={dataSells}
+          handleSubmit={handleSubmit}
+          latestInfo={latestInfo.product}
+        />
       )}
 
       {visible && (

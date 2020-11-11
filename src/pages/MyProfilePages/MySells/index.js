@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { isSameDay } from 'date-fns';
 import api from '~/services/api';
 import SellsList from '~/components/MySells';
-import { Title, DivFilter, RemoveText } from './styles';
+import { Title, DivFilter, RemoveText, WarningText } from './styles';
 import ModalPS from '~/components/ModalPS';
 import ReactDatePicker from '~/components/DataFilter';
 
@@ -15,6 +15,7 @@ export default function MySells() {
   const [modalData, setModalData] = useState('');
   const [text, setText] = useState('Enviar mensagem');
   const [filterDate, setFilterDate] = useState('');
+  const [noSells, setNoSells] = useState(false);
 
   const loadMySells = async () => {
     const response = await api.get('mySells');
@@ -25,6 +26,7 @@ export default function MySells() {
 
     SetMySells(organizedData);
     setVisibleSells(organizedData);
+    setNoSells(!organizedData.length > 0);
   };
 
   const OpenModal = (obj) => {
@@ -86,31 +88,37 @@ export default function MySells() {
     <Container>
       <Title>Minhas vendas</Title>
 
-      <DivFilter>
-        <ReactDatePicker
-          name="date"
-          placeholderText="Filtrar por data"
-          onChange={(e) => onFilterChange(e)}
-          value={filterDate}
-        />
-        {filterDate && (
-          <RemoveText onClick={RemoveFilter}>Remover filtro</RemoveText>
-        )}
-      </DivFilter>
+      {mySells.length > 0 && (
+        <>
+          <DivFilter>
+            <ReactDatePicker
+              name="date"
+              placeholderText="Filtrar por data"
+              onChange={(e) => onFilterChange(e)}
+              value={filterDate}
+            />
+            {filterDate && (
+              <RemoveText onClick={RemoveFilter}>Remover filtro</RemoveText>
+            )}
+          </DivFilter>
 
-      <SellsList data={visibleSells} openModal={OpenModal} />
-      {visible && (
-        <ModalPS
-          person={modalData.person}
-          visible={visible}
-          purchaseCode={modalData.code}
-          closeModal={() => {
-            setVisible(false);
-          }}
-          text={text}
-          sendFunction={sendMessagetoBuyer}
-        />
+          <SellsList data={visibleSells} openModal={OpenModal} />
+          {visible && (
+            <ModalPS
+              person={modalData.person}
+              visible={visible}
+              purchaseCode={modalData.code}
+              closeModal={() => {
+                setVisible(false);
+              }}
+              text={text}
+              sendFunction={sendMessagetoBuyer}
+            />
+          )}
+        </>
       )}
+
+      {noSells && <WarningText>Você ainda não tem nenhuma venda</WarningText>}
     </Container>
   );
 }

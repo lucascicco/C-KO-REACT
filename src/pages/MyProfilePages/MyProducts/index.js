@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { isSameDay } from 'date-fns';
 import api from '~/services/api';
 import MyProductList from '~/components/MyProducts';
-import { Title, DisplayFlex, ButtonBack } from './styles';
+import { Title, DisplayFlex, ButtonBack, WarningText } from './styles';
 import SellsMyItem from './SellsByProduct';
 import ModalPS from '~/components/ModalPS';
 import TitleChoice from '~/utils/TitleProduct';
@@ -23,6 +23,7 @@ export default function MyProducts() {
   const [visibleTwo, setVisibleTwo] = useState(false);
   const [visibleSells, setVisibleSells] = useState([]);
   const [filterDate, setFilterDate] = useState('');
+  const [noProducts, setProducts] = useState(false);
 
   const sortItems = (a, b) => {
     if (a.product.status_id > b.product.status_id) {
@@ -40,6 +41,7 @@ export default function MyProducts() {
     const sortPerStatus = response.data.sort(sortItems);
 
     SetMyProducts(sortPerStatus);
+    setProducts(!sortPerStatus.length > 0);
   };
 
   const goNextClick = async (id) => {
@@ -206,59 +208,67 @@ export default function MyProducts() {
 
         <Title>{TitleChoice(page)}</Title>
       </DisplayFlex>
+      {myProducts.length > 0 && (
+        <>
+          {page === 'first' && (
+            <MyProductList
+              data={myProducts}
+              goNextClick={goNextClick}
+              goEditProduct={GoThird}
+              openProcess={openProcess}
+            />
+          )}
+          {page === 'second' && (
+            <SellsMyItem
+              data={visibleSells}
+              openModal={OpenModal}
+              onFilterChange={onFilterChange}
+              RemoveFilter={RemoveFilter}
+              filterDate={filterDate}
+            />
+          )}
 
-      {page === 'first' && (
-        <MyProductList
-          data={myProducts}
-          goNextClick={goNextClick}
-          goEditProduct={GoThird}
-          openProcess={openProcess}
-        />
-      )}
-      {page === 'second' && (
-        <SellsMyItem
-          data={visibleSells}
-          openModal={OpenModal}
-          onFilterChange={onFilterChange}
-          RemoveFilter={RemoveFilter}
-          filterDate={filterDate}
-        />
-      )}
+          {page === 'third' && (
+            <EditPage
+              handleSubmit={handleSubmit}
+              latestInfo={latestInfo.product}
+              openModal={() => {
+                setVisibleTwo(true);
+              }}
+            />
+          )}
 
-      {page === 'third' && (
-        <EditPage
-          handleSubmit={handleSubmit}
-          latestInfo={latestInfo.product}
-          openModal={() => {
-            setVisibleTwo(true);
-          }}
-        />
-      )}
+          {visible && (
+            <ModalPS
+              person={modalData.person}
+              visible={visible}
+              purchaseCode={modalData.code}
+              closeModal={() => {
+                setVisible(false);
+              }}
+              text={text}
+              sendFunction={sendMessagetoBuyer}
+            />
+          )}
 
-      {visible && (
-        <ModalPS
-          person={modalData.person}
-          visible={visible}
-          purchaseCode={modalData.code}
-          closeModal={() => {
-            setVisible(false);
-          }}
-          text={text}
-          sendFunction={sendMessagetoBuyer}
-        />
+          {visibleTwo && (
+            <ModalPause
+              visible={visibleTwo}
+              closeModal={() => {
+                setVisibleTwo(false);
+              }}
+              product={latestInfo.product}
+              pauseFunction={PauseProduct}
+              unPauseFunction={RemovePause}
+              deleteFunction={DeleteItem}
+            />
+          )}
+        </>
       )}
-
-      {visibleTwo && (
-        <ModalPause
-          visible={visibleTwo}
-          closeModal={() => {
-            setVisibleTwo(false);
-          }}
-          product={latestInfo.product}
-          pauseFunction={PauseProduct}
-          unPauseFunction={RemovePause}
-          deleteFunction={DeleteItem}
-        />
+      {noProducts && (
+        <WarningText>
+          Você não possui nenhum produto registrado em nosso sistema
+        </WarningText>
       )}
     </Container>
   );

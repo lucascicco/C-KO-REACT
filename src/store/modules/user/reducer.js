@@ -2,7 +2,12 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   profile: {
-    user: {},
+    user: {
+      avatar: {
+        url:
+          'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png',
+      },
+    },
     location: null,
     personal_data: null,
     myfavorites: [],

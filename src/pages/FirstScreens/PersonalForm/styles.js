@@ -114,6 +114,9 @@ export const Button = styled.button`
   font-size: 16px;
   transition: background 0.2s;
 
+  outline: none !important;
+  box-shadow: none !important;
+
   &:hover {
     background: ${lighten(0.03, '#3f51b5')};
   }
@@ -130,6 +133,9 @@ export const SkipButton = styled.button`
   border-radius: 4px;
   font-size: 16px;
   transition: background 0.2s;
+
+  outline: none !important;
+  box-shadow: none !important;
 
   &:hover {
     background: ${lighten(0.03, '#f44336')};

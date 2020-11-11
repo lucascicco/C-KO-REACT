@@ -40,6 +40,8 @@ const NavBarStandard = () => {
   const modal = useSelector((state) => state.products.category_modal);
   const filters = useSelector((state) => state.filters);
 
+  console.log(profile);
+
   const [category, setCategory] = useState(filters.filters.categorySelectedId);
   const [filter, setFilter] = useState('');
 
@@ -130,10 +132,7 @@ const NavBarStandard = () => {
               </Link>
               <DivProfile>
                 <DivImageProfile
-                  src={
-                    profile.avatar.url ||
-                    'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png'
-                  }
+                  src={profile.avatar.url}
                   className="d-none d-xl-block"
                 />
 

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 import PurchaseList from '~/components/MyPurchases';
 import history from '~/services/history';
-import { Title } from './styles';
+import { Title, WarningText } from './styles';
 import ModalPS from '~/components/ModalPS';
 
 export default function MyPurchases() {
@@ -12,6 +12,7 @@ export default function MyPurchases() {
   const [visible, setVisible] = useState(false);
   const [modalData, setModalData] = useState('');
   const [text, setText] = useState('Enviar mensagem');
+  const [noPurchases, setNoPurchases] = useState(false);
 
   const loadMySells = async () => {
     const response = await api.get('myPurchases');
@@ -21,6 +22,7 @@ export default function MyPurchases() {
     });
 
     setMyPurchases(organizedData);
+    setNoPurchases(!organizedData.length > 0);
   };
 
   const navigate = (id) => {
@@ -67,28 +69,35 @@ export default function MyPurchases() {
   return (
     <Container>
       <Title>Minhas compras</Title>
+      {myPurchases.length > 0 && (
+        <>
+          <PurchaseList
+            data={myPurchases}
+            navigate={navigate}
+            openModal={OpenModal}
+          />
 
-      <PurchaseList
-        data={myPurchases}
-        navigate={navigate}
-        openModal={OpenModal}
-      />
+          {visible && (
+            <ModalPS
+              person={modalData.person}
+              visible={visible}
+              purchaseCode={modalData.code}
+              closeModal={() => {
+                setVisible(false);
+              }}
+              text={text}
+              setText={(e) => {
+                setText(e);
+              }}
+              sendFunction={sendMessagetoSeller}
+              sell
+            />
+          )}
+        </>
+      )}
 
-      {visible && (
-        <ModalPS
-          person={modalData.person}
-          visible={visible}
-          purchaseCode={modalData.code}
-          closeModal={() => {
-            setVisible(false);
-          }}
-          text={text}
-          setText={(e) => {
-            setText(e);
-          }}
-          sendFunction={sendMessagetoSeller}
-          sell
-        />
+      {noPurchases && (
+        <WarningText>Você ainda não realizou nenhuma compra</WarningText>
       )}
     </Container>
   );

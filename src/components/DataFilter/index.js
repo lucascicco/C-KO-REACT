@@ -5,7 +5,7 @@ import { useField } from '@rocketseat/unform';
 import pt from 'date-fns/locale/pt';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import './style.css';
+import './styles.css';
 
 registerLocale('pt', pt);
 
@@ -33,6 +33,7 @@ export default function DatePicker({
   return (
     <>
       <ReactDatePicker
+        id="config-react-picker"
         locale="pt"
         name={fieldName}
         selected={value}

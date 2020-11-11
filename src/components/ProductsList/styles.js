@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+
+export const RowGeral = styled(Row)`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0px;
+  margin-top: 15px;
+`;
 
 export const DivProduct = styled(animated.div)`
   height: 255px;
@@ -71,5 +79,3 @@ export const DivPerProduct = styled(Col)`
   margin: 5px;
   padding: 0px;
 `;
-
-export const DivWrapper = styled.div``;

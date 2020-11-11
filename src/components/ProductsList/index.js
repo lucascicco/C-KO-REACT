@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProductBox from './productbox';
-import { DivWrapper } from './styles';
+import { RowGeral } from './styles';
 
 export default function ProductList({ data, myfavorites }) {
   const productItems = data.map((item) => {
     return <ProductBox item={item} key={item.id} myFavorites={myfavorites} />;
   });
 
-  return <DivWrapper className="row offset-md-1">{productItems}</DivWrapper>;
+  return <RowGeral className="row offset-md-1">{productItems}</RowGeral>;
 }
 
 ProductList.propTypes = {

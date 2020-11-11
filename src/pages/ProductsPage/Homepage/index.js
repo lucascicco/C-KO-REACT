@@ -59,19 +59,17 @@ export default function HomePage() {
 
   return (
     <Content>
-      <Container className="mt-5 col-lg-12  pb-2">
-        <ProductList data={visibleProducts} myfavorites={myfavorites} />
-        {allow && (
-          <PurchaseModal
-            item={purchase}
-            visible={visible}
-            setOff={() => {
-              setVisible(false);
-              setAllow(false);
-            }}
-          />
-        )}
-      </Container>
+      <ProductList data={visibleProducts} myfavorites={myfavorites} />
+      {allow && (
+        <PurchaseModal
+          item={purchase}
+          visible={visible}
+          setOff={() => {
+            setVisible(false);
+            setAllow(false);
+          }}
+        />
+      )}
     </Content>
   );
 }

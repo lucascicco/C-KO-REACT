@@ -4,6 +4,7 @@ import { Col } from 'react-bootstrap';
 
 export const DivProduct = styled(animated.div)`
   height: 255px;
+  border: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +33,7 @@ export const DivHolder = styled.div`
 
 export const ProductImage = styled.img`
   height: 150px;
-  width: 70%;
+  max-width: 70%;
   border: 1px solid black;
   object-fit: cover;
 `;

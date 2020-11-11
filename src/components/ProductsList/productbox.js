@@ -18,11 +18,8 @@ import {
 
 import FavoriteIcon from '../FavoriteIcon';
 
-const calc = () => [
-  window.innerHeight / 2 / 20,
-  window.innerWidth / 2 / 20,
-  1.1,
-];
+const calc = () => [window.innerHeight, window.innerWidth, 1.1];
+
 const trans = (x, y, s) =>
   `perspective(600px) rotateX(${0}deg) rotateY(${0}deg) scale(${s})`;
 

@@ -27,7 +27,9 @@ export default function MyAccount() {
   const dispatch = useDispatch();
   const myAccount = useSelector((state) => state.user.profile.user);
 
-  const [image, setImage] = useState(myAccount.avatar.url);
+  const [image, setImage] = useState(
+    myAccount.avatar ? myAccount.avatar.url : ''
+  );
   const [preview, setPreview] = useState('');
 
   const [name, setName] = useState(myAccount.name);

@@ -17,6 +17,7 @@ export default function LocationFormRc() {
   const dispatch = useDispatch();
   const first_access = useSelector((state) => state.auth.first_access);
   const [postcode, setPostcode] = useState('');
+  const [error, setError] = useState(true);
 
   async function handleSubmit(data) {
     const testing = await EmptyObjectLocation(data);
@@ -24,13 +25,16 @@ export default function LocationFormRc() {
     if (testing) {
       toast.error('Todos os campos são obrigatórios.');
     } else {
+      setError(false);
       dispatch(createLocationRequest(data));
-      dispatch(TurnFirstAccessOff());
 
       history.push('/homepage');
       history.go();
+
+      dispatch(TurnFirstAccessOff());
     }
   }
+
   return (
     <Content>
       {first_access ? (
@@ -73,6 +77,7 @@ export default function LocationFormRc() {
 
           <SkipButton
             onClick={() => {
+              setError(false);
               dispatch(TurnFirstAccessOff());
 
               history.push('/homepage');
@@ -83,7 +88,7 @@ export default function LocationFormRc() {
           </SkipButton>
         </>
       ) : (
-        <ErrorWarning />
+        <>{error && <ErrorWarning />}</>
       )}
     </Content>
   );

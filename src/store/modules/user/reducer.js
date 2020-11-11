@@ -2,12 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   profile: {
-    user: {
-      avatar: {
-        url:
-          'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png',
-      },
-    },
+    user: {},
     location: null,
     personal_data: null,
     myfavorites: [],
@@ -59,9 +54,7 @@ export default function user(state = INITIAL_STATE, action) {
         break;
       }
       case '@auth/FIRST_ACCESS_ON': {
-        draft.profile.user.id = action.payload.user.id;
-        draft.profile.user.name = action.payload.user.name;
-        draft.profile.user.email = action.payload.user.email;
+        draft.profile.user = action.payload.user;
         break;
       }
       case '@auth/SIGN_OUT': {

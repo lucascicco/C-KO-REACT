@@ -49,7 +49,7 @@ export default function ProductBox({ item, myFavorites }) {
   };
 
   return (
-    <DivPerProduct lg="2">
+    <DivPerProduct xl="2">
       <DivProduct
         onMouseMove={() => set({ xys: calc() })}
         onMouseLeave={() => set({ xys: [0, 0, 1] })}

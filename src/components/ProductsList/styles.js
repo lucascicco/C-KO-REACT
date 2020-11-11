@@ -4,10 +4,6 @@ import { Col } from 'react-bootstrap';
 
 export const DivProduct = styled(animated.div)`
   height: 255px;
-  border: 1px solid red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: box-shadow 0.7s;
   will-change: transform;
   background: #fff;
@@ -15,7 +11,6 @@ export const DivProduct = styled(animated.div)`
   :hover {
     cursor: pointer;
     z-index: 4;
-    position: absolute;
     box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
   }
 `;
@@ -33,7 +28,7 @@ export const DivHolder = styled.div`
 
 export const ProductImage = styled.img`
   height: 150px;
-  max-width: 70%;
+  width: 70%;
   border: 1px solid black;
   object-fit: cover;
 `;

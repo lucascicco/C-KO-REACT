@@ -16,6 +16,7 @@ import {
   StrongText,
   TextNormal,
   StatusText,
+  ButtonSeeProcess,
 } from './styles';
 import TranslateStatus from '~/utils/translateStatus';
 
@@ -25,6 +26,7 @@ export default function ProductItem({
   soldQuantity,
   goNextClick,
   goEditProduct,
+  openProcess,
 }) {
   return (
     <RowItem>
@@ -63,13 +65,27 @@ export default function ProductItem({
             <ButtonText>Ver vendas</ButtonText>
           </Button>
 
-          <ButtonEdit
-            onClick={() => {
-              goEditProduct(product.id);
-            }}
-          >
-            <ButtonEditText>Editar produto</ButtonEditText>
-          </ButtonEdit>
+          {product.status !== 'deleted' && (
+            <>
+              {product.status !== 'closed' ? (
+                <ButtonEdit
+                  onClick={() => {
+                    goEditProduct(product.id);
+                  }}
+                >
+                  <ButtonEditText>Editar produto</ButtonEditText>
+                </ButtonEdit>
+              ) : (
+                <ButtonSeeProcess
+                  onClick={() => {
+                    openProcess(product.id);
+                  }}
+                >
+                  Acompanhar processo
+                </ButtonSeeProcess>
+              )}
+            </>
+          )}
         </DivTwo>
       </ColTwo>
     </RowItem>
@@ -87,4 +103,6 @@ ProductItem.propTypes = {
   sellsDone: PropTypes.number.isRequired,
   soldQuantity: PropTypes.number.isRequired,
   goNextClick: PropTypes.func.isRequired,
+  goEditProduct: PropTypes.func.isRequired,
+  openProcess: PropTypes.func.isRequired,
 };

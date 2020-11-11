@@ -68,10 +68,9 @@ export default function EditProduct({ handleSubmit, latestInfo, openModal }) {
           />
 
           <Button type="submit">Editar</Button>
+
           <PauseButton type="button" onClick={openModal}>
-            {latestInfo.status === 'open'
-              ? 'Pausar anúncio'
-              : 'Acompanhar processo'}
+            Pausar anúncio
           </PauseButton>
         </FormInput>
       </ColWrapper>

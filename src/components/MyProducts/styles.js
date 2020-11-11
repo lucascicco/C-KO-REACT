@@ -62,7 +62,7 @@ export const ButtonEditText = styled.h6`
 `;
 
 export const Button = styled.button`
-  width: 48%;
+  flex: 1;
   border: 1px solid #388e3c;
   padding: 10px;
   margin-right: 5px;
@@ -97,6 +97,25 @@ export const ButtonEdit = styled.button`
     ${ButtonEditText} {
       font-weight: bold;
     }
+  }
+`;
+
+export const ButtonSeeProcess = styled.button`
+  flex: 1;
+  border: 1px solid #b71c1c;
+  padding: 10px;
+  background: white;
+  color: #b71c1c;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+
+  outline: none !important;
+  box-shadow: none !important;
+  transition: background 0.5s;
+
+  &:hover {
+    background: #ffcdd2;
+    font-weight: bold;
   }
 `;
 

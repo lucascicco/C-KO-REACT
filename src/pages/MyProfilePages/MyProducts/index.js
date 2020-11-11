@@ -155,6 +155,17 @@ export default function MyProducts() {
     window.location.reload();
   };
 
+  const openProcess = async (id) => {
+    const response = await api.get('product', {
+      params: {
+        product_id: id,
+      },
+    });
+
+    setLastest(response.data);
+    setVisibleTwo(true);
+  };
+
   useEffect(() => {
     loadMyProducts();
   }, []);
@@ -178,6 +189,7 @@ export default function MyProducts() {
           data={myProducts}
           goNextClick={goNextClick}
           goEditProduct={GoThird}
+          openProcess={openProcess}
         />
       )}
       {page === 'second' && (

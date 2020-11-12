@@ -107,7 +107,11 @@ export default function ProductPage({
 
             <ButtonEdit
               onClick={() => {
-                console.log('Trying');
+                history.push('/myproducts', {
+                  edit: true,
+                  id: product.id,
+                });
+                history.go();
               }}
             >
               <AiFillEdit size={60} />

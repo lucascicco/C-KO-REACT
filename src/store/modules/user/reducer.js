@@ -35,7 +35,7 @@ export default function user(state = INITIAL_STATE, action) {
         break;
       }
       case '@user/UPDATE_PERSONAL_SUCCESS': {
-        draft.profile.personal_data = action.payload.personalInfo;
+        draft.profile.personal_data = action.payload.data;
         break;
       }
       case '@user/ADD_FAVORITE_ITEM': {

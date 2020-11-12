@@ -54,10 +54,10 @@ export function updatePersonalDataRequest(data) {
   };
 }
 
-export function updatePersonalDataSuccess(personalInfo) {
+export function updatePersonalDataSuccess(data) {
   return {
     type: '@user/UPDATE_PERSONAL_SUCCESS',
-    payload: { personalInfo },
+    payload: { data },
   };
 }
 

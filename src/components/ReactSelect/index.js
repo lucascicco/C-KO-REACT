@@ -49,6 +49,7 @@ const customStyles = {
     height: 45,
     lineHeight: 45,
     fontSize: 18,
+    color: '#fff',
   }),
   dropdownIndicator: (base) => ({
     ...base,

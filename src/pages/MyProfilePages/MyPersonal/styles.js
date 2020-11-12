@@ -14,6 +14,22 @@ export const ColWrapper = styled(Col)``;
 export const FormInput = styled(Form)`
   display: flex;
   flex-direction: column;
+
+  input {
+    background: #37474f;
+    border: 0;
+    border-radius: 2px;
+    height: 45px;
+    width: 100%;
+    padding: 0 15px;
+    color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
+    margin: 0 0 10px;
+    font-size: 17px;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -35,21 +51,7 @@ export const Button = styled.button`
   }
 `;
 
-export const Input = styled(InputRocket)`
-  background: #37474f;
-  border: 0;
-  border-radius: 2px;
-  height: 45px;
-  width: 100%;
-  padding: 0 15px;
-  color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
-  margin: 0 0 10px;
-  font-size: 17px;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-`;
+export const Input = styled(InputRocket)``;
 
 export const Title = styled.h1`
   color: white;

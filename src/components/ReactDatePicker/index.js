@@ -33,6 +33,7 @@ export default function DatePicker({
   return (
     <>
       <ReactDatePicker
+        id="react-date"
         locale="pt"
         name={fieldName}
         selected={value}

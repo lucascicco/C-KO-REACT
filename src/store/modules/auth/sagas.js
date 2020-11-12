@@ -38,8 +38,9 @@ export function* signUp({ payload }) {
 
     const { token, user } = response.data;
 
-    api.defaults.headers.Authorization = `Bearer ${token}`;
     user.avatar = null;
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
     yield put(FirstAccessSuccess(token, user));
 
     history.push('/crpersonal');

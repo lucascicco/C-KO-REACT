@@ -58,21 +58,7 @@ export function* UpdateLocationSaga({ payload }) {
 
 export function* CreatePersonalSaga({ payload }) {
   try {
-    const {
-      birthday,
-      gender,
-      cellphone,
-      profession,
-      identification,
-    } = payload.data;
-
-    const response = yield call(api.post, 'personal_data', {
-      birthday,
-      gender,
-      cellphone,
-      profession,
-      identification,
-    });
+    const response = yield call(api.post, 'personal_data', payload.data);
 
     yield put(updatePersonalDataSuccess(response.data));
   } catch (err) {
@@ -82,21 +68,7 @@ export function* CreatePersonalSaga({ payload }) {
 
 export function* UpdatePersonalSaga({ payload }) {
   try {
-    const {
-      birthday,
-      gender,
-      cellphone,
-      profession,
-      identification,
-    } = payload.data;
-
-    const response = yield call(api.put, 'personal_data', {
-      birthday,
-      gender,
-      cellphone,
-      profession,
-      identification,
-    });
+    const response = yield call(api.put, 'personal_data', payload.data);
 
     yield put(updatePersonalDataSuccess(response.data));
     toast.success('Dados pessoais atualizados com sucesso');

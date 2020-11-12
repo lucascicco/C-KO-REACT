@@ -11,6 +11,7 @@ import ModalPS from '~/components/ModalPS';
 import TitleChoice from '~/utils/TitleProduct';
 import EditPage from './EditProduct';
 import ModalPause from '~/components/ModalPause';
+import history from '~/services/history';
 
 export default function MyProducts() {
   const [page, setPage] = useState('first');
@@ -193,6 +194,13 @@ export default function MyProducts() {
 
   useEffect(() => {
     loadMyProducts();
+
+    if (history.location.state) {
+      if (history.location.state.edit) {
+        GoThird(history.location.state.id);
+        window.history.replaceState(null, '');
+      }
+    }
   }, []);
 
   return (

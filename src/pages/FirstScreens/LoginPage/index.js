@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   return (
     <Content>
-      <Image src={Logo} width={250} alt="logo" />
+      <Image src={Logo} alt="logo" />
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />

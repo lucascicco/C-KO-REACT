@@ -3,7 +3,7 @@ import { lighten } from 'polished';
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 400px;
   text-align: center;
 
   input:-webkit-autofill,
@@ -26,10 +26,11 @@ export const Content = styled.div`
       background: #37474f;
       border: 0;
       border-radius: 4px;
-      height: 44px;
+      height: 50px;
       padding: 0 15px;
       color: #fff;
       margin: 0 0 10px;
+      font-size: 18px;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
@@ -52,7 +53,7 @@ export const Content = styled.div`
       font-family: Raleway;
       border: 0;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 18px;
       transition: background 0.2s;
 
       &:hover {
@@ -63,7 +64,7 @@ export const Content = styled.div`
     a {
       color: #fff;
       margin-top: 15px;
-      font-size: 16px;
+      font-size: 18px;
       opacity: 1;
 
       &:hover {

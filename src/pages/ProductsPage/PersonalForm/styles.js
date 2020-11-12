@@ -1,23 +1,27 @@
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
-import { Input as RockeseatInput } from '@rocketseat/unform';
+import { Form, Input as RockeseatInput } from '@rocketseat/unform';
 
-export const Input = styled(RockeseatInput)`
-  background: #37474f;
-  border: 0;
-  border-radius: 2px;
-  height: 45px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  padding: 0 15px;
-  color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
-  margin: 0 0 10px;
-  font-size: 18px;
+export const FormStyled = styled(Form)`
+  input {
+    background: #37474f;
+    border: 0;
+    border-radius: 2px;
+    height: 45px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 0 15px;
+    color: ${(props) => (props.disabled ? 'rgba(255, 255, 255, 0.7)' : '#fff')};
+    margin: 0 0 10px;
+    font-size: 18px;
 
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
   }
 `;
+
+export const Input = styled(RockeseatInput)``;
 
 export const Content = styled.div`
   width: 100%;

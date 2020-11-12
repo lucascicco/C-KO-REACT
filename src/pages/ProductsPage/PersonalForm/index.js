@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Form } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -23,6 +22,7 @@ import {
   GenderDiv,
   Input,
   ButtonNext,
+  FormStyled,
 } from './styles';
 
 import api from '~/services/api';
@@ -108,7 +108,7 @@ export default function PersonalForm({ match }) {
             <Title>Informações</Title>
           </FlexDiv>
 
-          <Form onSubmit={GoNextPage}>
+          <FormStyled onSubmit={GoNextPage}>
             <ReactSelect
               name="profession"
               placeholder={profession || 'Selecione sua profissão'}
@@ -175,7 +175,7 @@ export default function PersonalForm({ match }) {
             <ButtonNext className="w-100 mt-5 mb-2" type="submit">
               {loading ? 'Carregando...' : 'Prosseguir'}
             </ButtonNext>
-          </Form>
+          </FormStyled>
         </>
       ) : (
         <>{!allow && allow !== null && <ErrorWarning />}</>

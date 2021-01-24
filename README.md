@@ -9,20 +9,22 @@ Here goes some of the screens of this project:
 
 <p align=center> 
     <span>
-        <img src="src/assets/Project_images/LoginOut.gif" width=350 height=350/>
-        <img src="src/assets/Project_images/Products.gif" width=350 height=350/>
-        <img src="src/assets/Project_images/Product.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/LoginOut.gif" width=400 height=350/>
+        <img src="src/assets/Project_images/Products.gif" width=400 height=350/>
     </span>
     <br/>
     <span>
-        <img src="src/assets/Project_images/Buying.gif" width=350 height=350/>
-        <img src="src/assets/Project_images/BuyingTwo.gif" width=350 height=350/>
-        <img src="src/assets/Project_images/BuyingThree.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/Product.gif" width=400 height=350/>
+        <img src="src/assets/Project_images/Buying.gif" width=400 height=350/>
     </span>
     <br/>
     <span>
-        <img src="src/assets/Project_images/Filtering.gif" width=350 height=350/>
-        <img src="src/assets/Project_images/MyCart.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/BuyingTwo.gif" width=400 height=350/>
+        <img src="src/assets/Project_images/BuyingThree.gif" width=400 height=350/>
+    </span>
+    <span>
+        <img src="src/assets/Project_images/Filtering.gif" width=400 height=350/>
+        <img src="src/assets/Project_images/MyCart.gif" width=400 height=350/>
     </span>
 </p>
 
@@ -52,4 +54,4 @@ Please, check it out.
 I am open minded about new suggestions.
 Thank you for reading.
 
-Created by Lucas Vitor.
+Created by Lucas Cicco.

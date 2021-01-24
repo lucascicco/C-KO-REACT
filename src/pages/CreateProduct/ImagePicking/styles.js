@@ -26,7 +26,7 @@ export const InputFile = styled.input`
 `;
 
 export const Title = styled.h1`
-  color: white;
+  color: #000000;
   font-family: 'Raleway', sans-serif;
   text-align: center;
 `;

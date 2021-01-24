@@ -99,11 +99,15 @@ export default function CreateProduct() {
           )}
         </>
       ) : (
-        <WarningText>
-          Antes de criar o produto, é necessário registrar sua localização e
-          dados pessoais no nosso sistema. No canto superior direito, acesse seu
-          perfil.
-        </WarningText>
+        <div>
+          <WarningText>
+            Antes de criar o anúncio do produto, é necessário registrar sua
+            localização e dados pessoais no nosso sistema.
+          </WarningText>
+          <WarningText>
+            No canto superior direito, acesse seu perfil.
+          </WarningText>
+        </div>
       )}
     </Container>
   );

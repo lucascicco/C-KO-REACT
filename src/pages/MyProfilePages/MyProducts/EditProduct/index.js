@@ -18,7 +18,7 @@ import { ObjectProduct } from '~/utils/EmptyObjectVerifier';
 import { formatarMoeda, currencyDecimalST } from '~/utils/masks';
 
 export default function EditProduct({ handleSubmit, latestInfo, openModal }) {
-  const [price, setPrice] = useState(formatarMoeda(latestInfo.price));
+  const [price, setPrice] = useState(latestInfo.price.toString());
   const [description, setDescription] = useState(latestInfo.description);
   const [quantity, setQuantity] = useState(latestInfo.quantity);
 

@@ -126,7 +126,7 @@ const NavBarStandard = () => {
                   color: 'black',
                 }}
               >
-                Criar produto
+                Anunciar
               </Link>
               <DivProfile>
                 <DivImageProfile

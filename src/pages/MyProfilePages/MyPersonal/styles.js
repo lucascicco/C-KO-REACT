@@ -54,7 +54,8 @@ export const Button = styled.button`
 export const Input = styled(InputRocket)``;
 
 export const Title = styled.h1`
-  color: white;
+  color: #000000;
+  text-decoration: underline;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   margin-bottom: 35px;

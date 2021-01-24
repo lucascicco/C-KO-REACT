@@ -20,7 +20,7 @@ export const DivWrapper = styled(Row)`
 export const ColWrapper = styled(Col)``;
 
 export const WarningText = styled.h1`
-  color: white;
+  color: #000000;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   margin: 50px auto 25px auto;

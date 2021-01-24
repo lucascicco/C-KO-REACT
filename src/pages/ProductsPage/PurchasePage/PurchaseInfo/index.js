@@ -44,7 +44,7 @@ export default function PurchaseInfo({ state, setPage }) {
   return (
     <Row className="d-flex justify-content-center mt-3">
       <Col lg="8">
-        <h1 className="display-4 text-light text-center">
+        <h1 className="display-4 text-dark text-center">
           Informações da compra
         </h1>
 

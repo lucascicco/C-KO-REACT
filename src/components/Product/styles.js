@@ -15,7 +15,7 @@ export const SellerRow = styled(Row)`
 `;
 
 export const WarningText = styled.h2`
-  color: white;
+  color: black;
 `;
 
 export const ButtonEdit = styled.button`
@@ -48,13 +48,13 @@ export const ProductDiv = styled.div`
 `;
 
 export const ProductTitle = styled.h1`
-  color: white;
+  color: black;
   text-shadow: black 0.1em 0.1em 0.2em;
   font-family: 'Raleway', sans-serif;
 `;
 
 export const ProductPrice = styled.h3`
-  color: white;
+  color: black;
   font-size: 35px;
 `;
 
@@ -76,7 +76,7 @@ export const SoldFavoriteDiv = styled.div`
 `;
 
 export const ProductsSold = styled.h6`
-  color: #b0bec5;
+  color: #455a64;
 `;
 
 export const QuantityDiv = styled.div`
@@ -88,13 +88,13 @@ export const QuantityDiv = styled.div`
 `;
 
 export const QuantityText = styled.h4`
-  color: black;
+  color: #455a64;
   font-weight: bold;
 `;
 
 export const QuantitySmallText = styled.p`
   text-align: center;
-  color: #eceff1;
+  color: #455a64;
   width: 100px;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -128,7 +128,7 @@ export const ProductDetails = styled.div``;
 export const TitleDescription = styled.h2`
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
-  color: white;
+  color: #eceff1;
   text-shadow: black 0.1em 0.1em 0.2em;
   margin-top: 5px;
 `;
@@ -147,6 +147,6 @@ export const DivImage = styled.div`
 export const TextAbsolute = styled.h3`
   position: absolute;
   z-index: 100;
-  color: #e53935;
+  color: #90a4ae;
   background: white;
 `;

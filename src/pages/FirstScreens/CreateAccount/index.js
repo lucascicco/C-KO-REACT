@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { Content, Title } from './styles';
+import { Content, Title, Image } from './styles';
 import { signUpRequest } from '~/store/modules/auth/actions';
+import Logo from '~/assets/Cko_logo.png';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Seu nome é obrigatório'),
@@ -23,6 +24,7 @@ export default function CreateAccount() {
 
   return (
     <Content>
+      <Image src={Logo} alt="logo" />
       <Title>Crie sua conta</Title>
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="name" type="text" placeholder="Nome completo" />

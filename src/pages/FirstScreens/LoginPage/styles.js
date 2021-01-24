@@ -61,7 +61,7 @@ export const Content = styled.div`
     }
 
     a {
-      color: #fff;
+      color: #000000;
       margin-top: 15px;
       font-size: 18px;
       opacity: 1;
@@ -75,4 +75,9 @@ export const Content = styled.div`
 
 export const Image = styled.img`
   width: 350px;
+`;
+
+export const Title = styled.h1`
+  color: #000000;
+  font-family: 'Raleway', sans-serif;
 `;

@@ -56,6 +56,7 @@ export default function MyPersonalData() {
 
     if (personal === null) {
       dispatch(createPersonalDataRequest(personalInfo));
+
       history.push('/homepage');
       history.go();
     } else if (CompareObjects(personalInfo, personal)) {

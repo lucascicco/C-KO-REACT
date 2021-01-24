@@ -40,13 +40,13 @@ export const InputSmaller = styled(RockeseatInput)`
 `;
 
 export const Title = styled.h1`
-  color: white;
+  color: #000000;
   font-family: 'Raleway', sans-serif;
   text-align: center;
 `;
 
 export const WarningText = styled.p`
-  color: white;
+  color: #000000;
   font-size: 20px;
   text-align: justify;
   text-justify: inter-word;

@@ -15,10 +15,7 @@ import {
 import ReactSelect from '~/components/ReactSelect';
 import Categories from '~/utils/Categorias';
 import { ObjectProduct } from '~/utils/EmptyObjectVerifier';
-import {
-  onChange_onlyNumber,
-  onChange_onlyTextandNumber,
-} from '~/utils/RestrictInputs';
+import { onChange_onlyNumber } from '~/utils/RestrictInputs';
 import { formatarMoeda, currencyDecimalST } from '~/utils/masks';
 
 export default function ProductData({ animationOne, HandleForm }) {

@@ -30,6 +30,7 @@ export const DivSecond = styled.div`
 
 export const DivHolder = styled.div`
   text-align: center;
+  background: #cfd8dc;
   height: 100%;
   width: 100%;
 `;

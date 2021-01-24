@@ -121,7 +121,7 @@ export const FlexDiv = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: #fff;
+  color: #000000;
   font-family: 'Raleway', sans-serif;
   margin-left: 10px;
   line-height: 70px;

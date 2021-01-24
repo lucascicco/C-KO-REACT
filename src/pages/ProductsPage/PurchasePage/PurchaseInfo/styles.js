@@ -7,7 +7,7 @@ export const ImgProduct = styled.img`
 `;
 
 export const Div1 = styled(Row)`
-  background: #e0e0e0;
+  background: white;
 `;
 
 export const DivInfo1 = styled(Col)`
@@ -57,7 +57,7 @@ export const DivTotal = styled.div`
 `;
 
 export const Div2 = styled(Row)`
-  background: #e0e0e0;
+  background: white;
 `;
 
 export const DivAddress = styled(Col)``;
@@ -74,7 +74,7 @@ export const PaymentTitle = styled.h4`
 `;
 
 export const Div3 = styled(Row)`
-  background: #e0e0e0;
+  background: white;
   padding-bottom: 10px;
   border-top: 1px solid black;
 `;

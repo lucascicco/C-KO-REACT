@@ -64,10 +64,10 @@ export const DivTwo = styled(Col)`
 
 export const Input = styled.input`
   padding: 10px;
-  border-radius: 5px;
   width: 100%;
   height: 45px;
   border: none;
+  border-bottom: 1px solid #cfd8dc;
   margin-bottom: 10px;
   font-size: 20px;
 
@@ -78,10 +78,10 @@ export const Input = styled.input`
 
 export const InputExpiry = styled.input`
   padding: 10px;
-  border-radius: 5px;
   width: 100%;
   height: 45px;
   border: none;
+  border-bottom: 1px solid #cfd8dc;
   margin-bottom: 10px;
   color: ${(props) => (props.validExpiry ? 'black' : '#d32f2f')};
   font-size: 20px;
@@ -93,10 +93,10 @@ export const InputExpiry = styled.input`
 
 export const InputNumber = styled.input`
   padding: 10px;
-  border-radius: 5px;
   width: 100%;
   height: 45px;
   border: none;
+  border-bottom: 1px solid #cfd8dc;
   margin-bottom: 10px;
   color: ${(props) => (props.validNumber ? 'black' : '#d32f2f')};
   font-size: 20px;
@@ -108,11 +108,11 @@ export const InputNumber = styled.input`
 
 export const CVC = styled.input`
   padding: 10px;
-  border-radius: 5px;
   width: 30%;
   margin-left: 20px;
   height: 45px;
   border: none;
+  border-bottom: 1px solid #cfd8dc;
   margin-bottom: 10px;
   font-size: 20px;
 

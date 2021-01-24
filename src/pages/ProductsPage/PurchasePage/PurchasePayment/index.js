@@ -15,9 +15,10 @@ export default function PurchasePage({ onSubmit, animation, outcome }) {
       >
         {(style) => (
           <Col lg="12" style={{ transform: `translateY(${style.y}px)` }}>
-            <h1 className="display-4 text-light text-center">
+            <h1 className="display-4 text-dark text-center">
               Finalize sua compra
             </h1>
+
             <CreditCard
               onSubmit={onSubmit}
               animation={animation}

@@ -12,7 +12,7 @@ export const Wrapper = styled(Row)`
 export const ColWrapper = styled(Col)``;
 
 export const WarningText = styled.h1`
-  color: white;
+  color: #000000;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   margin: 50px auto 25px auto;
@@ -72,7 +72,7 @@ export const Description = styled(Textarea)`
 `;
 
 export const Title = styled.h1`
-  color: white;
+  color: #000000;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   margin-bottom: 20px;

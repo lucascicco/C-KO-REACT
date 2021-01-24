@@ -66,4 +66,4 @@ Please, check it out.
 I am open minded about new suggestions.
 Thank you for reading.
 
-Created by LucasCicco.
+Created by lucascicco.

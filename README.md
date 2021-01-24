@@ -28,7 +28,7 @@ Here goes some of the screens of this project:
 
 ## BOOTSTRAP - RESPONSIBLE LAYOUT 
 
-<img src="src/assets/Project_images/11.PNG" height=500  width=300>
+<img src="src/assets/Project_images/BootstrapLayout.gif" height=500  width=300>
 
 
 ## What I used to develop it ?

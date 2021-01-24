@@ -7,25 +7,24 @@ The main library used is **REACT JS** to work on mobile front-end.
 
 Here goes some of the screens of this project:
 
-| Login Page | Home page | Profile page |
-| --- | --- | --- |
-| <img src="src/assets/Project_images/login.PNG" height=250  width=250> | <img src="src/assets/Project_images/1.PNG" height=300 width=500> | <img src="src/assets/Project_images/9.PNG"  height=250 width=250>
-
-
-| My Cart | Product page |
-| --- | --- | 
-| <img src="src/assets/Project_images/2.PNG" height=300  width=500> | <img src="src/assets/Project_images/3.PNG" height=300 width=500> |
-
-
-| Purchase page | Payment page |
-| --- | --- | 
-| <img src="src/assets/Project_images/5.PNG" height=300  width=500> | <img src="src/assets/Project_images/6.PNG" height=300 width=500> |
-
-
-| Purchase done | Filtering by category |
-| --- | --- | 
-| <img src="src/assets/Project_images/7.png" height=300  width=500> | <img src="src/assets/Project_images/10.PNG" height=300 width=500> |
-
+<p align=center> 
+    <span>
+        <img src="src/assets/Project_images/LoginOut.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/Products.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/Product.gif" width=350 height=350/>
+    </span>
+    <br/>
+    <span>
+        <img src="src/assets/Project_images/Buying.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/BuyingTwo.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/BuyingThree.gif" width=350 height=350/>
+    </span>
+    <br/>
+    <span>
+        <img src="src/assets/Project_images/Filtering.gif" width=350 height=350/>
+        <img src="src/assets/Project_images/MyCart.gif" width=350 height=350/>
+    </span>
+</p>
 
 ## BOOTSTRAP - RESPONSIBLE LAYOUT 
 

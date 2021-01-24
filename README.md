@@ -9,20 +9,20 @@ Here goes some of the screens of this project:
 
 <p align=center> 
     <span>
-        <img src="assets/Project_images/LoginOut.gif" width=250 height=250/>
-        <img src="assets/Project_images/Products.gif" width=250 height=250/>
-        <img src="assets/Project_images/Product.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/LoginOut.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/Products.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/Product.gif" width=250 height=250/>
     </span>
     <br/>
     <span>
-        <img src="assets/Project_images/Buying.gif" width=250 height=250/>
-        <img src="assets/Project_images/BuyingTwo.gif" width=250 height=250/>
-        <img src="assets/Project_images/BuyingThree.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/Buying.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/BuyingTwo.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/BuyingThree.gif" width=250 height=250/>
     </span>
     <br/>
     <span>
-        <img src="assets/Project_images/Filtering.gif" width=250 height=250/>
-        <img src="assets/Project_images/MyCart.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/Filtering.gif" width=250 height=250/>
+        <img src="src/assets/Project_images/MyCart.gif" width=250 height=250/>
     </span>
 </p>
 

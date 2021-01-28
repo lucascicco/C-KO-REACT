@@ -3,12 +3,12 @@
 This is a project developed by me using the most recent technologies.
 It can be consired as a E-COMMERCE app, once there will be interactions between sellers and buyers.
 They will be free to commercialize their products on the APP.
-The main library used is **REACT JS** to work on mobile front-end.
+The main library used is **REACT JS** to work on front-end for web application.
 
 Este é um projeto desenvolvido por mim utilizando as tecnologias mais recentes.
 É um aplicativo E-COMMERCE, uma vez queh há interações entre vendedores e compradores.
 Eles terão liberdade para comercializar seus produtos no APP.
-A principal biblioteca usada é **REACT JS** para trabalhar no front-end móvel.
+A principal biblioteca usada é **REACT JS** para trabalhar no front-end web.
 
 
 ## SCREENSHOTS - CAPTURAS DE TELA
